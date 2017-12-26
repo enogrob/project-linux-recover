@@ -15,24 +15,30 @@ The idea about this project is to create a practical way to reinstall the essent
 
 ## Topics
 
-* [ ] Change Language in `All Settings -> Language Support` to English.
+* [x] Change Language in `All Settings -> Language Support` to English.
+Set to 22 in `System Settings -> Appearance -> look -> Launch icon size`.
+Check Enable Workplaces and Add show desktop icon to the launcher in  `System Settings -> Appearance -> Behaviour`.
+In `All Settings -> Display` select `Build-in-Display` in `Launcher placement`.
 
-* [ ] Disable Laptop `Touchpad` pressing `Fn -> F3`.
+* [x] Disable Laptop `Touchpad` pressing `Fn -> F3`.
 
-* [ ] Install [Git](https://help.ubuntu.com/lts/serverguide/git.html) and reconfigure.
+* [x] Install [Git](https://help.ubuntu.com/lts/serverguide/git.html) and reconfigure.
 ```shell
 $ sudo apt-get install git
 $ git config --global user.email "enogrob@gmail.com"
 $ git config --global user.name "Roberto Nogueira"
+$ cd ~/.ssh && ssh-keygen
+$ sudo apt-get install xclip
+$ cat id_rsa.pub | xclip -sel clip
 ```
 
-* [ ] Install [Golang](https://github.com/golang/go/wiki/Ubuntu).
+* [x] Install [Golang](https://github.com/golang/go/wiki/Ubuntu).
 ```shell
 $ snap install --classic go
 $ snap list
 ```
 
-* [ ] Install [RVM](https://rvm.io/rvm/install).
+* [x] Install [RVM](https://rvm.io/rvm/install).
 ```shell
 $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 $ sudo apt-get install curl
@@ -45,6 +51,7 @@ $ gem install bundler
 ```
 
 Check  `Terminal -> Profile Preferences -> Tab Command` to Run command as a login shell.
+Select `Tab` in `Open new terminals`.
 
 
 * [ ] Install [Hub](https://github.com/github/hub) and reconfigure.
@@ -52,16 +59,19 @@ Check  `Terminal -> Profile Preferences -> Tab Command` to Run command as a logi
 $ git clone https://github.com/github/hub.git
 $ cd hub
 $ make install prefix=/usr/local
+$ echo alias git='hub' >> .bashrc
 ```
 
-* [ ] Install [Caffeine](http://www.edivaldobrito.com.br/impedir-o-bloqueio-da-tela/) and its indicator.
+* [x] Install [Caffeine](http://www.edivaldobrito.com.br/impedir-o-bloqueio-da-tela/) and its indicator.
 ```shell
 $ sudo add-apt-repository ppa:caffeine-developers/ppa
 $ sudo apt-get update
 $ sudo apt-get install caffeine
 ```
 
-* [ ] Recover [dot](https://github.com/enogrob/enogrob-unix-dotfiles) files configure Terminal.
+Run `Caffeine` and `Caffeine Indicator` from launcher.
+
+* [x] Recover [dotfiles](https://github.com/enogrob/enogrob-unix-dotfiles) files configure Terminal.
 ```shell
 $ git clone $ git@github.com:enogrob/enogrob-unix-dotfiles.git
 $ cd enogrob-unix-dotfiles
@@ -70,14 +80,13 @@ $ cd ..
 $ \rm -rf enogrob-unix-dotfiles
 ```
 
-
-* [ ] Install [tree](https://askubuntu.com/questions/572093/how-to-install-tree-with-command-line).
+* [x] Install [tree](https://askubuntu.com/questions/572093/how-to-install-tree-with-command-line).
 ```shell
 $ sudo apt-get install tree
 $ tree --version
 ```
 
-* [ ] Install [speedtest-cli](https://github.com/sivel/speedtest-cli).
+* [x] Install [speedtest-cli](https://github.com/sivel/speedtest-cli).
 ```shell
 $ sudo apt-get install python-pip
 $ pip -V
@@ -85,7 +94,7 @@ $ pip install git+https://github.com/sivel/speedtest-cli.git
 $ speedtest-cli --version
 ```
 
-* [ ] Install [sdkman](http://sdkman.io/install.html).
+* [x] Install [sdkman](http://sdkman.io/install.html).
 ```shell
 $ curl -s "https://get.sdkman.io" | bash
 $ source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -97,14 +106,11 @@ $ sdk install java
 java -version
 ```
 
-* [ ] Install [Google Chrome](http://askubuntu.com/questions/760085/how-do-you-install-google-chrome-on-ubuntu-16-04).
+* [x] Install [Google Chrome](http://askubuntu.com/questions/760085/how-do-you-install-google-chrome-on-ubuntu-16-04).
 ```shel
-$ sudo apt-get update
-$ sudo apt-get install -y unzip openjdk-8-jre-headless xvfb libxi6 libgconf-2-4
-$ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | $ sudo tee /etc/apt/sources.list.d/google-chrome.list
-$ sudo apt-get update
-$ sudo apt-get install google-chrome-stable
+$ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+$ sudo dpkg -i --force-depends google-chrome-stable_current_amd64.deb
+$ sudo apt-get install -f
 ```
 
 * [ ] Install [Google Driver](http://askubuntu.com/questions/760085/how-do-you-install-google-chrome-on-ubuntu-16-04).
@@ -128,7 +134,7 @@ $ sudo chown root:root /usr/local/bin/selenium-server-standalone.jar
 $ sudo chmod 0755 /usr/local/bin/selenium-server-standalone.jar
 ```
 
-* [ ] Install [Dropbox](https://www.dropbox.com/install-linux).
+* [x] Install [Dropbox](https://www.dropbox.com/install-linux).
 ```shell
 $ cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 ```
@@ -143,12 +149,20 @@ $ ~/.dropbox-dist/dropboxd
 chrome --load-and-launch-app=~/Dropbox/Projects_CHROME
 ```
 
-
-
 You should place this command in your `.bash_profile` or other startup script.
 ```shell
 eval "$(hub alias -s)"
 ```
+
+* [x] Install [Desktop Wallpaper](git@github.com:enogrob/project-linux-recover.git).
+```shell
+$ git clone git@github.com:enogrob/project-linux-recover.git
+$ cd project-linux-recover
+$ cd pictures
+$ cp * ~/Pictures
+```
+
+Rught click `Change Desktop Background` and then select the `Wallpaper` in the `Picture Folder`.
 
 * [ ] Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 ```shell
@@ -161,15 +175,9 @@ $ ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 $ heroku --version
 ```
 
-* [ ] Install [RVM](https://rvm.io/rvm/install).
+* [x] Install Nodejs(https://stackoverflow.com/questions/40490614/installing-nodejs-on-linux-ubuntu-16-04/40490843).
 ```shell
-$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
-$ \curl -sSL https://get.rvm.io | bash
-```
-
-* [ ] Install Nodejs(https://stackoverflow.com/questions/40490614/installing-nodejs-on-linux-ubuntu-16-04/40490843).
-```shell
-$ sudo apt-get install nodejs
+$ sudo apt-get install nodejs nodejs-legacy npm
 $ node --version
 $ npm --version
 ```
@@ -211,24 +219,38 @@ $ docker-compose version
 * [ ] Install Vim and reconfigure
 * [ ] Install NVim and reconfigure
 
-* [ ] Install [todotxt-cli](https://github.com/todotxt/todo.txt-cli) and reconfigure.
+* [x] Install [todotxt-cli](https://github.com/todotxt/todo.txt-cli) and reconfigure.
 ```shell
 $ git clone https://github.com/todotxt/todo.txt-cli.git
 $ cd todo.txt-cli
 $ make
-$ make install
+$ sudo make install
 $ make test
+$ cp -rf  /usr/local/etc/todo ~/.todo
 ```
 
-* [ ] Install [Things Today](https://github.com/enogrob/project-things-today) and reconfigure.
+* [x] Install [Things Today](https://github.com/enogrob/project-things-today) and reconfigure.
 ```shell
 $ git clone git@github.com:enogrob/project-things-today.git
 $ cd project-things-today
 $ sudo bash ./.todayrc_install.sh
+$ cp .tags ~/Projects
 ```
 
-* [ ] Install Calibre and reconfigure
-* [ ] Install Double Commander and reconfigure
+* [x] Install [Calibre](https://calibre-ebook.com/download_linux) and reconfigure.
+```shell
+$ sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+```
+
+From the main menu  `Calibre Library -> Import all calibre data` import to `~/Calibre Library`.
+
+* [x] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
+```shell
+$ sudo add-apt-repository ppa:alexx2000/doublecmd
+$ sudo apt-get update
+$ sudo apt-get install doublecmd-gtk
+```
+
 * [ ] Install Atom and reconfigure
 * [ ] Install Rubymine and reconfigure
 * [ ] Install Postman

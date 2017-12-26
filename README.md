@@ -16,19 +16,19 @@ The idea about this project is to create a practical way to reinstall the essent
 ## Topics
 
 * [ ] Install [Caffeine](http://www.edivaldobrito.com.br/impedir-o-bloqueio-da-tela/) and its indicator.
-```
-sudo add-apt-repository ppa:caffeine-developers/ppa
-sudo apt-get update
-sudo apt-get install caffeine
+```shell
+$ sudo add-apt-repository ppa:caffeine-developers/ppa
+$ sudo apt-get update
+$ sudo apt-get install caffeine
 ```
 
 * [ ] Recover [dot](https://github.com/enogrob/enogrob-unix-dotfiles) files configure Terminal.
-```
-git clone git@github.com:enogrob/enogrob-unix-dotfiles.git
-cd enogrob-unix-dotfiles
-cp * ~/enogrob
-cd ..
-\rm -rf enogrob-unix-dotfiles
+```shell
+$ git clone $ git@github.com:enogrob/enogrob-unix-dotfiles.git
+$ cd enogrob-unix-dotfiles
+$ cp * ~/enogrob
+$ cd ..
+$ \rm -rf enogrob-unix-dotfiles
 ```
 
 * [ ] Install [tree](https://askubuntu.com/questions/572093/how-to-install-tree-with-command-line).
@@ -88,13 +88,25 @@ $ sudo chown root:root /usr/local/bin/selenium-server-standalone.jar
 $ sudo chmod 0755 /usr/local/bin/selenium-server-standalone.jar
 ```
 
-[ ] Install Dropbox
-[ ] Install Google Chrome extensions and reconfigure
+[ ] Install [Dropbox](https://www.dropbox.com/install-linux).
+```shell
+$ cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+```
+
+Next, run the Dropbox daemon from the newly created `.dropbox-dist` folder.
+```shell
+$ ~/.dropbox-dist/dropboxd
+```
+
+[ ] Install [Google Chrome extensions](https://stackoverflow.com/questions/20782557/load-unpacked-chrome-extension-programatically) and reconfigure.
+```shell
+chrome --load-and-launch-app=~/Dropbox/Projects_CHROME
+```
+
 [ ] Install Git and reconfigure
 [ ] Install Hub and reconfigure
 [ ] Install Heroku CLI
 [ ] Install Ruby and RVM
-[ ] Install Java with Sdkman and configure JAVA_HOME
 [ ] Install Nodejs
 [ ] Install Postgres with enogrob user
 [ ] Install Docker, Docker Compose and Docker Machine

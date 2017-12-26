@@ -15,6 +15,45 @@ The idea about this project is to create a practical way to reinstall the essent
 
 ## Topics
 
+* [ ] Change Language in `All Settings -> Language Support` to English.
+
+* [ ] Disable Laptop `Touchpad` pressing `Fn -> F3`.
+
+* [ ] Install [Git](https://help.ubuntu.com/lts/serverguide/git.html) and reconfigure.
+```shell
+$ sudo apt-get install git
+$ git config --global user.email "enogrob@gmail.com"
+$ git config --global user.name "Roberto Nogueira"
+```
+
+* [ ] Install [Golang](https://github.com/golang/go/wiki/Ubuntu).
+```shell
+$ snap install --classic go
+$ snap list
+```
+
+* [ ] Install [RVM](https://rvm.io/rvm/install).
+```shell
+$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+$ sudo apt-get install curl
+$ \curl -sSL https://get.rvm.io | bash
+$ source ~/.rvm/scripts/rvm
+$ rvm install ruby-2.3.1
+$ rvm use ruby-2.3.1 --default
+$ rvm list
+$ gem install bundler
+```
+
+Check  `Terminal -> Profile Preferences -> Tab Command` to Run command as a login shell.
+
+
+* [ ] Install [Hub](https://github.com/github/hub) and reconfigure.
+```shell
+$ git clone https://github.com/github/hub.git
+$ cd hub
+$ make install prefix=/usr/local
+```
+
 * [ ] Install [Caffeine](http://www.edivaldobrito.com.br/impedir-o-bloqueio-da-tela/) and its indicator.
 ```shell
 $ sudo add-apt-repository ppa:caffeine-developers/ppa
@@ -30,6 +69,7 @@ $ cp * ~/enogrob
 $ cd ..
 $ \rm -rf enogrob-unix-dotfiles
 ```
+
 
 * [ ] Install [tree](https://askubuntu.com/questions/572093/how-to-install-tree-with-command-line).
 ```shell
@@ -103,19 +143,7 @@ $ ~/.dropbox-dist/dropboxd
 chrome --load-and-launch-app=~/Dropbox/Projects_CHROME
 ```
 
-* [ ] Install [Git](https://help.ubuntu.com/lts/serverguide/git.html) and reconfigure.
-```shell
-$ sudo apt-get install git
-$ git config --global user.email "enogrob@gmail.com"
-$ git config --global user.name "Roberto Nogueira"
-```
 
-* [ ] Install [Hub](https://github.com/github/hub) and reconfigure.
-```shell
-$ git clone https://github.com/github/hub.git
-$ cd hub
-$ make install prefix=/usr/local
-```
 
 You should place this command in your `.bash_profile` or other startup script.
 ```shell

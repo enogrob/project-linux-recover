@@ -265,19 +265,20 @@ start `Doublecmd` and all is fine.
 
 * [ ] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
 ```shell
-sudo snap install atom --classic
+$ sudo snap install atom --classic
 ```
 
 Once a new release is out, install updates via command:
 ```shell
-sudo snap refresh atom
+$ sudo snap refresh atom
 ```
 
 Take Backup:
 ```shell
-cd ~/.atom
-zip atom.zip ~/.atom/*.cson ~/.atom/*.coffee ~/.atom/*.less
-apm list --installed --bare > atom-bare_packages.txt
+$ cd ~/.atom
+$ zip atom.zip ~/.atom/*.cson ~/.atom/*.coffee ~/.atom/*.less ~/.atom/*.json
+$ apm list --installed --bare > atom-bare-packages.txt
+$ mv ~/atom-* ~/Projects/project-linux-recover/backups
 ```
 
 Recover Backup:

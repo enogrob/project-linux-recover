@@ -263,7 +263,7 @@ and check `User home directoy` and "on close" , save the configuration. hit `ok`
 then  copy the files from the backup directory to the newly created `~/.config/doublecmd` and overwrite.
 start `Doublecmd` and all is fine.
 
-* [ ] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
+* [x] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
 ```shell
 $ sudo snap install atom --classic
 ```

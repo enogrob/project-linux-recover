@@ -355,6 +355,15 @@ $ sudo snap install zeal-casept --classic
 $ sudo snap install spotify --classic
 ```
 
+* [x] Install [neofetch](https://github.com/dylanaraps/neofetch/wiki/Installation) compatible and reconfigure.
+```shell
+$ echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | sudo tee -a /etc/apt/sources.list
+$ sudo snap install spotify --classic
+$ curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| sudo apt-key add -
+$ sudo apt-get update
+$ sudo apt-get install neofetch
+```
+
 * [ ] Install and run [Parallels Transport Agent](https://www.parallels.com/pc/#lin) and reconfigure.
 ```shell
 $ chmod +x ParallelsTransporterAgent-13.2.0-43213-amd64-lin.run

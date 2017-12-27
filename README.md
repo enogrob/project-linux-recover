@@ -283,15 +283,17 @@ $ mv ~/atom-* ~/Projects/project-linux-recover/backups
 
 Recover Backup:
 ```shell
-apm install `cat atom-bare-packages.txt`
-unzip -d ~/.atom atom.zip
+$ apm install `cat atom-bare-packages.txt`
+$ unzip -d ~/.atom atom.zip
 ```
 
-* [ ] Install [Rubymine]() and reconfigure.
+* [x] Install [Rubymine](https://uappexplorer.com) and reconfigure.
 ```shell
+$ sudo snap install rubymine --classic
 ```
 
-* [ ] Install [Postman]() and reconfigure.
+* [ ] Install [Postman](https://www.getpostman.com) and reconfigure.
+Download it and install it accordingly:
 ```shell
 ```
 
@@ -303,11 +305,12 @@ unzip -d ~/.atom atom.zip
 ```shell
 ```
 
-* [ ] Install [Slack]() and reconfigure.
+* [ ] Install [Slack](https://uappexplorer.com) and reconfigure.
 ```shell
+$ sudo snap install slackapp --classic
 ```
 
-* [ ] Install [Autokey]() and reconfigure.
+* [ ] Install [Parcellite]() and reconfigure.
 ```shell
 ```
 
@@ -319,8 +322,9 @@ unzip -d ~/.atom atom.zip
 ```shell
 ```
 
-* [ ] Install [Dash]() compatible and reconfigure.
+* [ ] Install [Zeal](https://uappexplorer.com) compatible and reconfigure.
 ```shell
+$ sudo snap install zeal-casept --classic
 ```
 
 * [ ] Install and run [Parallels Transport Agent]() and reconfigure.

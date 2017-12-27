@@ -1,0 +1,32 @@
+--------------- 11-10-2017, 07:59:04 ---------------
+| DC v0.7.8 beta Rev. 7400 -- x86_64-Linux-gtk2
+| Ubuntu 16.04.3 LTS -- GTK 2.24.30 | PID 5972
+Unhandled exception: EAccessViolation: Access violation
+  Stack trace:
+  $0000000000994FD0 line 206, column 1 of udisplayfile.pas in /usr/lib/doublecmd/doublecmd
+  $0000000000497C62 in /usr/lib/doublecmd/doublecmd
+  $000000000088D9D4 line 226, column 7 of uformcommands.pas in /usr/lib/doublecmd/doublecmd
+  $000000000050A467 line 4580, column 97 of fmain.pas in /usr/lib/doublecmd/doublecmd
+  $00000000008A66A4 line 623, column 41 of kastoolbar.pas in /usr/lib/doublecmd/doublecmd
+  $000000000056A722 line 2736, column 5 of include/control.inc in /usr/lib/doublecmd/doublecmd
+  $00000000005BECC9 line 111, column 3 of include/speedbutton.inc in /usr/lib/doublecmd/doublecmd
+  $00000000005C0914 line 845, column 5 of include/speedbutton.inc in /usr/lib/doublecmd/doublecmd
+  $0000000000432F0F in /usr/lib/doublecmd/doublecmd
+  $0000000000567E68 line 1453, column 11 of include/control.inc in /usr/lib/doublecmd/doublecmd
+  $000000000055ACCB line 4713, column 83 of include/wincontrol.inc in /usr/lib/doublecmd/doublecmd
+  $000000000055C3C8 line 5348, column 38 of include/wincontrol.inc in /usr/lib/doublecmd/doublecmd
+  $000000000070E3F2 line 112, column 36 of lclmessageglue.pas in /usr/lib/doublecmd/doublecmd
+  $000000000063C4D5 line 3628, column 68 of gtk2proc.inc in /usr/lib/doublecmd/doublecmd
+  $000000000064BB9E line 2238, column 15 of gtk2callback.inc in /usr/lib/doublecmd/doublecmd
+  $000000000064B1A8 line 1920, column 6 of gtk2callback.inc in /usr/lib/doublecmd/doublecmd
+  $00007F1FBECD2AEC in /usr/lib/x86_64-linux-gnu/libgtk-x11-2.0.so.0
+
+
+--------------- 30-11-2017, 17:45:00 ---------------
+| DC v0.7.8 beta Rev. 7400 -- x86_64-Linux-gtk2
+| Ubuntu 16.04.3 LTS -- GTK 2.24.30 | PID 18274
+Unhandled exception: EIPCError: : Failed to remove named pipe: /tmp/doublecmd--1001
+  Stack trace:
+  $0000000000B25D6B in /usr/lib/doublecmd/doublecmd
+  $0000000000B25A32 in /usr/lib/doublecmd/doublecmd
+

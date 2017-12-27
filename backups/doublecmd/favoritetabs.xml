@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doublecmd>
+  <FavoriteTabsList>
+    <FavoriteTabs Name="enogrob" DestLeft="0" UniqueID="{BC2DF33C-A417-4527-A26A-BA29B4E2274B}" DestRight="1" ExistingKeep="5" SaveDirHistory="False"/>
+    <FavoriteTabs Name="Today" DestLeft="0" UniqueID="{13931B92-0B68-4E45-8AB2-0B4C85856608}" DestRight="1" ExistingKeep="5" SaveDirHistory="False"/>
+    <FavoriteTabs Name="Projects" DestLeft="0" UniqueID="{95F7561A-3870-4D8E-8DE2-770F2360204C}" DestRight="1" ExistingKeep="5" SaveDirHistory="False"/>
+    <FavoriteTabs Name="Downloads" DestLeft="0" UniqueID="{EB457DA4-3ABC-498F-B176-9468F279949C}" DestRight="1" ExistingKeep="5" SaveDirHistory="False"/>
+    <FavoriteTabs Name="Backups Windows" DestLeft="0" UniqueID="{E99546B9-61B5-44A8-9B14-FAABFC5CE791}" DestRight="1" ExistingKeep="5" SaveDirHistory="False"/>
+  </FavoriteTabsList>
+  <ActualTabs>
+    <GUID13931B92-0B68-4E45-8AB2-0B4C85856608>
+      <Left>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/Today/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Left>
+      <Right>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/Projects/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Right>
+    </GUID13931B92-0B68-4E45-8AB2-0B4C85856608>
+    <GUIDEB457DA4-3ABC-498F-B176-9468F279949C>
+      <Left>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/Today/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Left>
+      <Right>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/Downloads/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Right>
+    </GUIDEB457DA4-3ABC-498F-B176-9468F279949C>
+    <GUIDBC2DF33C-A417-4527-A26A-BA29B4E2274B>
+      <Left>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/Today/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Left>
+      <Right>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Right>
+    </GUIDBC2DF33C-A417-4527-A26A-BA29B4E2274B>
+    <GUID95F7561A-3870-4D8E-8DE2-770F2360204C>
+      <Left>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/Today/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Left>
+      <Right>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/Projects/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Right>
+    </GUID95F7561A-3870-4D8E-8DE2-770F2360204C>
+    <GUIDE99546B9-61B5-44A8-9B14-FAABFC5CE791>
+      <Left>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/home/enogrob/Today/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Left>
+      <Right>
+        <ActiveTab>0</ActiveTab>
+        <Tab>
+          <FileView Type="columns">
+            <History>
+              <Entry Active="True">
+                <FileSource Type="FileSystem"/>
+                <Paths>
+                  <Path>/media/enogrob/Backups Windows/</Path>
+                </Paths>
+              </Entry>
+            </History>
+            <ColumnsView>
+              <ColumnsSet>Default</ColumnsSet>
+            </ColumnsView>
+          </FileView>
+        </Tab>
+      </Right>
+    </GUIDE99546B9-61B5-44A8-9B14-FAABFC5CE791>
+  </ActualTabs>
+</doublecmd>

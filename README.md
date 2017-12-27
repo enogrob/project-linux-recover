@@ -250,7 +250,7 @@ $ sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py 
 
 From the main menu  `Calibre Library -> Import all calibre data` import to `~/Calibre Library`.
 
-* [ ] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
+* [x] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
 ```shell
 $ sudo add-apt-repository ppa:alexx2000/doublecmd
 $ sudo apt-get update
@@ -259,7 +259,7 @@ $ sudo apt-get install doublecmd-gtk
 
 In order to recover the configuration do  a backup copy of the `~/.config/doublecmd`
 then delete this folder, start the `new doublecmd` for the first time , then go to, `options->settings`
-and check `User home directoy` and "on close" , save the configuration. hit `ok` and close `Doublecmd`.
+and check `User home directory` and "on close" , save the configuration. hit `ok` and close `Doublecmd`.
 then  copy the files from the backup directory to the newly created `~/.config/doublecmd` and overwrite.
 start `Doublecmd` and all is fine.
 
@@ -292,14 +292,20 @@ $ unzip -d ~/.atom atom.zip
 $ sudo snap install rubymine --classic
 ```
 
-* [ ] Install [Postman](https://www.getpostman.com) and reconfigure.
+* [x] Install [Postman](https://www.getpostman.com) and reconfigure.
 Download it and install it accordingly:
 ```shell
+$ gunzip Postman-linux-x64-5.5.0.tar.gz
+$ tar -xvf Postman-linux-x64-5.5.0.tar
+$ sudo mv Postman /opt
+$ ./opt/Postman/Postman&
 ```
 
-* [ ] Install [Compiz]() and reconfigure.
-```shell
-```
+* [x] Install [Compiz](https://apps.ubuntu.com/cat/applications/compizconfig-settings-manager) and reconfigure.
+`Compiz` comes already with Ubuntu.
+Install from Ubuntu Software `CompizConfig Settings Manager`.
+Set keymaps for <ctrl>-<shift> in `Windows Manager -> Grid -> Bindings`.
+Check `Cycle Through Multiple Sizes` in `Resize Actions` tab.
 
 * [ ] Install [Skype]() and reconfigure.
 ```shell

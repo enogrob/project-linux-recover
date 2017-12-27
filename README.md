@@ -192,27 +192,38 @@ $ \du;
 $ ALTER USER "enogrob" WITH SUPERUSER;
 ```
 
-* [ ] Install `Docker`.
+* [x] Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
 ```shell
-$ curl -sSL https://get.docker.com/ | sh
-$ docker version
+$ sudo apt-get update
+$ sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo apt-key fingerprint <last 8 digits>
+$ sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+$ sudo apt-get update
+$ sudo apt-get install docker-ce
+$ sudo chmod 666 /var/run/docker.sock
+$ docker info
 ```
 
-To install `Docker Machine` run the following commands:
+To install [Docker Machine](https://docs.docker.com/machine/install-machine/#install-machine-directly) run the following commands:
 ```shell
-$ curl -L "https://github.com/docker/machine/releases/download/v0.9.0/
-$ docker-machine-$(uname -s)-$(uname -m)" -o /tmp/docker-machine
-$ chmod +x /tmp/docker-machine
-$ sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+$ curl -L https://github.com/docker/machine/releases/download/v0.13.0/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+chmod +x /tmp/docker-machine &&
+sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
 $ docker-machine version
 ```
 
-To install `Docker Compose`, run the following commands:
+To install [Docker Compose](https://docs.docker.com/compose/install/#install-compose), run the following commands:
 ```shell
-$ curl -L "https://github.com/docker/compose/releases/download/1.10.0/
-$ docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-$ chmod +x /tmp/docker-compose
-$ sudo cp /tmp/docker-compose /usr/local/bin/docker-compose
+$ sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+$ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose version
 ```
 
@@ -307,37 +318,51 @@ Install from Ubuntu Software `CompizConfig Settings Manager`.
 Set keymaps for <ctrl>-<shift> in `Windows Manager -> Grid -> Bindings`.
 Check `Cycle Through Multiple Sizes` in `Resize Actions` tab.
 
-* [ ] Install [Skype]() and reconfigure.
+* [x] Install [Skype](https://www.skype.com/en/get-skype/) and reconfigure.
+Download it and install it accordingly:
 ```shell
+$ sudo dpkg -i ./skypeforlinux-64.deb
+$ sudo apt-get install -f
 ```
 
-* [ ] Install [Slack](https://uappexplorer.com) and reconfigure.
+* [x] Install [Slack](https://slack.com/downloads/linux) and reconfigure.
+Download it and install it accordingly:
 ```shell
-$ sudo snap install slackapp --classic
+$ sudo dpkg -i ./slack-desktop-3.0.2-amd64.deb
+$ sudo apt-get install -f
 ```
 
-* [ ] Install [Parcellite]() and reconfigure.
+* [x] Install [Parcellite](http://parcellite.sourceforge.net/) and reconfigure.
+Download and install from the `Ubuntu Software`.
+
+* [x] Install [Shutter](http://shutter-project.org) and reconfigure.
+Download and install from the `Ubuntu Software`.
+
+* [x] Install [Pinta](https://pinta-project.com/pintaproject/pinta/howto/installing-pinta) and reconfigure.
 ```shell
+$ sudo add-apt-repository ppa:pinta-maintainers/pinta-stable
+$ sudo apt-get update
+$ sudo apt-get install pinta
 ```
 
-* [ ] Install [Shutter]() and reconfigure.
-```shell
-```
-
-* [ ] Install [Pinta]() and reconfigure.
-```shell
-```
-
-* [ ] Install [Zeal](https://uappexplorer.com) compatible and reconfigure.
+* [x] Install [Zeal](https://uappexplorer.com) compatible and reconfigure.
 ```shell
 $ sudo snap install zeal-casept --classic
 ```
 
-* [ ] Install and run [Parallels Transport Agent]() and reconfigure.
+* [x] Install [Spotify](https://uappexplorer.com) compatible and reconfigure.
 ```shell
+$ sudo snap install spotify --classic
 ```
 
-* [ ] Establish [Docker Workflow]() for development.
+* [ ] Install and run [Parallels Transport Agent](https://www.parallels.com/pc/#lin) and reconfigure.
+```shell
+$ chmod +x ParallelsTransporterAgent-13.2.0-43213-amd64-lin.run
+$ sudo ./ParallelsTransporterAgent-13.2.0-43213-amd64-lin.run
+```
+
+* [ ] Establish [Docker Workflow](https://rubythursday.com) for development.
+See `project-ruby-thursday`.
 ```shell
 ```
 

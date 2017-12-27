@@ -50,8 +50,8 @@ $ rvm list
 $ gem install bundler
 ```
 
-Check  `Terminal -> Profile Preferences -> Tab Command` to Run command as a login shell.
-Select `Tab` in `Open new terminals`.
+Check `Run command as a login shell` from `Terminal -> Profile Preferences -> Command`.
+Select `Tab` in `Open new terminals` from `Terminal -> Preferences`.
 
 
 * [ ] Install [Hub](https://github.com/github/hub) and reconfigure.
@@ -216,8 +216,13 @@ $ sudo cp /tmp/docker-compose /usr/local/bin/docker-compose
 $ docker-compose version
 ```
 
-* [ ] Install Vim and reconfigure
-* [ ] Install NVim and reconfigure
+* [ ] Install [Vim]() and reconfigure.
+```shell
+```
+
+* [ ] Install [NVim]() and reconfigure.
+```shell
+```
 
 * [x] Install [todotxt-cli](https://github.com/todotxt/todo.txt-cli) and reconfigure.
 ```shell
@@ -234,6 +239,7 @@ $ cp -rf  /usr/local/etc/todo ~/.todo
 $ git clone git@github.com:enogrob/project-things-today.git
 $ cd project-things-today
 $ sudo bash ./.todayrc_install.sh
+$ tag -l $PROJECTS/* > .tags
 $ cp .tags ~/Projects
 ```
 
@@ -244,23 +250,84 @@ $ sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py 
 
 From the main menu  `Calibre Library -> Import all calibre data` import to `~/Calibre Library`.
 
-* [x] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
+* [ ] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
 ```shell
 $ sudo add-apt-repository ppa:alexx2000/doublecmd
 $ sudo apt-get update
 $ sudo apt-get install doublecmd-gtk
 ```
 
-* [ ] Install Atom and reconfigure
-* [ ] Install Rubymine and reconfigure
-* [ ] Install Postman
-* [ ] Install Compiz and reconfigure
-* [ ] Install Skype
-* [ ] Install Slack
-* [ ] Install Autokey
-* [ ] Install Shutter
-* [ ] Install Pinta
-* [ ] Install Dash compatible for Linux
-* [ ] Install and run Parallels Transport Agent
-* [ ] Establish Docker Workflow for development
+In order to recover the configuration do  a backup copy of the `~/.config/doublecmd`
+then delete this folder, start the `new doublecmd` for the first time , then go to, `options->settings`
+and check `User home directoy` and "on close" , save the configuration. hit `ok` and close `Doublecmd`.
+then  copy the files from the backup directory to the newly created `~/.config/doublecmd` and overwrite.
+start `Doublecmd` and all is fine.
+
+* [ ] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
+```shell
+sudo snap install atom --classic
+```
+
+Once a new release is out, install updates via command:
+```shell
+sudo snap refresh atom
+```
+
+Take Backup:
+```shell
+cd ~/.atom
+zip atom.zip ~/.atom/*.cson ~/.atom/*.coffee ~/.atom/*.less
+apm list --installed --bare > atom-bare_packages.txt
+```
+
+Recover Backup:
+```shell
+apm install `cat atom-bare-packages.txt`
+unzip -d ~/.atom atom.zip
+```
+
+* [ ] Install [Rubymine]() and reconfigure.
+```shell
+```
+
+* [ ] Install [Postman]() and reconfigure.
+```shell
+```
+
+* [ ] Install [Compiz]() and reconfigure.
+```shell
+```
+
+* [ ] Install [Skype]() and reconfigure.
+```shell
+```
+
+* [ ] Install [Slack]() and reconfigure.
+```shell
+```
+
+* [ ] Install [Autokey]() and reconfigure.
+```shell
+```
+
+* [ ] Install [Shutter]() and reconfigure.
+```shell
+```
+
+* [ ] Install [Pinta]() and reconfigure.
+```shell
+```
+
+* [ ] Install [Dash]() compatible and reconfigure.
+```shell
+```
+
+* [ ] Install and run [Parallels Transport Agent]() and reconfigure.
+```shell
+```
+
+* [ ] Establish [Docker Workflow]() for development.
+```shell
+```
+
 ```

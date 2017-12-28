@@ -227,12 +227,25 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose version
 ```
 
-* [ ] Install [Vim]() and reconfigure.
+* [ ] Install [Vim](https://docs.oseems.com/general/operatingsystem/ubuntu/install-vim) and reconfigure.
 ```shell
+sudo apt remove vim-tiny
+sudo apt update
+sudo apt install vim
 ```
 
-* [ ] Install [NVim]() and reconfigure.
+Install [powerline fonts](https://github.com/powerline/fonts).
+In some distributions, Terminess `Powerline` is ignored by default and must be explicitly allowed. A fontconfig file is provided which enables it. Copy this file from the fontconfig directory to your home folder under `~/.config/fontconfig/conf.d` (create it if it doesn't exist) and re-run `fc-cache -vf`.
 ```shell
+sudo apt-get install fonts-powerline
+```
+
+* [ ] Install [NVim](https://github.com/neovim/neovim/wiki/Installing-Neovim) and reconfigure.
+```shell
+sudo apt-get install python-dev python-pip python3-dev python3-pip
+sudo add-apt-repository ppa:neovim-ppa/stable
+sudo apt-get update
+sudo apt-get install neovim
 ```
 
 * [x] Install [todotxt-cli](https://github.com/todotxt/todo.txt-cli) and reconfigure.

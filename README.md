@@ -54,7 +54,16 @@ Check `Run command as a login shell` from `Terminal -> Profile Preferences -> Co
 Select `Tab` in `Open new terminals` from `Terminal -> Preferences`.
 
 
-* [ ] Install [Hub](https://github.com/github/hub) and reconfigure.
+* [x] Install [Hub](https://github.com/github/hub) and reconfigure.
+Download attempt(it successful):
+```shell
+$ gunzip hub-linux-amd64-2.3.0-pre10.targz
+$ tar-xvf hub-linux-amd64-2.3.0-pre10
+$ cd hub-linux-amd64-2.3.0-pre10
+$ sudo ./install
+```
+
+Native compiling:
 ```shell
 $ git clone https://github.com/github/hub.git
 $ cd hub
@@ -69,7 +78,7 @@ $ sudo apt-get update
 $ sudo apt-get install caffeine
 ```
 
-Run `Caffeine` and `Caffeine Indicator` from launcher.
+Run `Caffeine` and `Caffeine Indicator` from launcher. Include them in `Start Applications` initiated in `Dash`.
 
 * [x] Recover [dotfiles](https://github.com/enogrob/enogrob-unix-dotfiles) files configure Terminal.
 ```shell
@@ -182,14 +191,21 @@ $ node --version
 $ npm --version
 ```
 
-* [ ] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
+* [x] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
 ```shell
-$ sudo apt install postgresql
-$ sudo -u postgres psql
-$ sudo -u postgres createuser enogrob
+$ sudo apt install postgresql postgresql-contrib libpq-dev
+$ sudo su - postgres
+$ createuser enogrob
 $ psql
-$ \du;
-$ ALTER USER "enogrob" WITH SUPERUSER;
+~ \du;
+~ ALTER USER "enogrob" WITH SUPERUSER;
+~ ALTER USER "enogrob" WITH CREATEDB;
+~ ALTER USER "enogrob" WITH CREATEROLE;
+~ ALTER USER "enogrob" WITH REPLICATION;
+~ ALTER USER "enogrob" WITH BYPASSRLS;
+~\du;
+~\q;
+$ service --status-all | grep postgresql
 ```
 
 * [x] Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
@@ -227,7 +243,7 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose version
 ```
 
-* [ ] Install [Vim](https://docs.oseems.com/general/operatingsystem/ubuntu/install-vim) and reconfigure.
+* [x] Install [Vim](https://docs.oseems.com/general/operatingsystem/ubuntu/install-vim) and reconfigure.
 ```shell
 sudo apt remove vim-tiny
 sudo apt update
@@ -240,7 +256,7 @@ In some distributions, Terminess `Powerline` is ignored by default and must be e
 sudo apt-get install fonts-powerline
 ```
 
-* [ ] Install [NVim](https://github.com/neovim/neovim/wiki/Installing-Neovim) and reconfigure.
+* [x] Install [NVim](https://github.com/neovim/neovim/wiki/Installing-Neovim) and reconfigure.
 ```shell
 sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo add-apt-repository ppa:neovim-ppa/stable

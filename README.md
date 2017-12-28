@@ -245,6 +245,14 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose version
 ```
 
+To install [Kitematic](https://github.com/docker/kitematic/releases/).
+```shell
+$ cd ~/Downloads
+$ unzip Kitematic-0.17.3-Ubuntu.zip
+$ sudo dpkg -i ./dist/Kitematic_0.17.3_amd64.deb
+$ sudo apt-get install -f
+```
+
 * [x] Install [Vim](https://docs.oseems.com/general/operatingsystem/ubuntu/install-vim) and reconfigure.
 ```shell
 sudo apt remove vim-tiny
@@ -401,9 +409,10 @@ $ chmod +x ParallelsTransporterAgent-13.2.0-43213-amd64-lin.run
 $ sudo ./ParallelsTransporterAgent-13.2.0-43213-amd64-lin.run
 ```
 
-* [ ] Establish [Docker Workflow](https://rubythursday.com) for development.
+* [x] Establish [Docker Workflow](https://rubythursday.com) for development.
 See `project-ruby-thursday`.
-```shell
-```
 
-```
+* [x] [Ruby Snack #59: Intro to Docker](https://rubythursday.com/episodes/ruby-snack-59-intro-to-docker).
+* [x] [Ruby Snack #60: Create New Rails App With Docker](https://rubythursday.com/episodes/create_new_rails_app_with_docker).
+* [ ] [Ruby Snack #61: Rails Development Flow With Docker](https://rubythursday.com/episodes/ruby_snack_61_rails_development_flow_with_docker).
+* [ ] [Ruby Snack # 62: Add Additional Dependencies to Docker](https://rubythursday.com/episodes/ruby-snack-62-add-additional-dependencies-to-docker).

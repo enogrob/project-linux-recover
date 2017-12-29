@@ -102,8 +102,11 @@ alias si='neofetch'
 
 alias dc=docker-compose
 alias dc-web='docker-compose run web'
-alias dc-migrate='docker-compose run wed rails db:migrate'
+alias dc-rails='docker-compose run wed rails'
 alias dc-rspec='docker-compose run web rspec'
+alias dc-rake='docker-compose run web rake'
+alias dc-test='docker-compose run web rake test'
+alias dc-dashing='docker-compose run web dashing'
 
 
 # Add an "alert" alias for long running commands.  Use like so:

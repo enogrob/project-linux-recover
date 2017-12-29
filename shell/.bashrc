@@ -100,6 +100,12 @@ alias tree='tree -L 1'
 alias google-chrome='google-chrome --disable-gpu'
 alias si='neofetch'
 
+alias dc=docker-compose
+alias dc-web='docker-compose run web'
+alias dc-migrate='docker-compose run wed rails db:migrate'
+alias dc-rspec='docker-compose run web rspec'
+
+
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

@@ -27,27 +27,29 @@ In `All Settings -> Display` select `Build-in-Display` in `Launcher placement`.
 $ sudo apt-get install git
 $ git config --global user.email "enogrob@gmail.com"
 $ git config --global user.name "Roberto Nogueira"
-$ cd ~/.ssh && ssh-keygen
+$ ssh-keygen && cd ~/.ssh
 $ sudo apt-get install xclip
 $ cat id_rsa.pub | xclip -sel clip
 ```
 
 * [x] Install [Golang](https://github.com/golang/go/wiki/Ubuntu).
 ```shell
-$ snap install --classic go
+$ sudo snap install --classic go
 $ snap list
 ```
 
 * [x] Install [RVM](https://rvm.io/rvm/install).
 ```shell
+$ dpkg -l | grep -i rubygems
+$ sudo apt-get remove --purge rubygems
 $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
 $ sudo apt-get install curl
 $ \curl -sSL https://get.rvm.io | bash
 $ source ~/.rvm/scripts/rvm
 $ rvm install ruby-2.3.1
-$ rvm use ruby-2.3.1 --default
 $ rvm list
-$ gem install bundler
+$ rvm use ruby-2.3.1 --default
+$ gem install bundler --no-document
 ```
 
 Check `Run command as a login shell` from `Terminal -> Profile Preferences -> Command`.
@@ -58,9 +60,10 @@ Select `Tab` in `Open new terminals` from `Terminal -> Preferences`.
 Download attempt(it successful):
 ```shell
 $ gunzip hub-linux-amd64-2.3.0-pre10.targz
-$ tar-xvf hub-linux-amd64-2.3.0-pre10
+$ tar -xvf hub-linux-amd64-2.3.0-pre10.tar
 $ cd hub-linux-amd64-2.3.0-pre10
 $ sudo ./install
+$ hub --version
 ```
 
 Native compiling:
@@ -71,6 +74,11 @@ $ make install prefix=/usr/local
 $ echo alias git='hub' >> .bashrc
 ```
 
+You should place this command in your `.bash_profile` or other startup script.
+```shell
+eval "$(hub alias -s)"
+```
+
 * [x] Install [Caffeine](http://www.edivaldobrito.com.br/impedir-o-bloqueio-da-tela/) and its indicator.
 ```shell
 $ sudo add-apt-repository ppa:caffeine-developers/ppa
@@ -78,9 +86,9 @@ $ sudo apt-get update
 $ sudo apt-get install caffeine
 ```
 
-Run `Caffeine` and `Caffeine Indicator` from launcher. Include them in `Start Applications` initiated in `Dash`.
+Run `Caffeine` and `Caffeine Indicator` from launcher. Include them in `Startup Applications` initiated in `Dash`.
 
-* [x] Recover [dotfiles](https://github.com/enogrob/enogrob-unix-dotfiles) files configure Terminal.
+* [ ] Recover [dotfiles](https://github.com/enogrob/enogrob-unix-dotfiles) files configure Terminal.
 ```shell
 $ git clone $ git@github.com:enogrob/enogrob-unix-dotfiles.git
 $ cd enogrob-unix-dotfiles
@@ -109,6 +117,7 @@ $ curl -s "https://get.sdkman.io" | bash
 $ source "$HOME/.sdkman/bin/sdkman-init.sh"
 $ sdk version
 ```
+
 Install [java](http://sdkman.io/usage.html) with `sdkman`.
 ```shell
 $ sdk install java
@@ -153,15 +162,24 @@ Next, run the Dropbox daemon from the newly created `.dropbox-dist` folder.
 $ ~/.dropbox-dist/dropboxd
 ```
 
+In the u16.04vm-lab360 just add the symlinks to Dropbox:
+```shell
+$ cd ~/
+$ ln -sf /media/psf/Dropbox Dropbox
+```
+
+In the u16.04vm-lab360 just add the symlinks to Google Drive:
+```shell
+$ cd ~/
+$ touch 'Google Drive'
+$ ln -sf /media/psf/Google\ Drive 'Google Drive'
+```
+
 * [ ] Install [Google Chrome extensions](https://stackoverflow.com/questions/20782557/load-unpacked-chrome-extension-programatically) and reconfigure.
 ```shell
 chrome --load-and-launch-app=~/Dropbox/Projects_CHROME
 ```
 
-You should place this command in your `.bash_profile` or other startup script.
-```shell
-eval "$(hub alias -s)"
-```
 
 * [x] Install [Desktop Wallpaper](git@github.com:enogrob/project-linux-recover.git).
 ```shell
@@ -191,7 +209,7 @@ $ node --version
 $ npm --version
 ```
 
-* [x] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
+* [ ] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
 ```shell
 $ sudo apt install postgresql postgresql-contrib libpq-dev
 $ sudo su - postgres
@@ -208,7 +226,7 @@ $ psql
 $ service --status-all | grep postgresql
 ```
 
-* [x] Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
+* [ ] Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
 ```shell
 $ sudo apt-get update
 $ sudo apt-get install \
@@ -253,7 +271,7 @@ $ sudo dpkg -i ./dist/Kitematic_0.17.3_amd64.deb
 $ sudo apt-get install -f
 ```
 
-* [x] Install [Vim](https://docs.oseems.com/general/operatingsystem/ubuntu/install-vim) and reconfigure.
+* [ ] Install [Vim](https://docs.oseems.com/general/operatingsystem/ubuntu/install-vim) and reconfigure.
 ```shell
 sudo apt remove vim-tiny
 sudo apt update
@@ -266,7 +284,7 @@ In some distributions, Terminess `Powerline` is ignored by default and must be e
 sudo apt-get install fonts-powerline
 ```
 
-* [x] Install [NVim](https://github.com/neovim/neovim/wiki/Installing-Neovim) and reconfigure.
+* [ ] Install [NVim](https://github.com/neovim/neovim/wiki/Installing-Neovim) and reconfigure.
 ```shell
 sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo add-apt-repository ppa:neovim-ppa/stable
@@ -281,10 +299,13 @@ $ cd todo.txt-cli
 $ make
 $ sudo make install
 $ make test
+$ mkdir -p ~/.todo
 $ cp -rf  /usr/local/etc/todo ~/.todo
 ```
 
-* [x] Install [Things Today](https://github.com/enogrob/project-things-today) and reconfigure.
+Edit `~/.todo/config` in order to color the `CONTEXT` and `PROJECT`.
+
+* [ ] Install [Things Today](https://github.com/enogrob/project-things-today) and reconfigure.
 ```shell
 $ git clone git@github.com:enogrob/project-things-today.git
 $ cd project-things-today
@@ -293,14 +314,14 @@ $ tag -l $PROJECTS/* > .tags
 $ cp .tags ~/Projects
 ```
 
-* [x] Install [Calibre](https://calibre-ebook.com/download_linux) and reconfigure.
+* [ ] Install [Calibre](https://calibre-ebook.com/download_linux) and reconfigure.
 ```shell
 $ sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 ```
 
 From the main menu  `Calibre Library -> Import all calibre data` import to `~/Calibre Library`.
 
-* [x] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
+* [ ] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
 ```shell
 $ sudo add-apt-repository ppa:alexx2000/doublecmd
 $ sudo apt-get update
@@ -313,7 +334,7 @@ and check `User home directory` and "on close" , save the configuration. hit `ok
 then  copy the files from the backup directory to the newly created `~/.config/doublecmd` and overwrite.
 start `Doublecmd` and all is fine.
 
-* [x] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
+* [ ] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
 ```shell
 $ sudo snap install atom --classic
 ```
@@ -337,12 +358,12 @@ $ apm install `cat atom-bare-packages.txt`
 $ unzip -d ~/.atom atom.zip
 ```
 
-* [x] Install [Rubymine](https://uappexplorer.com) and reconfigure.
+* [ ] Install [Rubymine](https://uappexplorer.com) and reconfigure.
 ```shell
 $ sudo snap install rubymine --classic
 ```
 
-* [x] Install [Postman](https://www.getpostman.com) and reconfigure.
+* [ ] Install [Postman](https://www.getpostman.com) and reconfigure.
 Download it and install it accordingly:
 ```shell
 $ gunzip Postman-linux-x64-5.5.0.tar.gz
@@ -351,50 +372,50 @@ $ sudo mv Postman /opt
 $ ./opt/Postman/Postman&
 ```
 
-* [x] Install [Compiz](https://apps.ubuntu.com/cat/applications/compizconfig-settings-manager) and reconfigure.
+* [ ] Install [Compiz](https://apps.ubuntu.com/cat/applications/compizconfig-settings-manager) and reconfigure.
 `Compiz` comes already with Ubuntu.
 Install from Ubuntu Software `CompizConfig Settings Manager`.
 Set keymaps for <ctrl>-<shift> in `Windows Manager -> Grid -> Bindings`.
 Check `Cycle Through Multiple Sizes` in `Resize Actions` tab.
 
-* [x] Install [Skype](https://www.skype.com/en/get-skype/) and reconfigure.
+* [ ] Install [Skype](https://www.skype.com/en/get-skype/) and reconfigure.
 Download it and install it accordingly:
 ```shell
 $ sudo dpkg -i ./skypeforlinux-64.deb
 $ sudo apt-get install -f
 ```
 
-* [x] Install [Slack](https://slack.com/downloads/linux) and reconfigure.
+* [ ] Install [Slack](https://slack.com/downloads/linux) and reconfigure.
 Download it and install it accordingly:
 ```shell
 $ sudo dpkg -i ./slack-desktop-3.0.2-amd64.deb
 $ sudo apt-get install -f
 ```
 
-* [x] Install [Parcellite](http://parcellite.sourceforge.net/) and reconfigure.
+* [ ] Install [Parcellite](http://parcellite.sourceforge.net/) and reconfigure.
 Download and install from the `Ubuntu Software`.
 
-* [x] Install [Shutter](http://shutter-project.org) and reconfigure.
+* [ ] Install [Shutter](http://shutter-project.org) and reconfigure.
 Download and install from the `Ubuntu Software`.
 
-* [x] Install [Pinta](https://pinta-project.com/pintaproject/pinta/howto/installing-pinta) and reconfigure.
+* [ ] Install [Pinta](https://pinta-project.com/pintaproject/pinta/howto/installing-pinta) and reconfigure.
 ```shell
 $ sudo add-apt-repository ppa:pinta-maintainers/pinta-stable
 $ sudo apt-get update
 $ sudo apt-get install pinta
 ```
 
-* [x] Install [Zeal](https://uappexplorer.com) compatible and reconfigure.
+* [ ] Install [Zeal](https://uappexplorer.com) compatible and reconfigure.
 ```shell
 $ sudo snap install zeal-casept --classic
 ```
 
-* [x] Install [Spotify](https://uappexplorer.com) compatible and reconfigure.
+* [ ] Install [Spotify](https://uappexplorer.com) compatible and reconfigure.
 ```shell
 $ sudo snap install spotify --classic
 ```
 
-* [x] Install [neofetch](https://github.com/dylanaraps/neofetch/wiki/Installation) compatible and reconfigure.
+* [ ] Install [neofetch](https://github.com/dylanaraps/neofetch/wiki/Installation) compatible and reconfigure.
 ```shell
 $ echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | sudo tee -a /etc/apt/sources.list
 $ sudo snap install spotify --classic
@@ -414,5 +435,5 @@ See `project-ruby-thursday`.
 
 * [x] [Ruby Snack #59: Intro to Docker](https://rubythursday.com/episodes/ruby-snack-59-intro-to-docker).
 * [x] [Ruby Snack #60: Create New Rails App With Docker](https://rubythursday.com/episodes/create_new_rails_app_with_docker).
-* [ ] [Ruby Snack #61: Rails Development Flow With Docker](https://rubythursday.com/episodes/ruby_snack_61_rails_development_flow_with_docker).
-* [ ] [Ruby Snack # 62: Add Additional Dependencies to Docker](https://rubythursday.com/episodes/ruby-snack-62-add-additional-dependencies-to-docker).
+* [x] [Ruby Snack #61: Rails Development Flow With Docker](https://rubythursday.com/episodes/ruby_snack_61_rails_development_flow_with_docker).
+* [x] [Ruby Snack # 62: Add Additional Dependencies to Docker](https://rubythursday.com/episodes/ruby-snack-62-add-additional-dependencies-to-docker).

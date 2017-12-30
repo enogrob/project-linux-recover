@@ -102,7 +102,7 @@ alias si='neofetch'
 
 alias dc=docker-compose
 alias dc-web='docker-compose run web'
-alias dc-rails='docker-compose run wed rails'
+alias dc-rails='docker-compose run web rails'
 alias dc-rspec='docker-compose run web rspec'
 alias dc-rake='docker-compose run web rake'
 alias dc-test='docker-compose run web rake test'

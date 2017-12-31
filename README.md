@@ -305,7 +305,12 @@ $ cp -rf  /usr/local/etc/todo ~/.todo
 
 Edit `~/.todo/config` in order to color the `CONTEXT` and `PROJECT`.
 
-* [ ] Install [Things Today](https://github.com/enogrob/project-things-today) and reconfigure.
+In the `Parallels vm` it was not needed to install, just to do the symlink:
+```shell
+$ ln -sf /media/psf/Dropbox/todo ~/.todo
+```
+
+* [x] Install [Things Today](https://github.com/enogrob/project-things-today) and reconfigure.
 ```shell
 $ git clone git@github.com:enogrob/project-things-today.git
 $ cd project-things-today
@@ -314,17 +319,17 @@ $ tag -l $PROJECTS/* > .tags
 $ cp .tags ~/Projects
 ```
 
-* [ ] Install [Calibre](https://calibre-ebook.com/download_linux) and reconfigure.
+* [x] Install [Calibre](https://calibre-ebook.com/download_linux) and reconfigure.
 ```shell
 $ sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
 ```
 
 From the main menu  `Calibre Library -> Import all calibre data` import to `~/Calibre Library`.
 
-* [ ] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
+* [x] Install [Double Commander](http://www.ubuntugeek.com/install-double-commander-on-ubuntu-16-04.html) and reconfigure.
 ```shell
 $ sudo add-apt-repository ppa:alexx2000/doublecmd
-$ sudo apt-get update
+$ sudo apt-get updatesudo
 $ sudo apt-get install doublecmd-gtk
 ```
 
@@ -334,7 +339,7 @@ and check `User home directory` and "on close" , save the configuration. hit `ok
 then  copy the files from the backup directory to the newly created `~/.config/doublecmd` and overwrite.
 start `Doublecmd` and all is fine.
 
-* [ ] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
+* [x] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
 ```shell
 $ sudo snap install atom --classic
 ```
@@ -355,24 +360,27 @@ $ mv ~/atom-* ~/Projects/project-linux-recover/backups
 Recover Backup:
 ```shell
 $ apm install `cat atom-bare-packages.txt`
-$ unzip -d ~/.atom atom.zip
+$ unzip -d ~/ atom.zip
 ```
 
-* [ ] Install [Rubymine](https://uappexplorer.com) and reconfigure.
-```shell
-$ sudo snap install rubymine --classic
-```
-
-* [ ] Install [Postman](https://www.getpostman.com) and reconfigure.
+* [x] Install [Rubymine](https://www.jetbrains.com) and reconfigure.
 Download it and install it accordingly:
 ```shell
-$ gunzip Postman-linux-x64-5.5.0.tar.gz
-$ tar -xvf Postman-linux-x64-5.5.0.tar
-$ sudo mv Postman /opt
-$ ./opt/Postman/Postman&
+$ gunzip RubyMine-2017.3.1.tar.gz
+$ sudo tar xfz RubyMine-*.tar.gz -C /opt
+$ cd /opt/RubyMine-*/bin
+$ ./rubymine.sh&
 ```
 
-* [ ] Install [Compiz](https://apps.ubuntu.com/cat/applications/compizconfig-settings-manager) and reconfigure.
+* [x] Install [Postman](https://www.getpostman.com) and reconfigure.
+Download it and install it accordingly:
+```shell
+$ sudo tar xfz Postman-*.tar.gz -C /opt
+$ cd /opt/Postman-*
+$ ./Postman&
+```
+
+* [x] Install [Compiz](https://apps.ubuntu.com/cat/applications/compizconfig-settings-manager) and reconfigure.
 `Compiz` comes already with Ubuntu.
 Install from Ubuntu Software `CompizConfig Settings Manager`.
 Set keymaps for <ctrl>-<shift> in `Windows Manager -> Grid -> Bindings`.
@@ -415,10 +423,9 @@ $ sudo snap install zeal-casept --classic
 $ sudo snap install spotify --classic
 ```
 
-* [ ] Install [neofetch](https://github.com/dylanaraps/neofetch/wiki/Installation) compatible and reconfigure.
+* [x] Install [neofetch](https://github.com/dylanaraps/neofetch/wiki/Installation) compatible and reconfigure.
 ```shell
 $ echo "deb http://dl.bintray.com/dawidd6/neofetch jessie main" | sudo tee -a /etc/apt/sources.list
-$ sudo snap install spotify --classic
 $ curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| sudo apt-key add -
 $ sudo apt-get update
 $ sudo apt-get install neofetch

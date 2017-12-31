@@ -209,7 +209,7 @@ $ node --version
 $ npm --version
 ```
 
-* [ ] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
+* [x] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
 ```shell
 $ sudo apt install postgresql postgresql-contrib libpq-dev
 $ sudo su - postgres
@@ -221,12 +221,13 @@ $ psql
 ~ ALTER USER "enogrob" WITH CREATEROLE;
 ~ ALTER USER "enogrob" WITH REPLICATION;
 ~ ALTER USER "enogrob" WITH BYPASSRLS;
-~\du;
-~\q;
+~\du
+~\q
+$ exit
 $ service --status-all | grep postgresql
 ```
 
-* [ ] Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
+* [x] Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
 ```shell
 $ sudo apt-get update
 $ sudo apt-get install \
@@ -242,9 +243,10 @@ $ sudo add-apt-repository \
    stable"
 $ sudo apt-get update
 $ sudo apt-get install docker-ce
-$ sudo groupadd docker
+# sudo groupadd docker
 $ sudo usermod -aG docker $USER
-$ sudo chmod 666 /var/run/docker.sock
+$ sudo shutdown -h now
+# sudo chmod 666 /var/run/docker.sock
 $ docker info
 ```
 
@@ -271,7 +273,7 @@ $ sudo dpkg -i ./dist/Kitematic_0.17.3_amd64.deb
 $ sudo apt-get install -f
 ```
 
-* [ ] Install [Vim](https://docs.oseems.com/general/operatingsystem/ubuntu/install-vim) and reconfigure.
+* [x] Install [Vim](https://docs.oseems.com/general/operatingsystem/ubuntu/install-vim) and reconfigure.
 ```shell
 sudo apt remove vim-tiny
 sudo apt update
@@ -284,7 +286,7 @@ In some distributions, Terminess `Powerline` is ignored by default and must be e
 sudo apt-get install fonts-powerline
 ```
 
-* [ ] Install [NVim](https://github.com/neovim/neovim/wiki/Installing-Neovim) and reconfigure.
+* [x] Install [NVim](https://github.com/neovim/neovim/wiki/Installing-Neovim) and reconfigure.
 ```shell
 sudo apt-get install python-dev python-pip python3-dev python3-pip
 sudo add-apt-repository ppa:neovim-ppa/stable
@@ -386,39 +388,39 @@ Install from Ubuntu Software `CompizConfig Settings Manager`.
 Set keymaps for <ctrl>-<shift> in `Windows Manager -> Grid -> Bindings`.
 Check `Cycle Through Multiple Sizes` in `Resize Actions` tab.
 
-* [ ] Install [Skype](https://www.skype.com/en/get-skype/) and reconfigure.
+* [x] Install [Skype](https://www.skype.com/en/get-skype/) and reconfigure.
 Download it and install it accordingly:
 ```shell
 $ sudo dpkg -i ./skypeforlinux-64.deb
 $ sudo apt-get install -f
 ```
 
-* [ ] Install [Slack](https://slack.com/downloads/linux) and reconfigure.
+* [x] Install [Slack](https://slack.com/downloads/linux) and reconfigure.
 Download it and install it accordingly:
 ```shell
 $ sudo dpkg -i ./slack-desktop-3.0.2-amd64.deb
 $ sudo apt-get install -f
 ```
 
-* [ ] Install [Parcellite](http://parcellite.sourceforge.net/) and reconfigure.
+* [x] Install [Parcellite](http://parcellite.sourceforge.net/) and reconfigure.
 Download and install from the `Ubuntu Software`.
 
-* [ ] Install [Shutter](http://shutter-project.org) and reconfigure.
+* [x] Install [Shutter](http://shutter-project.org) and reconfigure.
 Download and install from the `Ubuntu Software`.
 
-* [ ] Install [Pinta](https://pinta-project.com/pintaproject/pinta/howto/installing-pinta) and reconfigure.
+* [x] Install [Pinta](https://pinta-project.com/pintaproject/pinta/howto/installing-pinta) and reconfigure.
 ```shell
 $ sudo add-apt-repository ppa:pinta-maintainers/pinta-stable
 $ sudo apt-get update
 $ sudo apt-get install pinta
 ```
 
-* [ ] Install [Zeal](https://uappexplorer.com) compatible and reconfigure.
+* [x] Install [Zeal](https://uappexplorer.com) compatible and reconfigure.
 ```shell
 $ sudo snap install zeal-casept --classic
 ```
 
-* [ ] Install [Spotify](https://uappexplorer.com) compatible and reconfigure.
+* [x] Install [Spotify](https://uappexplorer.com) compatible and reconfigure.
 ```shell
 $ sudo snap install spotify --classic
 ```

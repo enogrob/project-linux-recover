@@ -338,8 +338,7 @@ $ sudo apt-get install doublecmd-gtk
 In order to recover the configuration do  a backup copy of the `~/.config/doublecmd`
 then delete this folder, start the `new doublecmd` for the first time , then go to, `options->settings`
 and check `User home directory` and "on close" , save the configuration. hit `ok` and close `Doublecmd`.
-then  copy the files from the backup directory to the newly created `~/.config/doublecmd` and overwrite.
-start `Doublecmd` and all is fine.
+then  copy the files from the backup directory to the newly created `~/.config/doublecmd` (linux) or `~/Library/Preferences/doublecmd` (Mac) and overwrite. Start `Doublecmd` and all is fine.
 
 * [x] Install [Atom](https://discuss.atom.io/t/how-to-backup-all-your-settings/15674/2) and reconfigure.
 ```shell

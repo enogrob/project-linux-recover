@@ -211,7 +211,7 @@ $ npm --version
 
 * [x] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
 ```shell
-$ sudo apt install postgresql postgresql-contrib libpq-dev
+$ sudo apt install postgresql postgresql-contrib libpq-dev pgadmin3 
 $ sudo su - postgres
 $ createuser enogrob
 $ psql

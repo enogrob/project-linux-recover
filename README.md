@@ -211,7 +211,7 @@ $ npm --version
 
 * [x] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
 ```shell
-$ sudo apt install postgresql postgresql-contrib libpq-dev pgadmin3 
+$ sudo apt install postgresql postgresql-contrib libpq-dev pgadmin3
 $ sudo su - postgres
 $ createuser enogrob
 $ psql
@@ -367,10 +367,19 @@ $ unzip -d ~/ atom.zip
 * [x] Install [Rubymine](https://www.jetbrains.com) and reconfigure.
 Download it and install it accordingly:
 ```shell
-$ gunzip RubyMine-2017.3.1.tar.gz
 $ sudo tar xfz RubyMine-*.tar.gz -C /opt
 $ cd /opt/RubyMine-*/bin
 $ ./rubymine.sh&
+```
+
+* [x] Install [Eclipse](http://www.eclipse.org/downloads) and reconfigure.
+Download it and install it accordingly:
+```shell
+$ tar xfz eclipse-inst-linux64.tar.gz
+$ cd eclipse-installer
+$ ./eclipse-inst
+$ cd ~/bin
+$ ln -sf /home/enogrob/eclipse/jee-oxygen2/eclipse/eclipse eclipse
 ```
 
 * [x] Install [Postman](https://www.getpostman.com) and reconfigure.

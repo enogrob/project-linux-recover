@@ -100,14 +100,22 @@ alias tree='tree -L 1'
 alias google-chrome='google-chrome --disable-gpu'
 alias si='neofetch'
 
+alias dk='docker'
+alias dki='docker image'
+alias dkis='docker images'
+alias dkc='docker container'
+alias dkcps='docker container ps'
+alias dkcpsa='docker container ps -a'
+
 alias dc=docker-compose
 alias dc-web='docker-compose run web'
 alias dc-rails='docker-compose run web rails'
+alias dc-dashing='docker-compose run web dashing'
 alias dc-rspec='docker-compose run web rspec'
 alias dc-rake='docker-compose run web rake'
 alias dc-test='docker-compose run web rake test'
-alias dc-dashing='docker-compose run web dashing'
 
+export LOCAL_USER_ID=$(id -u)
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

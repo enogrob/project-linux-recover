@@ -131,6 +131,13 @@ $ sudo dpkg -i --force-depends google-chrome-stable_current_amd64.deb
 $ sudo apt-get install -f
 ```
 
+* [x] Install [Google Drive](https://www.thefanclub.co.za/overgrive).
+```shell
+$ cd ~/Downloads
+$ sudo dpkg -i ./overgrive_3.2.3_all.deb
+$ sudo apt-get install -f
+```
+
 * [ ] Install [Google Driver](http://askubuntu.com/questions/760085/how-do-you-install-google-chrome-on-ubuntu-16-04).
 ```shell
 CHROME_DRIVER_VERSION=`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`
@@ -440,6 +447,8 @@ $ curl "https://bintray.com/user/downloadSubjectPublicKey?username=bintray"| sud
 $ sudo apt-get update
 $ sudo apt-get install neofetch
 ```
+
+* [x] Install [Cairo-Dock](). It comes with Ubuntu. Install from the Ubuntu Software.
 
 * [ ] Install and run [Parallels Transport Agent](https://www.parallels.com/pc/#lin) and reconfigure.
 ```shell

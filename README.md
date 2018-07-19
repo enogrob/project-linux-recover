@@ -234,6 +234,33 @@ $ exit
 $ service --status-all | grep postgresql
 ```
 
+* [x] Install [Postgres](https://help.ubuntu.com/lts/serverguide/postgresql.html) with enogrob user.
+```shell
+$ sudo apt install postgresql postgresql-contrib libpq-dev pgadmin3
+$ sudo su - postgres
+$ createuser enogrob
+$ psql
+~ \du;
+~ ALTER USER "enogrob" WITH SUPERUSER;
+~ ALTER USER "enogrob" WITH CREATEDB;
+~ ALTER USER "enogrob" WITH CREATEROLE;
+~ ALTER USER "enogrob" WITH REPLICATION;
+~ ALTER USER "enogrob" WITH BYPASSRLS;
+~\du
+~\q
+$ exit
+$ service --status-all | grep postgresql
+```
+
+* [x] Install [MySQL](https://gorails.com/setup/ubuntu/16.04) with root user.
+```shell
+$ sudo apt-get install mysql-server mysql-client libmysqlclient-dev
+$ sudo service mysql status
+$ mysql -u root -p
+~\q
+$ exit
+```
+
 * [x] Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
 ```shell
 $ sudo apt-get update

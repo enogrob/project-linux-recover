@@ -261,6 +261,12 @@ $ mysql -u root -p
 $ exit
 ```
 
+Download [MySQL connection](https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar) and install it:
+```shell
+$ cd $HOME/.RubyMine2018.1/config/jdbc-drivers
+$ mv ~/Downloads/mysql-connector-java-5.1.45.jar .
+```
+
 * [x] Install [Docker](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/).
 ```shell
 $ sudo apt-get update
@@ -429,6 +435,7 @@ $ ./Postman&
 Install from Ubuntu Software `CompizConfig Settings Manager`.
 Set keymaps for <ctrl>-<shift> in `Windows Manager -> Grid -> Bindings`.
 Check `Cycle Through Multiple Sizes` in `Resize Actions` tab.
+Click in `Windows Manager` and in `Place Windows` unticked `Workarounds` and in `Placement Mode` select `Placeacross all outputs`. The Placement Mode `Smart` is the key for remembering your desired position.
 
 * [x] Install [Skype](https://www.skype.com/en/get-skype/) and reconfigure.
 Download it and install it accordingly:

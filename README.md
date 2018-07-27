@@ -15,7 +15,7 @@ The idea about this project is to create a practical way to reinstall the essent
 
 ## Topics
 
-* [x] Change Language in `All Settings -> Language Support` to English.
+* [x] Change Language in `All Settings -> Language Support` to English, and in the `Regional Formats` set it to `English` as well in order to have the `Dates` also in English format.
 Set to 22 in `System Settings -> Appearance -> look -> Launch icon size`.
 Check Enable Workplaces and Add show desktop icon to the launcher in  `System Settings -> Appearance -> Behaviour`.
 In `All Settings -> Display` select `Build-in-Display` in `Launcher placement`.

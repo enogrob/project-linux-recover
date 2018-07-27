@@ -86,7 +86,7 @@ $ sudo apt-get update
 $ sudo apt-get install caffeine
 ```
 
-Run `Caffeine` and `Caffeine Indicator` from launcher. Include them in `Startup Applications` initiated in `Dash`.
+Run `Caffeine` and `Caffeine Indicator` from launcher. Include them in `Startup Applications` initiated in `Dash`, e.g. `/usr/bin/caffeine-indicator` shall be included in the `Startup Applications`.
 
 * [ ] Recover [dotfiles](https://github.com/enogrob/enogrob-unix-dotfiles) files configure Terminal.
 ```shell
@@ -489,6 +489,8 @@ $ sudo apt-get install neofetch
 $ chmod +x ParallelsTransporterAgent-13.2.0-43213-amd64-lin.run
 $ sudo ./ParallelsTransporterAgent-13.2.0-43213-amd64-lin.run
 ```
+
+`/usr/bin/cairo-dock` shall be included in the `Startup Applications`.
 
 * [x] Establish [Docker Workflow](https://rubythursday.com) for development.
 See `project-ruby-thursday`.

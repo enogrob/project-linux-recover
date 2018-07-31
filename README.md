@@ -452,7 +452,7 @@ $ sudo apt-get install -f
 ```
 
 * [x] Install [Parcellite](http://parcellite.sourceforge.net/) and reconfigure.
-Download and install from the `Ubuntu Software`.
+Download and install from the `Ubuntu Software`. Then setup in its preferences, in `Behaviour` tab check `Use Copy` , `Use Primary(Selection)` and `Synchronize clipboards`.
 
 * [x] Install [Shutter](http://shutter-project.org) and reconfigure.
 Download and install from the `Ubuntu Software`.

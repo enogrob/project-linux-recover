@@ -482,7 +482,10 @@ $ sudo apt-get update
 $ sudo apt-get install neofetch
 ```
 
-* [x] Install [Cairo-Dock](). It comes with Ubuntu. Install from the Ubuntu Software.
+* [x] Install [Cairo-Dock](). It comes with Ubuntu. Install from the Ubuntu Software, or using the following shell command:
+```shell
+sudo apt-get install cairo-dock cairo-dock-plug-ins
+```
 
 * [ ] Install and run [Parallels Transport Agent](https://www.parallels.com/pc/#lin) and reconfigure.
 ```shell

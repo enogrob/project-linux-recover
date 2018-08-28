@@ -99,6 +99,7 @@ alias gsync='pushd .;cd ~/Google\ Drive;grive sync;popd'
 alias tree='tree -L 1'
 alias google-chrome='google-chrome --disable-gpu'
 alias si='neofetch'
+alias home='cd ~/;neofetch'
 
 alias dk='docker'
 alias dki='docker image'
@@ -114,6 +115,7 @@ alias dc-dashing='docker-compose run web dashing'
 alias dc-rspec='docker-compose run web rspec'
 alias dc-rake='docker-compose run web rake'
 alias dc-test='docker-compose run web rake test'
+alias mysql='mysql -u root --password=""  --pager="less -SFX" obras_development'
 
 export LOCAL_USER_ID=$(id -u)
 
@@ -156,21 +158,21 @@ fi
 }
 alias rspec='_rspec_command'
 
-EDITOR=vim
+export EDITOR=vim
 
 source ~/.todayrc.sh
 
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+. /home/rnogueira/kerl/21.0/activate
+kiex use elixir-1.6.6
+
+export JAVA_HOME=$HOME/.sdkman/candidates/java/current
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-export JAVA_HOME=/home/enogrob/.sdkman/candidates/java/current
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/enogrob/.sdkman"
-[[ -s "/home/enogrob/.sdkman/bin/sdkman-init.sh" ]] && source "/home/enogrob/.sdkman/bin/sdkman-init.sh"

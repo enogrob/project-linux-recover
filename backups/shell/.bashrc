@@ -109,12 +109,12 @@ alias dkcps='docker container ps'
 alias dkcpsa='docker container ps -a'
 
 alias dc=docker-compose
-alias dc-web='docker-compose run web'
-alias dc-rails='docker-compose run web rails'
-alias dc-dashing='docker-compose run web dashing'
-alias dc-rspec='docker-compose run web rspec'
-alias dc-rake='docker-compose run web rake'
-alias dc-test='docker-compose run web rake test'
+alias dc-web='docker-compose run --user "$(id -u):$(id -g) web"'
+alias dc-rails='docker-compose run --user "$(id -u):$(id -g)" web rails'
+alias dc-dashing='docker-compose run --user "$(id -u):$(id -g)" web dashing'
+alias dc-rspec='docker-compose run --user "$(id -u):$(id -g)" web rspec'
+alias dc-rake='docker-compose run --user "$(id -u):$(id -g)" web rake'
+alias dc-test='docker-compose run --user "$(id -u):$(id -g)" web rake test'
 alias mysql='mysql -u root --password=""  --pager="less -SFX" obras_development'
 
 export LOCAL_USER_ID=$(id -u)
@@ -175,4 +175,3 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:$HOME/.rvm/bin"
-

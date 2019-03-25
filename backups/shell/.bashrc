@@ -104,18 +104,43 @@ alias home='cd ~/;neofetch'
 alias dk='docker'
 alias dki='docker image'
 alias dkis='docker images'
+alias dkins="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias dkc='docker container'
-alias dkcps='docker container ps'
-alias dkcpsa='docker container ps -a'
+alias dkv='docker volume'
+alias dkn='docker network'
 
 alias dc=docker-compose
-alias dc-web='docker-compose run --user "$(id -u):$(id -g) web"'
-alias dc-rails='docker-compose run --user "$(id -u):$(id -g)" web rails'
-alias dc-dashing='docker-compose run --user "$(id -u):$(id -g)" web dashing'
-alias dc-rspec='docker-compose run --user "$(id -u):$(id -g)" web rspec'
-alias dc-rake='docker-compose run --user "$(id -u):$(id -g)" web rake'
-alias dc-test='docker-compose run --user "$(id -u):$(id -g)" web rake test'
-alias mysql='mysql -u root --password=""  --pager="less -SFX" obras_development'
+alias dc-exec='docker-compose exec"'
+alias dc-db='docker-compose exec db"'
+alias dc-user='docker-compose exec --user "$(id -u):$(id -g)"'
+alias cleanup='sudo chown -R $USER:$USER tmp'
+#alias mysql='mysql -u root --password=""  --pager="less -SFX" obras_development'
+
+export COMPOSE_FILE='docker-compose.yaml'
+
+function importdb(){
+  rake db:drop
+  rake db:create
+  mysql -u root -p $MYSQL_DATABASE_DEV < $1
+  rake db:migrate
+}
+
+function dkimportdb(){
+  docker-compose exec $1 bundle exec rake db:drop
+  docker-compose exec $1 bundle exec rake db:create
+  docker exec -i db mysql -uroot -proot $2 < $3
+  docker-compose exec $1 bundle exec rake db:migrate
+}
+
+function setdb(){
+  set -o allexport
+  . ./.env/development/$1
+  set +o allexport
+}
+
+function db(){
+  echo $MYSQL_DATABASE_DEV
+}
 
 export LOCAL_USER_ID=$(id -u)
 

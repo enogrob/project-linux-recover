@@ -118,13 +118,6 @@ alias cleanup='sudo chown -R $USER:$USER tmp'
 
 export COMPOSE_FILE='docker-compose.yaml'
 
-function importdb(){
-  rake db:drop
-  rake db:create
-  mysql -u root -p $MYSQL_DATABASE_DEV < $1
-  rake db:migrate
-}
-
 function dkimportdb(){
   docker-compose exec $1 bundle exec rake db:drop
   docker-compose exec $1 bundle exec rake db:create
@@ -133,15 +126,25 @@ function dkimportdb(){
 }
 
 function setdb(){
+	spring stop
   set -o allexport
   . ./.env/development/$1
   set +o allexport
+  db
 }
 
 function db(){
   echo $MYSQL_DATABASE_DEV
 }
 
+function importdb(){
+  rake db:drop
+  rake db:create
+  mysql -u root -p $MYSQL_DATABASE_DEV < $1
+  rake db:migrate
+}
+
+export MYSQL_DATABASE_DEV=obras_olimpia_dev
 export LOCAL_USER_ID=$(id -u)
 
 # Add an "alert" alias for long running commands.  Use like so:

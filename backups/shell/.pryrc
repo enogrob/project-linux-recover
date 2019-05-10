@@ -43,82 +43,111 @@ rescue LoadError => err
   Pry.config.print = Pry::DEFAULT_PRINT
 end
 
+# used to print the content tables when typed, e.g. accesses, status_types..etc
 def self.method_missing(m, *args, &block)
   class_name = "#{m}".classify.constantize
   if class_name.is_a?(Class) && ActiveRecord::Base.connection.table_exists?("#{m}")
     case class_name.to_s
     when 'ServiceGrid'
-        if args[0].present?
-          service_id = args[0]
+      if args[0].present?
+        service_id = args[0]
 
-          grid_ids = ServiceGrid.where(service_id: service_id).pluck(:grid_id)
-          puts
-          tp Grid.where(id: grid_ids), :id, :name
-        else
-          puts
-          puts "service_grids <service_id>"
-        end
+        grid_ids = ServiceGrid.where(service_id: service_id).pluck(:grid_id)
+        puts
+        tp Grid.where(id: grid_ids), :id, :name
+      else
+        puts
+        puts "usage: service_grids <service_id>".magenta
+        puts
+      end
     else
-        if (class_name.respond_to? 'name') && (class_name.all.count < 100)
-          puts
-          tp class_name.all, :id, :name
-        else
-          puts
-          tp class_name.all.limit(20), class_name.column_names[0..8]
-        end
+      if (class_name.respond_to? 'name') && (class_name.all.count < 100)
+        puts
+        tp class_name.all, :id, :name
+      else
+        puts
+        tp class_name.all.limit(20), class_name.column_names[0..8]
+      end
     end
   end
 end
 
-def _log
-  Logger::INFO
+class String
+  def black;          "\e[30m#{self}\e[0m" end
+  def red;            "\e[31m#{self}\e[0m" end
+  def green;          "\e[32m#{self}\e[0m" end
+  def brown;          "\e[33m#{self}\e[0m" end
+  def blue;           "\e[34m#{self}\e[0m" end
+  def magenta;        "\e[35m#{self}\e[0m" end
+  def cyan;           "\e[36m#{self}\e[0m" end
+  def gray;           "\e[37m#{self}\e[0m" end
+
+  def bg_black;       "\e[40m#{self}\e[0m" end
+  def bg_red;         "\e[41m#{self}\e[0m" end
+  def bg_green;       "\e[42m#{self}\e[0m" end
+  def bg_brown;       "\e[43m#{self}\e[0m" end
+  def bg_blue;        "\e[44m#{self}\e[0m" end
+  def bg_magenta;     "\e[45m#{self}\e[0m" end
+  def bg_cyan;        "\e[46m#{self}\e[0m" end
+  def bg_gray;        "\e[47m#{self}\e[0m" end
+
+  def bold;           "\e[1m#{self}\e[22m" end
+  def italic;         "\e[3m#{self}\e[23m" end
+  def underline;      "\e[4m#{self}\e[24m" end
+  def blink;          "\e[5m#{self}\e[25m" end
+  def reverse_color;  "\e[7m#{self}\e[27m" end
 end
 
-def _log_off
-  @old_logger = ActiveRecord::Base.logger
-  ActiveRecord::Base.logger = nil
-end
+# handle ActiveRecord database and logs
+module Databases
+  def _log
+    Logger::INFO
+  end
 
-def _log_on
-  ActiveRecord::Base.logger = @old_logger
-end
+  def _log_off
+    @old_logger = ActiveRecord::Base.logger
+    ActiveRecord::Base.logger = nil
+  end
 
-def _db
-  ActiveRecord::Base.connection.current_database
-end
+  def _log_on
+    ActiveRecord::Base.logger = @old_logger
+  end
 
-def _db_config
-  ActiveRecord::Base.connection_config
-end
+  def _db
+    ActiveRecord::Base.connection.current_database
+  end
 
-_log_off
-$PROJECT_ID = 319
-
-module Demo
-  def _demo
-    @current_user = User.find(1)
-    @current_access = Access.find(17)
-    @current_profile = Profile.find(2)
-    @current_agency = Agency.find(3)
-    @projects = Project.default_access(@current_access, @current_user, @current_profile, @current_agency, opts={status: 1})
+  def _db_config
+    ActiveRecord::Base.connection_config
   end
 end
 
-module OrderingGrids
+# handy methods for obras
+module Obras
+  def _set_demo
+    @user = User.find(1)
+    @access = Access.find(17)
+    @profile = Profile.find(2)
+    @agency = Agency.find(3)
+    @projects = Project.default_access(@access, @user, @profile, @agency, opts={status: 1})
+  end
+
+  def _set_project(project_id=$PROJECT_ID)
+    @project = Project.find(project_id)
+  end
+
   def _service_grids(project_id=$PROJECT_ID)
-  service_grid_ids = Project.find(project_id).service.service_grids.pluck(:grid_id)
-  module_adder_grids = ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids).order(:position).pluck(:name)
+    service_grid_ids = Project.find(project_id).service.service_grids.pluck(:grid_id)
+    module_adder_grids = ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids).order(:position).pluck(:name)
   end
-end
 
-#947-24-criar-area-administrativa-de-grids
-module RequestReasonAndGrids
+  #947-24-criar-area-administrativa-de-grids
   def _service_ids_that_include_request_reason_grid
-    grid = Grid.find_by(active: true, name: 'Identificação da Solicitação')
-    if grid.present?
-      service_ids= ServiceGrid.joins(:grid).where(grid_id: grid.id).pluck(:service_id)
-      tp Service.where(id: service_ids), :id, :name
-    end
+     grid = Grid.find_by(active: true, name: 'Identificação da Solicitação')
+     if grid.present?
+       service_ids= ServiceGrid.joins(:grid).where(grid_id: grid.id).pluck(:service_id)
+       tp Service.where(id: service_ids), :id, :name
+     end
   end
 
   def _request_reasons_from_motive_and_service_associations(service_id)
@@ -134,6 +163,9 @@ module RequestReasonAndGrids
   end
 end
 
-# include Demo
-# include OrderingGrids
-# include RequestReasonAndGrids
+# initializations
+include Databases
+include Obras
+
+$PROJECT_ID = nil
+_log_off

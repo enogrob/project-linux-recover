@@ -134,12 +134,9 @@ module Obras
 
   def _set_project(project_id=$PROJECT_ID)
     @project = Project.find(project_id)
+    $PROJECT_ID = project_id
   end
 
-  def _service_grids(project_id=$PROJECT_ID)
-    service_grid_ids = Project.find(project_id).service.service_grids.pluck(:grid_id)
-    module_adder_grids = ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids).order(:position).pluck(:name)
-  end
 
   #947-24-criar-area-administrativa-de-grids
   def _service_ids_that_include_request_reason_grid
@@ -156,10 +153,12 @@ module Obras
       tp RequestReason.where(id: request_reason_ids, active: true), :id , :name
     end
   end
-
-  def _service_grids(service_id)
-    grid_ids = ServiceGrid.where(service_id: service_id).pluck(:grid_id)
-    tp Grid.where(id: grid_ids), :id, :name
+  
+  class Project < Project
+    def service_grid_names
+      service_grid_ids = self.service.service_grids.pluck(:grid_id)
+      ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids).order(:position).pluck(:name)
+    end
   end
 end
 

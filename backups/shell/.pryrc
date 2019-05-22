@@ -124,7 +124,7 @@ end
 
 # handy methods for obras
 module Obras
-  def _set_demo
+  def set_demo
     @user = User.find(1)
     @access = Access.find(17)
     @profile = Profile.find(2)
@@ -132,32 +132,33 @@ module Obras
     @projects = Project.default_access(@access, @user, @profile, @agency, opts={status: 1})
   end
 
-  def _set_project(project_id=$PROJECT_ID)
+  def set_project(project_id=$PROJECT_ID)
     @project = Project.find(project_id)
     $PROJECT_ID = project_id
   end
 
-
-  #947-24-criar-area-administrativa-de-grids
-  def _service_ids_that_include_request_reason_grid
-     grid = Grid.find_by(active: true, name: 'Identificação da Solicitação')
-     if grid.present?
-       service_ids= ServiceGrid.joins(:grid).where(grid_id: grid.id).pluck(:service_id)
-       tp Service.where(id: service_ids), :id, :name
-     end
+  def project
+    @project
   end
 
-  def _request_reasons_from_motive_and_service_associations(service_id)
-    request_reason_ids = MotiveAndServiceAssociation.where(service_id: service_id).pluck(:request_reason_id)
-    if request_reason_ids.present?
-      tp RequestReason.where(id: request_reason_ids, active: true), :id , :name
-    end
+  def project_id
+    $PROJECT_ID
   end
-  
+
   class Project < Project
-    def service_grid_names
+    def grids
       service_grid_ids = self.service.service_grids.pluck(:grid_id)
       ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids).order(:position).pluck(:name)
+    end
+
+    def include_grid?(name = 'Identificação da Solicitação')
+      self.grids.include? name
+    end
+
+    def request_reasons
+      service_id = self.service.id
+      request_reason_ids = MotiveAndServiceAssociation.where(service_id: service_id).pluck(:request_reason_id)
+      RequestReason.where(id: request_reason_ids, active: true).pluck(:name)
     end
   end
 end

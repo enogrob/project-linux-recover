@@ -168,4 +168,4 @@ include Databases
 include Obras
 
 $PROJECT_ID = nil
-_log_off
+_log_on

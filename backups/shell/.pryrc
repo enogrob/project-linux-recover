@@ -19,7 +19,9 @@ Pry.config.prompt = [
     proc do |object, nest_level, pry|
       prompt  = colour :bright_black, Pry.view_clip(object)
       prompt += ":#{nest_level}" if nest_level > 0
-      prompt += colour :green, " #{_db}"
+      if defined?(Rails::Console)
+        prompt += colour :green, " #{_db}"
+      end
       prompt += colour :cyan, " > "
     end, proc { |object, nest_level, pry| colour :cyan, "> " }
 ]
@@ -44,6 +46,7 @@ rescue LoadError => err
 end
 
 # used to print the content tables when typed, e.g. accesses, status_types..etc
+if defined?(Rails::Console)
 def self.method_missing(m, *args, &block)
   class_name = "#{m}".classify.constantize
   if class_name.is_a?(Class) && ActiveRecord::Base.connection.table_exists?("#{m}")
@@ -70,6 +73,7 @@ def self.method_missing(m, *args, &block)
       end
     end
   end
+end
 end
 
 class String
@@ -145,27 +149,30 @@ module Obras
     $PROJECT_ID
   end
 
-  class Project < Project
-    def grids
-      service_grid_ids = self.service.service_grids.pluck(:grid_id)
-      ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids).order(:position).pluck(:name)
-    end
+  if defined?(Rails::Console)
+    class Project < Project
+      def grids
+        service_grid_ids = self.service.service_grids.pluck(:grid_id)
+        ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids).pluck(:name)
+      end
 
-    def include_grid?(name = 'Identificação da Solicitação')
-      self.grids.include? name
-    end
+      def include_grid?(name = 'Identificação da Solicitação')
+        self.grids.include? name
+      end
 
-    def request_reasons
-      service_id = self.service.id
-      request_reason_ids = MotiveAndServiceAssociation.where(service_id: service_id).pluck(:request_reason_id)
-      RequestReason.where(id: request_reason_ids, active: true).pluck(:name)
+      def request_reasons
+        service_id = self.service.id
+        request_reason_ids = MotiveAndServiceAssociation.where(service_id: service_id).pluck(:request_reason_id)
+        RequestReason.where(id: request_reason_ids, active: true).pluck(:name)
+      end
     end
   end
 end
 
-# initializations
-include Databases
-include Obras
+if defined?(Rails::Console)
+  include Databases
+  include Obras
 
-$PROJECT_ID = nil
-_log_on
+  $PROJECT_ID = nil
+  _log_on
+end

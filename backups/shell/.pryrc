@@ -47,33 +47,33 @@ end
 
 # used to print the content tables when typed, e.g. accesses, status_types..etc
 if defined?(Rails::Console)
-def self.method_missing(m, *args, &block)
-  class_name = "#{m}".classify.constantize
-  if class_name.is_a?(Class) && ActiveRecord::Base.connection.table_exists?("#{m}")
-    case class_name.to_s
-    when 'ServiceGrid'
-      if args[0].present?
-        service_id = args[0]
+  def self.method_missing(m, *args, &block)
+    class_name = "#{m}".classify.constantize
+    if class_name.is_a?(Class) && ActiveRecord::Base.connection.table_exists?("#{m}")
+      case class_name.to_s
+      when 'ServiceGrid'
+        if args[0].present?
+          service_id = args[0]
 
-        grid_ids = ServiceGrid.where(service_id: service_id).pluck(:grid_id)
-        puts
-        tp Grid.where(id: grid_ids), :id, :name
+          grid_ids = ServiceGrid.where(service_id: service_id).pluck(:grid_id)
+          puts
+          tp Grid.where(id: grid_ids), :id, :name
+        else
+          puts
+          puts "usage: service_grids <service_id>".magenta
+          puts
+        end
       else
-        puts
-        puts "usage: service_grids <service_id>".magenta
-        puts
-      end
-    else
-      if (class_name.respond_to? 'name') && (class_name.all.count < 100)
-        puts
-        tp class_name.all, :id, :name
-      else
-        puts
-        tp class_name.all.limit(20), class_name.column_names[0..8]
+        if (class_name.respond_to? 'name') && (class_name.all.count < 100)
+          puts
+          tp class_name.all, :id, :name
+        else
+          puts
+          tp class_name.all.limit(20), class_name.column_names[0..8]
+        end
       end
     end
   end
-end
 end
 
 class String
@@ -137,6 +137,7 @@ module Obras
   end
 
   def set_project(project_id=$PROJECT_ID)
+    puts
     @project = Project.find(project_id)
     $PROJECT_ID = project_id
   end
@@ -151,9 +152,19 @@ module Obras
 
   if defined?(Rails::Console)
     class Project < Project
+      def survey
+        project = {}
+        project[:project] = {id: self.id}
+        project[:status_type] = Hash[self.status_type.id, self.status_type.name]
+        project[:service] = Hash[self.service.id, self.service.name]
+        project[:agency] = Hash[self.agency.id, self.agency.name]
+        project[:grids] = self.grids.pluck(:grid_id, :name).to_h
+        project
+      end
+
       def grids
         service_grid_ids = self.service.service_grids.pluck(:grid_id)
-        ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids).pluck(:name)
+        ModuleAdderGrid.joins(:grid).where(grid_id: service_grid_ids)
       end
 
       def include_grid?(name = 'Identificação da Solicitação')

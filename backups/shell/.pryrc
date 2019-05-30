@@ -159,6 +159,7 @@ module Obras
         project[:service] = Hash[self.service.id, self.service.name]
         project[:agency] = Hash[self.agency.id, self.agency.name]
         project[:grids] = self.grids.pluck(:grid_id, :name).to_h
+        project[:proprietaries] = {proprietary: Hash[self.proprietary.id, self.proprietary.full_name], others: self.proprietaries.others(self).select {|p| Hash[p.id, p.full_name]}}
         project
       end
 

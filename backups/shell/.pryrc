@@ -158,9 +158,15 @@ module Obras
         project[:status_type] = Hash[self.status_type.id, self.status_type.name]
         project[:service] = Hash[self.service.id, self.service.name]
         project[:agency] = Hash[self.agency.id, self.agency.name]
-        project[:grids] = self.grids.pluck(:grid_id, :name).to_h
-        project[:proprietaries] = {proprietary: Hash[self.proprietary.id, self.proprietary.full_name], others: self.proprietaries.others(self).select {|p| Hash[p.id, p.full_name]}}
-        project
+        project[:grids] = self.grids.pluck(:position, :name).to_h
+        if self.proprietary.present? && self.proprietaries.present?
+          project[:proprietaries] = {proprietary: Hash[self.proprietary.id, self.proprietary.full_name], others: self.proprietaries.others(self).select {|p| Hash[p.id, p.full_name]}}
+        end
+        JSON.parse(project.to_json, object_class: OpenStruct)
+      end
+
+      def pluck_to_hash(*fields)
+        Hash[fields ]
       end
 
       def grids

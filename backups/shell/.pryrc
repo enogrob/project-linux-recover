@@ -187,6 +187,26 @@ module Obras
   end
 end
 
+
+module FModel
+  @@instances = []
+
+  def initialize
+    @@instances << self
+  end
+
+  def self.included base
+    base.extend ClassMethods
+  end
+
+  module ClassMethods
+    def all
+      class_eval('@@instances')
+    end
+  end
+end
+
+
 if defined?(Rails::Console)
   include Databases
   include Obras

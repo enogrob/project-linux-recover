@@ -155,18 +155,20 @@ module Obras
       def survey
         project = {}
         project[:project] = {id: self.id}
-        project[:status_type] = Hash[self.status_type.id, self.status_type.name]
-        project[:service] = Hash[self.service.id, self.service.name]
-        project[:agency] = Hash[self.agency.id, self.agency.name]
+        project[:status_type] = Hash[*self.status_type.deep_pluck(:id, :name).values]
+        project[:service] = Hash[*self.service.deep_pluck(:id, :name).values]
+        project[:agency] = Hash[*self.agency.deep_pluck(:id, :name).values]
         project[:grids] = self.grids.pluck(:position, :name).to_h
         if self.proprietary.present? && self.proprietaries.present?
           project[:proprietaries] = {proprietary: Hash[self.proprietary.id, self.proprietary.full_name], others: self.proprietaries.others(self).select {|p| Hash[p.id, p.full_name]}}
         end
-        JSON.parse(project.to_json, object_class: OpenStruct)
+        project[:reports] = self.reports.joins(:access).pluck(:id, :name).to_h
+        project
+        # JSON.parse(project.to_json, object_class: OpenStruct);
       end
 
       def pluck_to_hash(*fields)
-        Hash[fields ]
+        Hash[fields]
       end
 
       def grids

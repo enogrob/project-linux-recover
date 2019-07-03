@@ -184,6 +184,18 @@ else
   command rspec $@
 fi
 }
+
+function backup_obras(){
+pushd .
+cd ~/Projects
+&> \rm *.zip
+zip -r obras.zip obras/.
+&> \rm /media/rnogueira/KROSS/obras.zip
+mv obras.zip /media/rnogueira/KROSS
+ls -la /media/rnogueira/KROSS
+popd
+}
+
 alias rspec='_rspec_command'
 
 export EDITOR=vim

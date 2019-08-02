@@ -141,7 +141,7 @@ function importdb(){
   NODE=${MYSQL_DATABASE_DEV/%????/}
   if [ -z "$1" ]
   then
-    DB=`ls ~/Projects/obras/*.sql | grep "$NODE"` | xargs basename
+    DB=`ls ~/Projects/obras/*.sql | grep "$NODE" | xargs basename`
   else
     DB=$1
 	fi

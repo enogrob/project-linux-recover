@@ -152,7 +152,7 @@ function importdb(){
   rake db:migrate
 }
 
-export MYSQL_DATABASE_DEV=obras_olimpia_dev
+export MYSQL_DATABASE_DEV=obras_demo_dev
 export LOCAL_USER_ID=$(id -u)
 
 # Add an "alert" alias for long running commands.  Use like so:

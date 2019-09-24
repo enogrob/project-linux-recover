@@ -207,6 +207,7 @@ popd
 alias rspec='_rspec_command'
 
 export EDITOR=vim
+export MAILCATCHER_ENV="LOCALHOST"
 
 source ~/.todayrc.sh
 

@@ -102,6 +102,24 @@ class String
   def reverse_color;  "\e[7m#{self}\e[27m" end
 end
 
+class Object
+  private
+  def populate(name, &block)
+    self.class.send(:define_method, name) do
+
+      instance_variable_name = '@_' + name
+      value = instance_variable_get(instance_variable_name)
+
+      unless value
+        value = block.call
+        instance_variable_set(instance_variable_name, value)
+      end
+
+      value
+    end
+  end
+end
+
 # handle ActiveRecord database and logs
 module Databases
   def _log
@@ -128,29 +146,9 @@ end
 
 # handy methods for obras
 module Obras
-  def set_demo
-    @user = User.find(1)
-    @access = Access.find(17)
-    @profile = Profile.find(2)
-    @agency = Agency.find(3)
-    @projects = Project.default_access(@access, @user, @profile, @agency, opts={status: 1})
-  end
-
-  def set_project(project_id=$PROJECT_ID)
-    puts
-    @project = Project.find(project_id)
-    $PROJECT_ID = project_id
-  end
-
-  def project
-    @project
-  end
-
-  def project_id
-    $PROJECT_ID
-  end
 
   if defined?(Rails::Console)
+
     class Project < Project
       def survey
         project = {}
@@ -167,8 +165,8 @@ module Obras
         # JSON.parse(project.to_json, object_class: OpenStruct);
       end
 
-      def pluck_to_hash(*fields)
-        Hash[fields]
+      def pluck_to_hash(fields)
+        Hash[*fields]
       end
 
       def grids
@@ -186,25 +184,7 @@ module Obras
         RequestReason.where(id: request_reason_ids, active: true).pluck(:name)
       end
     end
-  end
-end
 
-
-module FModel
-  @@instances = []
-
-  def initialize
-    @@instances << self
-  end
-
-  def self.included base
-    base.extend ClassMethods
-  end
-
-  module ClassMethods
-    def all
-      class_eval('@@instances')
-    end
   end
 end
 
@@ -213,6 +193,68 @@ if defined?(Rails::Console)
   include Databases
   include Obras
 
-  $PROJECT_ID = nil
+  populate('project') do
+    Project.first
+  end
+
+  populate('cookie') do
+    ""
+  end
+
+  populate('secret_key_base') do "ca82ec34944e8a2a25ab3350a5e96680ab65ad80fc2a91722c032143365a8df93cc460f0ca8c98ee4ce33ed831d5f2025a7b4ac18978d10ced72c56d001fb68d"
+  end
+
+  populate('secret') do
+    ActiveSupport::KeyGenerator.new(secret_key_base, iterations: 1000).generate_key("encrypted cookie")
+  end
+
+  populate('sign_secret') do
+    ActiveSupport::KeyGenerator.new(secret_key_base, iterations: 1000).generate_key("signed encrypted cookie")
+  end
+
+  def encryptor(cookie)
+    encryptor = JSON.parse(ActiveSupport::MessageEncryptor.new(secret, sign_secret, serializer: ActiveSupport::MessageEncryptor::NullSerializer).decrypt_and_verify(URI.unescape(cookie)))
+
+    populate('access_id') do
+      encryptor["access"]["access_id"]
+    end
+
+    populate('agency_id') do
+      encryptor["agency"]["agency_id"]
+    end
+
+    populate('profile_id') do
+      encryptor["profile"]["profile_id"]
+    end
+
+    populate('user_id') do
+      encryptor["warden.user.user.key"][0][0]
+    end
+
+    populate('user') do
+      User.find(user_id)
+    end
+
+    populate('access') do
+      Access.find(access_id)
+    end
+
+    populate('profile') do
+      Profile.find(profile_id)
+    end
+
+    populate('agency') do
+      Agency.find(agency_id)
+    end
+
+    populate('projects') do
+      Project.default_access(access, user, profile, agency, opts={status: 1})
+    end
+
+    populate('project') do
+      projects.first
+    end
+  end
+
   _log_on
 end

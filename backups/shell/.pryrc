@@ -193,68 +193,51 @@ if defined?(Rails::Console)
   include Databases
   include Obras
 
-  populate('project') do
-    Project.first
+  populate('cookie_erika') do "aVRBNXlDLyswUE5GSkZ4cjRTa2xDZHp5bGtEVEVvV1g3czFGc1Q1UGNiSDRrWDY1eExaVWh3ZlBaT3ZCbG1iQjBrUytIcHp5SVREV2REakwzOStpdG50YXlrK1I0ZUNuSDJrTmZEbmM0MkxyT1NXa1ZCNXlSMHFDSFN2YlZuaisrdEZrNjdGUS9ha3h1a3R5R0tCdU9Yd0NzajZzdi9BdFRVVkZxWC9kOG1Ud2ZTZVg3UkZvcE00ck1IdHh6MW5NT2tncTlDaVFFV1Q1VmpvZXZucUhUTkRMbEZGWkdNMjVRb3Fmc0hSc0Rlb3JrS1FkbnlaaUhjNy8zVUJyd1NrQzBwY0dDQ0hsb05pK1U3bkdnOXFNRDJOTFA3SG1NT1JiRlF0UHFMRjJITlJaVlgzVk5FUWxRamNselRrMEJ5RVlYUS9rVERoT0J6OXFKY285d2c5TXRyclozc3FXb2o2ZGEwTEhBZnA4ZkU1TUFmcmovU2hDdWN6S211Q2pyc1cyVnl0R3lNUWVlWlExRnJubXlrWGJwS21HcldaSGM0enl4ekowWDJBZDZDdFNBZ250SVNXR0wrM01UbjAvTGFrU1ZKYUhadjY0NGUrdktXQ2tmaC9MbENleUV2WGY2T0hBa2ZRMkZiVjVlanl6YlFZeW15NWVKSUlkL0x0ZWs5ZlYtLXRCT1dQT2psdjNVd1JOajMzQTFqK1E9PQ%3D%3D--1679c5fe6f08b61404fff3562b74e549ddbe6862"
   end
 
-  populate('cookie') do
-    ""
+  populate('cookie_suporte') do "TTdJQnY3RlU2TUhuMzNCUkphK2R4SmNoa25ld2F0c1BMakF6a29SM3JYenJiRkdySXJhREJ0MlcybjBLb1FqMUZzcUQxTVk0QzFrajJUbmdTZ0ZVSHBtUVJOZlV6TkcyY1RjaFVDalhBQVhaNmRJM0hFcEVjVkgwaWEyeU5uYU9EL1RrVzh4WVluNHdqTERHa2lBMUJPV1hrSzdUZG9CNm1CZ3NWZzI5UkY0ZnFDWENhVUY3cUdWL3pWOE5Eclk5VC92Z1FTdlJka3EwWHRaZStzakxOeFZHb2NkUlZ4MzQ3MkJ2QnppMWd4WEhWV3VjeC80RVlTNTE3UW9HblliandsQWwycER3ZUZGVkN1SnA3UmJUMkFZMG11RC9kTTFqRFBmSE04K3RvcTNmYkNibzBMYWJQWnlHRm9YWEVwc2F3NkZPUWtucWh2Ylg5YnM4VnI2T05rd28xaFBLcEpJalByUVNwdTIyUTRDWmhyMjkwek5pemlleW5mdnVFVm9rWGpzTEtZRVpyYThmUmhxdFEzVTVCSlFMd2xtSlR4OVJzZjBFNUdsUG02ZTQ5NmtsdW9GVW1VVzk0dmV6Q0RBWGtlN0NDZlFaazVna2tGOXYxYWpaeEF1UEQ0OWFhRHp3YjUySkpOZ1lBM0lGOFJVMkM2QWduZy9hVVplSFN5VVgtLTRsTGp5UjZDaTlvbmJvaFFyaW1mNWc9PQ%3D%3D--73b26ac691c068d2cce06e3a698af65946558bb2"
   end
 
-  populate('secret_key_base') do "ca82ec34944e8a2a25ab3350a5e96680ab65ad80fc2a91722c032143365a8df93cc460f0ca8c98ee4ce33ed831d5f2025a7b4ac18978d10ced72c56d001fb68d"
-  end
-
-  populate('secret') do
-    ActiveSupport::KeyGenerator.new(secret_key_base, iterations: 1000).generate_key("encrypted cookie")
-  end
-
-  populate('sign_secret') do
-    ActiveSupport::KeyGenerator.new(secret_key_base, iterations: 1000).generate_key("signed encrypted cookie")
-  end
-
-  def encryptor(cookie)
+  def encrypt(cookie)
+    secret_key_base = "ca82ec34944e8a2a25ab3350a5e96680ab65ad80fc2a91722c032143365a8df93cc460f0ca8c98ee4ce33ed831d5f2025a7b4ac18978d10ced72c56d001fb68d"
+    secret = ActiveSupport::KeyGenerator.new(secret_key_base, iterations: 1000).generate_key("encrypted cookie")
+    sign_secret = ActiveSupport::KeyGenerator.new(secret_key_base, iterations: 1000).generate_key("signed encrypted cookie")
     encryptor = JSON.parse(ActiveSupport::MessageEncryptor.new(secret, sign_secret, serializer: ActiveSupport::MessageEncryptor::NullSerializer).decrypt_and_verify(URI.unescape(cookie)))
 
-    populate('access_id') do
-      encryptor["access"]["access_id"]
-    end
+    access_id = encryptor["access"]["access_id"]
+    agency_id = encryptor["agency"]["agency_id"]
+    profile_id = encryptor["profile"]["profile_id"]
+    user_id = encryptor["warden.user.user.key"][0][0]
 
-    populate('agency_id') do
-      encryptor["agency"]["agency_id"]
-    end
-
-    populate('profile_id') do
-      encryptor["profile"]["profile_id"]
-    end
-
-    populate('user_id') do
-      encryptor["warden.user.user.key"][0][0]
-    end
-
-    populate('user') do
-      User.find(user_id)
-    end
+    undef access if respond_to? :access
+    undef agency if respond_to? :agency
+    undef profile if respond_to? :profile
+    undef user if respond_to? :user
+    undef projects if respond_to? :projects
+    undef project if respond_to? :project
 
     populate('access') do
       Access.find(access_id)
     end
-
-    populate('profile') do
-      Profile.find(profile_id)
-    end
-
     populate('agency') do
       Agency.find(agency_id)
     end
-
+    populate('profile') do
+      Profile.find(profile_id)
+    end
+    populate('user') do
+      User.find(user_id)
+    end
     populate('projects') do
       Project.default_access(access, user, profile, agency, opts={status: 1})
     end
-
     populate('project') do
       projects.first
     end
   end
+
+  encrypt(cookie_suporte)
 
   _log_on
 end

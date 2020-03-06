@@ -114,6 +114,10 @@ alias dc-exec='docker-compose exec"'
 alias dc-db='docker-compose exec db"'
 alias dc-user='docker-compose exec --user "$(id -u):$(id -g)"'
 alias cleanup='sudo chown -R $USER:$USER tmp'
+alias boot='git checkout 54-atualizar-a-versão-bootstrap-413;rvm use ruby-2.6.5@rails-6.0.2.1'
+alias no_boot='git checkout feature@61-atualizar-rails-e-ruby;rvm use ruby-2.6.5@rails-6.0.2.1'
+alias master='git checkout master;rvm use ruby-2.3.3@rails-4.2.8'
+alias obras='cd ~/Projects/obras;git checkout 54-atualizar-a-versão-bootstrap-413;rvm use ruby-2.6.5@rails-6.0.2.1;rvm current;db'
 #alias mysql='mysql -u root --password=""  --pager="less -SFX" obras_development'
 
 export COMPOSE_FILE='docker-compose.yaml'
@@ -125,6 +129,13 @@ function dkimportdb(){
   docker-compose exec $1 bundle exec rake db:migrate
 }
 
+function dkinitdb(){
+  docker-compose exec $1 bundle exec rake db:drop
+  docker-compose exec $1 bundle exec rake db:create
+  docker-compose exec $1 bundle exec rake db:migrate
+  docker-compose exec $1 bundle exec rake db:seed
+}
+
 function setdb(){
 	spring stop
   set -o allexport
@@ -133,8 +144,17 @@ function setdb(){
   db
 }
 
+function setdb2(){
+	spring stop
+  set -o allexport
+  . ./.env/$1
+  set +o allexport
+  db
+}
+
 function db(){
   echo $MYSQL_DATABASE_DEV
+  echo $MYSQL_DATABASE_TST
 }
 
 function importdb(){
@@ -146,13 +166,22 @@ function importdb(){
     DB=$1
 	fi
   echo $DB
-  rake db:drop
-  rake db:create
+  bundle exec rake db:drop
+  bundle exec rake db:create
   mysql -u root -p $MYSQL_DATABASE_DEV < $DB
-  rake db:migrate
+  bundle exec rake db:migrate
 }
 
-export MYSQL_DATABASE_DEV=obras_demo_dev
+function initdb(){
+  rails db:environment:set RAILS_ENV=development
+  bundle exec rails db:drop
+  bundle exec rails db:create
+  bundle exec rails db:migrate
+  bundle exec rails db:seed
+}
+
+export MYSQL_DATABASE_DEV=demo_dev
+export MYSQL_DATABASE_TST=demo_tst
 export LOCAL_USER_ID=$(id -u)
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -208,6 +237,7 @@ alias rspec='_rspec_command'
 
 export EDITOR=vim
 export MAILCATCHER_ENV="LOCALHOST"
+export RUBYOPT=-W0
 
 source ~/.todayrc.sh
 

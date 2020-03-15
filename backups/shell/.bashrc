@@ -1,126 +1,54 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
-# Add git branch if its present to PS1
+LANG=;export LANG;LC_TYPE=UTF-8;export LC_TYPE
 
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# Git Tab completion
+source ~/git-completion.bash
+# prompt show branch in status line
+PS1='\e[35;1m[\W$(__git_ps1 " (%s)")]\$\e[0m '
+export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
-HISTCONTROL=ignoreboth
+export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode – red
+export LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode – bold, magenta
+export LESS_TERMCAP_me=$(printf '\e[0m') # turn off all appearance modes (mb, md, so, us)
+export LESS_TERMCAP_se=$(printf '\e[0m') # leave standout mode
+export LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode – yellow
+export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
+export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode – cyan
 
-# append to the history file, don't overwrite it
-shopt -s histappend
+EDITOR=vim
+export EDITOR
+export ERL_AFLAGS="-kernel shell_history enabled"
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# aliases general
+alias h='history | tail'
+alias komodo='open -a "Komodo IDE 8" .'
+alias rstudio='open -a RStudio .'
+alias excel='open -a "Microsoft Excel"'
+alias psty='~/bin/psty.py -a -d /Users/enogrob/psty'
+alias shellinit='$(boot2docker shellinit);printenv DOCKER_HOST'
+alias top='top -o cpu'
+alias shutdown='shutdown -r now'
+alias airport='airport -s'
+alias ps='ps aux'
+alias mytap='cd /usr/local/Library/Taps/caskroom/;open -g .'
+alias tree='tree -C -L 2'
+alias cypher='/usr/local/Cellar/neo4j/3.1.0/libexec/bin/cypher-shell -u neo4j -p betoz23'
+alias browser-sync='browser-sync --start --directory --files "**/*"'
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# If set, the pattern "**" used in a pathname expansion context will
-# match all files and zero or more directories and subdirectories.
-#shopt -s globstar
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias xclip='xclip -sel clip'
-alias open='xdg-open'
-alias gl='git log --oneline'
-alias gsync='pushd .;cd ~/Google\ Drive;grive sync;popd'
-alias tree='tree -L 1'
-alias google-chrome='google-chrome --disable-gpu'
-alias si='neofetch'
-alias home='cd ~/;neofetch'
-
+export LOCAL_USER_ID=$(id -u)
 alias dk='docker'
 alias dki='docker image'
 alias dkis='docker images'
-alias dkins="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 alias dkc='docker container'
-alias dkv='docker volume'
-alias dkn='docker network'
 
-alias dc=docker-compose
-alias dc-exec='docker-compose exec"'
-alias dc-db='docker-compose exec db"'
-alias dc-user='docker-compose exec --user "$(id -u):$(id -g)"'
-alias cleanup='sudo chown -R $USER:$USER tmp'
-alias boot='git checkout 54-atualizar-a-versão-bootstrap-413;rvm use ruby-2.6.5@rails-6.0.2.1'
-alias no_boot='git checkout feature@61-atualizar-rails-e-ruby;rvm use ruby-2.6.5@rails-6.0.2.1'
-alias master='git checkout master;rvm use ruby-2.3.3@rails-4.2.8'
-alias obras='cd ~/Projects/obras;git checkout 54-atualizar-a-versão-bootstrap-413;rvm use ruby-2.6.5@rails-6.0.2.1;rvm current;db'
-#alias mysql='mysql -u root --password=""  --pager="less -SFX" obras_development'
-
-export COMPOSE_FILE='docker-compose.yaml'
+alias dc='docker-compose'
+alias dc-web='docker-compose run web'
+alias dc-app='docker-compose run app'
+alias dc-rails='docker-compose run web rails'
+alias dc-rspec='docker-compose run web rspec'
+alias dc-rake='docker-compose run web rake'
+alias dc-test='docker-compose run web rake test'
+alias dc-dashing='docker-compose run web dashing'
+alias code='code --disable-gpu .&'
 
 function dkimportdb(){
   docker-compose exec $1 bundle exec rake db:drop
@@ -129,27 +57,11 @@ function dkimportdb(){
   docker-compose exec $1 bundle exec rake db:migrate
 }
 
-function dkinitdb(){
-  docker-compose exec $1 bundle exec rake db:drop
-  docker-compose exec $1 bundle exec rake db:create
-  docker-compose exec $1 bundle exec rake db:migrate
-  docker-compose exec $1 bundle exec rake db:seed
-}
-
-function setdb(){
-	spring stop
-  set -o allexport
-  . ./.env/development/$1
-  set +o allexport
-  db
-}
-
-function setdb2(){
-	spring stop
-  set -o allexport
-  . ./.env/$1
-  set +o allexport
-  db
+function importdb(){
+  rake db:drop
+  rake db:create
+  mysql -u root -p $MYSQL_DATABASE_DEV < $1
+  rake db:migrate
 }
 
 function db(){
@@ -157,100 +69,164 @@ function db(){
   echo $MYSQL_DATABASE_TST
 }
 
-function importdb(){
-  NODE=${MYSQL_DATABASE_DEV/%????/}
-  if [ -z "$1" ]
-  then
-    DB=`ls ~/Projects/obras/*.sql | grep "$NODE" | xargs basename`
-  else
-    DB=$1
-	fi
-  echo $DB
-  bundle exec rake db:drop
-  bundle exec rake db:create
-  mysql -u root -p $MYSQL_DATABASE_DEV < $DB
-  bundle exec rake db:migrate
+function setdb(){
+  set -o allexport
+  . ./.env/development/$1
+  set +o allexport
 }
 
-function initdb(){
-  rails db:environment:set RAILS_ENV=development
-  bundle exec rails db:drop
-  bundle exec rails db:create
-  bundle exec rails db:migrate
-  bundle exec rails db:seed
+# function in order to control spotlight workers
+function spotlight(){
+    case $1 in
+        status)
+        mdutil -s /Volumes/Macintosh\ HD
+        ;;
+        on)
+        sudo mdutil -a -i on
+        ;;
+        off)
+        sudo mdutil -a -i off
+        ;;
+    esac
 }
 
-export MYSQL_DATABASE_DEV=demo_dev
-export MYSQL_DATABASE_TST=demo_tst
-export LOCAL_USER_ID=$(id -u)
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
-
-parse_git_branch() {
- git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
- }
-export PS1="\[\033[32m\]\W\[\033[33m\]\$(parse_git_branch)\[\033[00m\] $ "
-PROMPT_COMMAND='echo -ne "\033]0;$(basename ${PWD})\007"'
-
-function _rspec_command () {
-if [ -e "bin/rspec" ]; then
-  bin/rspec $@
-else
-  command rspec $@
-fi
+function dash(){
+  open dash://$1:$2
 }
 
-function backup_obras(){
-pushd .
-cd ~/Projects
-&> \rm *.zip
-zip -r obras.zip obras/.
-&> \rm /media/rnogueira/KROSS/obras.zip
-mv obras.zip /media/rnogueira/KROSS
-ls -la /media/rnogueira/KROSS
-popd
+# function in order to control CalendarAgent
+function tasks(){
+    case $1 in
+        list)
+        CA_LOADED=`launchctl list | grep CalendarAgent`;
+        if [[ $CA_LOADED == *"CalendarAgent"* ]]
+        then
+          echo "CalendarAgent is loaded.";
+          echo "";
+          /usr/local/bin/icalBuddy -f tasksDueBefore:today+1;
+        else
+          echo "CalendarAgent is not loaded.";
+        fi
+        ;;
+
+        on)
+        CA_LOADED=`launchctl list | grep CalendarAgent`;
+        if [[ $CA_LOADED == *"CalendarAgent"* ]]
+        then
+          echo "CalendarAgent is already loaded.";
+          echo "";
+        else
+          launchctl load -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist
+          tasks status;
+        fi
+        ;;
+
+        off)
+        CA_LOADED=`launchctl list | grep CalendarAgent`;
+        if [[ $CA_LOADED == *"CalendarAgent"* ]]
+        then
+          launchctl unload -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist
+          tasks status;
+        else
+          echo "CalendarAgent is already unloaded.";
+          echo "";
+        fi
+        ;;
+
+        status|*)
+        CA_LOADED=`launchctl list | grep CalendarAgent`;
+        if [[ $CA_LOADED == *"CalendarAgent"* ]]
+        then
+          echo "CalendarAgent is loaded.";
+          echo "";
+        else
+          echo "CalendarAgent is not loaded.";
+          echo "";
+        fi
+        ;;
+    esac
 }
 
-alias rspec='_rspec_command'
+# aliases vim
+alias vim='vim --servername VIM'
+alias ct='ctags -R -V --exclude=.git --exclude=.idea'
+alias git='hub'
+alias mysql='mysql -u root'
 
-export EDITOR=vim
-export MAILCATCHER_ENV="LOCALHOST"
-export RUBYOPT=-W0
+# aliases repl
+alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc"
+alias icpp='igcc'
+alias ijava='javarepl'
+alias ijavascript='jsc'
+alias ir='r --no-save --quiet'
+alias iperl='re.pl'
+alias ifortran='python -m fytran'
+alias icling='/Users/enogrob/bin/cling/inst/bin/cling'
+alias iclosure='java -jar ~/bin/clojure-1.8.0/clojure-1.8.0.jar'
+
+# help function to get the repl for a language
+function repl(){
+  case $1 in
+    java) javarepl;;
+    javascript) jsc;;
+    c++) icling;;
+    cpp) igcc;;
+    perl) re.pl;;
+    r) r --no-save --quiet;;
+    fortran) python -m fytran;;
+    closure) closure;;
+    julia) julia;;
+    ruby) pry;;
+    *) echo "repls:";
+       echo "java       ";
+       echo "javascirpt ";
+       echo "c++        ";
+       echo "cpp        ";
+       echo "perl       ";
+       echo "r          ";
+       echo "fortran    ";
+       echo "closure    ";
+       echo "julia      ";
+       echo "ruby       ";
+       ;;
+  esac
+}
+
+tab() {
+    osascript &>/dev/null <<EOF
+      tell application "iTerm"
+        activate
+        tell current window to set tb to create tab with default profile
+      end tell
+EOF
+}
+
+#perl 5 envs
+PERL_MB_OPT="--install_base \"/Users/enogrob/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/enogrob/perl5"; export PERL_MM_OPT;
+
+# bash: Place this in .bashrc.
+function iterm2_print_user_vars() {
+  iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
+}
+
+# python envs
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Projects
+source ~/Library/Python/2.7/bin/virtualenvwrapper.sh
 
 source ~/.todayrc.sh
 
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-. /home/rnogueira/kerl/21.0/activate
-kiex use elixir-1.6.6
-
-export JAVA_HOME=$HOME/.sdkman/candidates/java/current
+. /Users/enogrob/kerl/20.2/activate
+source $HOME/.evm/scripts/evm
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="/Users/enogrob/.sdkman"
+[[ -s "/Users/enogrob/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/enogrob/.sdkman/bin/sdkman-init.sh"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:$HOME/.rvm/bin"
+# Load RVM into a shell session *as a function*
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export RAILS_ENV=development
+export MYSQL_DATABASE_DEV=demo_dev
+export MYSQL_DATABASE_TST=demo_tst
+export RUBYOPT=-W0

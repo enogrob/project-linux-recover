@@ -1,4 +1,4 @@
-LANG=;export LANG;LC_TYPE=UTF-8;export LC_TYPE
+LANG=en_US.US-ASCII;export LANG;LC_TYPE=UTF-8;export LC_TYPE
 
 # git tab completion
 source /usr/local/etc/bash_completion.d/git-completion.bash
@@ -213,5 +213,5 @@ source ~/.todayrc.sh
 #export SDKMAN_DIR="/Users/enogrob/.sdkman"
 #[[ -s "/Users/enogrob/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/enogrob/.sdkman/bin/sdkman-init.sh"
 
-# Load RVM into a shell session *as a function*
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

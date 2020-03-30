@@ -1,8 +1,8 @@
 LANG=en_US.US-ASCII;export LANG;LC_TYPE=UTF-8;export LC_TYPE
 
 # git tab completion
-source /usr/local/etc/bash_completion.d/git-completion.bash
-source /usr/local/etc/bash_completion.d/git-prompt.sh
+test -s /usr/local/etc/bash_completion.d/git-completion.bash && source /usr/local/etc/bash_completion.d/git-completion.bash
+test -s /usr/local/etc/bash_completion.d/git-prompt.sh && source /usr/local/etc/bash_completion.d/git-prompt.sh
 
 # prompt show branch in status line
 PS1='\e[35;1m[\W$(__git_ps1 " (%s)")]\$\e[0m '
@@ -47,55 +47,8 @@ alias top='top -o cpu'
 alias tree='tree -C -L 2'
 alias vim='vim --servername VIM'
 
-
 # obras
-# variables
-export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
-export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
-export MYSQL_DATABASE_DEV=demo_dev
-export MYSQL_DATABASE_TST=demo_tst
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-export RAILS_ENV=development
-export RUBYOPT=-W0
-
-# aliases
-alias code='code --disable-gpu .&'
-alias dc='docker-compose'
-alias dk='docker'
-alias dkc='docker container'
-alias dki='docker image'
-alias dkis='docker images'
-alias mysql='mysql -u root'
-alias obras='cd ~/Projects/obras' 
-alias rc='rvm current'
-
-# functions
-function importdb(){
-  rake db:drop
-  rake db:create
-  mysql -u root -p $MYSQL_DATABASE_DEV < $1
-  rake db:migrate
-}
-function importdb_dk(){
-  docker-compose exec $1 bundle exec rake db:drop
-  docker-compose exec $1 bundle exec rake db:create
-  docker exec -i db mysql -uroot -proot $2 < $3
-  docker-compose exec $1 bundle exec rake db:migrate
-}
-function db(){
-  echo $MYSQL_DATABASE_DEV
-  echo $MYSQL_DATABASE_TST
-}
-function setdb(){
-  set -o allexport
-  . ./.env/development/$1
-  set +o allexport
-  db
-}
-function dash(){
-  open dash://$1:$2
-}
-
+test -s "$HOME/.obras_osx.sh" && source "$HOME/.obras_osx.sh"
 
 # macbook
 function spotlight(){
@@ -111,6 +64,7 @@ function spotlight(){
         ;;
     esac
 }
+
 function tasks(){
     case $1 in
         list)
@@ -162,6 +116,7 @@ function tasks(){
         ;;
     esac
 }
+
 function repl(){
   case $1 in
     java) javarepl;;
@@ -188,6 +143,7 @@ function repl(){
        ;;
   esac
 }
+
 tab() {
     osascript &>/dev/null <<EOF
       tell application "iTerm"
@@ -196,22 +152,22 @@ tab() {
       end tell
 EOF
 }
+
 function iterm2_print_user_vars() {
   iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
 }
 
-
 # today
-source ~/.todayrc.sh
+test -s  "$HOME/.todayrc.sh" && source "$HOME/.todayrc.sh"
 
-
-# lang managers
+# erlang
 #. /Users/enogrob/kerl/20.2/activate
 #source $HOME/.evm/scripts/evm
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-#export SDKMAN_DIR="/Users/enogrob/.sdkman"
-#[[ -s "/Users/enogrob/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/enogrob/.sdkman/bin/sdkman-init.sh"
-
+# java
+export SDKMAN_DIR="$HOME/.sdkman"
+test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# elixir
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"

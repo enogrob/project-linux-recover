@@ -12,6 +12,8 @@ export RAILS_ENV=development
 export RUBYOPT=-W0
 
 # aliases development
+alias enogrob='cd $HOME' 
+alias downloads='cd $HOME/Downloads' 
 alias code='code --disable-gpu .&'
 alias mysql='mysql -u root'
 alias olimpia='site set olimpia' 
@@ -29,10 +31,6 @@ alias dki='docker image'
 alias dkis='docker images'
 
 # functions
-mysql_ls(){
-  brew services list
-}
-
 __pr(){
     if [ $# -eq 0 ]; then
         echo -e ""
@@ -79,6 +77,15 @@ __pr(){
     fi
 }
 
+function dash(){
+  open dash://$1:$2
+}
+
+function title(){
+  SITE=$1
+  export PROMPT_COMMAND='echo -ne "\033]0;${SITE##*/}\007"'
+}
+
 function db(){
   case $1 in 
     init)
@@ -100,7 +107,7 @@ function db(){
         if test -f "$FILE"; then
           rake db:drop
           rake db:create
-          __pr info "file: " $(base name $FILE)
+          __pr info "file: " $(basename $FILE)
           mysql -u root -p $MYSQL_DATABASE_DEV < $FILE
           rake db:migrate
         else
@@ -116,7 +123,7 @@ function db(){
         docker-compose exec $2 bundle exec rake db:drop
         docker-compose exec $2 bundle exec rake db:drop
         docker-compose exec $2 bundle exec rake db:create
-        __pr info "file: " $(base name $3)
+        __pr info "file: " $(basename $3)
         docker exec -i db mysql -uroot -proot $MYSQL_DATABASE_DEV < $3
         docker-compose exec $2 bundle exec rake db:migrate
       else  
@@ -208,13 +215,4 @@ function site(){
       db
       ;;
   esac
-}
-
-function dash(){
-  open dash://$1:$2
-}
-
-function title(){
-  SITE=$1
-  export PROMPT_COMMAND='echo -ne "\033]0;${SITE##*/}\007"'
 }

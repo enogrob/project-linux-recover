@@ -1,0 +1,95 @@
+{
+	"name": "dakara-foldplus",
+	"displayName": "Fold Plus",
+	"description": "Additional fold commands",
+	"version": "1.4.0",
+	"icon": "foldplus_icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dakaraphi/vscode-extension-fold"
+	},
+	"publisher": "dakara",
+	"engines": {
+		"vscode": "^1.31.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:dakara-foldplus.levelAtCursor",
+		"onCommand:dakara-foldplus.levelOfParent",
+		"onCommand:dakara-foldplus.parent",
+		"onCommand:dakara-foldplus.children",
+		"onCommand:dakara-foldplus.selection",
+		"onCommand:dakara-foldplus.selection.exclude",
+		"onCommand:dakara-foldplus.cursor.exclude",
+		"onCommand:dakara-foldplus.toggle.indentation"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "dakara-foldplus.levelAtCursor",
+				"title": "All Same Level as Cursor",
+				"category": "Fold Plus"
+			},
+			{
+				"command": "dakara-foldplus.levelOfParent",
+				"title": "All Same Level as Parent",
+				"category": "Fold Plus"
+			},
+			{
+				"command": "dakara-foldplus.parent",
+				"title": "Parent",
+				"category": "Fold Plus"
+			},
+			{
+				"command": "dakara-foldplus.children",
+				"title": "Children",
+				"category": "Fold Plus"
+			},
+			{
+				"command": "dakara-foldplus.selection",
+				"title": "All with Selected Text",
+				"category": "Fold Plus"
+			},
+			{
+				"command": "dakara-foldplus.selection.exclude",
+				"title": "All keep Selected Text",
+				"category": "Fold Plus"
+			},
+			{
+				"command": "dakara-foldplus.cursor.exclude",
+				"title": "All keep Cursor Line",
+				"category": "Fold Plus"
+			},
+			{
+				"command": "dakara-foldplus.toggle.indentation",
+				"title": "Toggle Indentation/Language Folding",
+				"category": "Fold Plus"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./",
+		"compile": "tsc -watch -p ./",
+		"compile_common": "tsc -watch -p ../vscode-extension-common",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.6.3",
+		"vscode": "^1.1.5",
+		"mocha": "^2.3.3",
+		"@types/node": "^6.0.40",
+		"@types/mocha": "^2.2.32"
+	},
+	"dependencies": {
+		"vscode-extension-common": "file:../vscode-extension-common"
+	},
+	"__metadata": {
+		"id": "0929f405-649c-41ac-b39f-2352e3d65a77",
+		"publisherId": "85664f25-f036-4f9e-bb1f-463e4007dfab",
+		"publisherDisplayName": "dakara"
+	}
+}

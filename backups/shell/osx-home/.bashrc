@@ -46,7 +46,7 @@ alias shellinit='$(boot2docker shellinit);printenv DOCKER_HOST'
 alias shutdown='shutdown -r now'
 alias top='top -o cpu'
 alias tree='tree -C -L 2'
-alias vim='vim --servername VIM'
+# alias vim='vim --servername VIM'
 
 # obras
 test -s "$HOME/.obras_osx.sh" && source "$HOME/.obras_osx.sh"

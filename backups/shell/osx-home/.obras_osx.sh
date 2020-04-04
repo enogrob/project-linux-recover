@@ -1,5 +1,14 @@
 #!/bin/bash
-# obras
+## Crafted (c) 2013~2020 by ZoatWorks Software LTDA.
+## Prepared : Roberto Nogueira
+## File     : .obras_osx.sh
+## Version  : PA02
+## Date     : 2020-04-04
+## Project  : project-things-today
+## Reference: bash
+##
+## Purpose  : Develop bash routines in order to help Rails development 
+##            projects.
 
 # variables
 export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
@@ -12,8 +21,8 @@ export RAILS_ENV=development
 export RUBYOPT=-W0
 
 # aliases development
-alias enogrob='cd $HOME' 
-alias downloads='cd $HOME/Downloads' 
+alias enogrob='cd $HOME;title enogrob' 
+alias downloads='cd $HOME/Downloads;title downloads' 
 alias code='code --disable-gpu .&'
 alias mysql='mysql -u root'
 alias olimpia='site set olimpia' 
@@ -46,7 +55,7 @@ __pr(){
                 echo -e "\033[33m$2 \033[0m"
                 ;;
             info|blue)
-                echo -e "\033[34m$2 \033[0m"
+                echo -e "\033[36m$2 \033[0m"
                 ;;
             bold|white)
                 echo -e "\033[1;39m$2 \033[0m"
@@ -93,6 +102,16 @@ function db(){
       rake db:create
       rake db:migrate
       rake db:seed
+      ;;
+
+    ls)
+      files_sql=$(ls *.sql)
+      echo -e "db_sqls:"
+      for file in ${files_sql[*]}
+      do 
+        __pr info ' '$file
+      done
+      __pr
       ;;
 
     import)

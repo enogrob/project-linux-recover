@@ -195,7 +195,7 @@ function db(){
       __pr succ "db_dev:" $MYSQL_DATABASE_DEV 
       __pr succ "db_tst:" $MYSQL_DATABASE_TST 
       IFS=$'\n'
-      files_sql=(`ls *$SITE.sql`) 
+      files_sql=(`ls *$SITE.sql 2>/dev/null`) 
       echo -e "db_sqls:"
       if [ ! -z "$files_sql" ]; then
         IFS=$'\n'

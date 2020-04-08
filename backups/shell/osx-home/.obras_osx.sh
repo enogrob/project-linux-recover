@@ -2,8 +2,8 @@
 ## Crafted (c) 2013~2020 by ZoatWorks Software LTDA.
 ## Prepared : Roberto Nogueira
 ## File     : .obras_osx.sh
-## Version  : PA02
-## Date     : 2020-04-04
+## Version  : PA03
+## Date     : 2020-04-08
 ## Project  : project-things-today
 ## Reference: bash
 ##
@@ -31,6 +31,7 @@ alias suzano='site set suzano'
 alias santoandre='site set santoandre' 
 alias demo='site set demo' 
 alias rc='rvm current'
+alias window='tput cols;tput lines'
 
 # aliases docker
 alias dc='docker-compose'
@@ -118,22 +119,27 @@ function db(){
       if test -f "$2"; then
         rake db:drop
         rake db:create
-        __pr info "file: " $($2)
+        __pr info "file: " $2
         mysql -u root -p $MYSQL_DATABASE_DEV < $2
         rake db:migrate
       else 
-        FILE=$(find . -iname *$SITE.sql) 
-        if test -f "$FILE"; then
-          rake db:drop
-          rake db:create
-          __pr info "file: " $(basename $FILE)
-          mysql -u root -p $MYSQL_DATABASE_DEV < $FILE
-          rake db:migrate
-        else
-          __pr dang "=> Error: Bad file "$2
-          __pr
-          return 1
-        fi  
+        files_sql=(`ls *$SITE.sql`) 
+        if [ ! -z "$files_sql" ]; then
+          IFS=$'\n'
+          files_sql=( $(printf "%s\n" ${files_sql[@]} | sort -r ) )
+          FILE=${files_sql[0]}
+          if test -f "$FILE"; then
+            rake db:drop
+            rake db:create
+            __pr info "file: " $(basename $FILE)
+            mysql -u root -p $MYSQL_DATABASE_DEV < $FILE
+            rake db:migrate
+          else
+            __pr dang "=> Error: Bad file "$2
+            __pr
+            return 1
+          fi  
+        fi
       fi
       ;;
 
@@ -153,7 +159,7 @@ function db(){
       ;; 
 
     restart)
-      FILE=$HOME/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plistnf
+      FILE=$HOME/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
       if test -f "$FILE"; then
         unload ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
         rm ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
@@ -188,11 +194,18 @@ function db(){
     *)
       __pr succ "db_dev:" $MYSQL_DATABASE_DEV 
       __pr succ "db_tst:" $MYSQL_DATABASE_TST 
-      FILE=$(find . -iname *$SITE.sql) 
-      if test -f "$FILE"; then
-      __pr info "db_sql:" $(basename $FILE)
-      else
-      __pr dang "db_sql:" "no file"
+      IFS=$'\n'
+      files_sql=(`ls *$SITE.sql`) 
+      echo -e "db_sqls:"
+      if [ ! -z "$files_sql" ]; then
+        IFS=$'\n'
+        files_sql=( $(printf "%s\n" ${files_sql[@]} | sort -r ) )
+        for file in ${files_sql[*]}
+        do 
+          __pr info ' '$file
+        done
+      else 
+        __pr dang " no sql files"
       fi
       __pr
       ;;

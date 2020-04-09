@@ -5,11 +5,15 @@ test -s /usr/local/etc/bash_completion.d/git-completion.bash && source /usr/loca
 test -s /usr/local/etc/bash_completion.d/git-prompt.sh && source /usr/local/etc/bash_completion.d/git-prompt.sh
 
 # prompt show branch in status line
-PS1='\e[35;1m[\W$(__git_ps1 " (%s)")]\$\e[0m '
-
+export PS1='\e[35;1m[\W$(__git_ps1 " (%s)")]\$\e[0m '
 # env variables
 export EDITOR=vim
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# For compilers to find icu4c you may need to set:
+export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+
 export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode – red
 export LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode – bold, magenta
 export LESS_TERMCAP_me=$(printf '\e[0m') # turn off all appearance modes (mb, md, so, us)

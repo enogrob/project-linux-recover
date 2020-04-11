@@ -4,8 +4,12 @@ LANG=en_US.US-ASCII;export LANG;LC_TYPE=UTF-8;export LC_TYPE
 test -s /usr/local/etc/bash_completion.d/git-completion.bash && source /usr/local/etc/bash_completion.d/git-completion.bash
 test -s /usr/local/etc/bash_completion.d/git-prompt.sh && source /usr/local/etc/bash_completion.d/git-prompt.sh
 
-# prompt show branch in status line
-export PS1='\e[35;1m[\W$(__git_ps1 " (%s)")]\$\e[0m '
+# Git branch in prompt.
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export PS1="\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
+
 # env variables
 export EDITOR=vim
 export ERL_AFLAGS="-kernel shell_history enabled"

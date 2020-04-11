@@ -7,7 +7,7 @@
 ## Project  : project-things-today
 ## Reference: bash
 ##
-## Purpose  : Develop bash routines in order to help Rails development 
+## Purpose  : Develop bash routines in order to help Rails development
 ##            projects.
 
 # variables
@@ -21,15 +21,15 @@ export RAILS_ENV=development
 export RUBYOPT=-W0
 
 # aliases development
-alias enogrob='cd $HOME;title enogrob' 
-alias downloads='cd $HOME/Downloads;title downloads' 
+alias enogrob='cd $HOME;title enogrob'
+alias downloads='cd $HOME/Downloads;title downloads'
 alias code='code --disable-gpu .&'
 alias mysql='mysql -u root'
-alias olimpia='site set olimpia' 
-alias rioclaro='site set rioclaro' 
-alias suzano='site set suzano' 
-alias santoandre='site set santoandre' 
-alias demo='site set demo' 
+alias olimpia='site set olimpia'
+alias rioclaro='site set rioclaro'
+alias suzano='site set suzano'
+alias santoandre='site set santoandre'
+alias demo='site set demo'
 alias rc='rvm current'
 alias window='tput cols;tput lines'
 
@@ -97,7 +97,7 @@ function title(){
 }
 
 function db(){
-  case $1 in 
+  case $1 in
     init)
       rake db:drop
       rake db:create
@@ -109,7 +109,7 @@ function db(){
       files_sql=$(ls *.sql)
       echo -e "db_sqls:"
       for file in ${files_sql[*]}
-      do 
+      do
         __pr info ' '$file
       done
       __pr
@@ -122,8 +122,8 @@ function db(){
         __pr info "file: " $2
         mysql -u root -p $MYSQL_DATABASE_DEV < $2
         rake db:migrate
-      else 
-        files_sql=(`ls *$SITE.sql`) 
+      else
+        files_sql=(`ls *$SITE.sql`)
         if [ ! -z "$files_sql" ]; then
           IFS=$'\n'
           files_sql=( $(printf "%s\n" ${files_sql[@]} | sort -r ) )
@@ -138,41 +138,54 @@ function db(){
             __pr dang "=> Error: Bad file "$2
             __pr
             return 1
-          fi  
+          fi
         fi
       fi
       ;;
 
-    docker) 
-      if test -f "$3"; then
-        docker-compose exec $2 bundle exec rake db:drop
-        docker-compose exec $2 bundle exec rake db:drop
-        docker-compose exec $2 bundle exec rake db:create
-        __pr info "file: " $(basename $3)
-        docker exec -i db mysql -uroot -proot $MYSQL_DATABASE_DEV < $3
-        docker-compose exec $2 bundle exec rake db:migrate
-      else  
-        __pr dang "=> Error: Bad file "$3
-        __pr
-        return 1
+    docker)
+      if test -f "$2"; then
+        docker-compose exec $SITE rake db:drop
+        docker-compose exec $SITE rake db:create
+        __pr info "file: " $2
+        docker exec -i db mysql -uroot -proot $MYSQL_DATABASE_DEV < $2
+        docker-compose exec $SITE rake db:migrate
+      else
+        files_sql=(`ls *$SITE.sql`)
+        if [ ! -z "$files_sql" ]; then
+          IFS=$'\n'
+          files_sql=( $(printf "%s\n" ${files_sql[@]} | sort -r ) )
+          FILE=${files_sql[0]}
+          if test -f "$FILE"; then
+            docker-compose exec $SITE rake db:drop
+            docker-compose exec $SITE rake db:create
+            __pr info "file: " $(basename $FILE)
+            docker exec -i db mysql -uroot -proot $MYSQL_DATABASE_DEV < $FILE
+            docker-compose exec $SITE rake db:migrate
+          else
+            __pr dang "=> Error: Bad file "$FILE
+            __pr
+            return 1
+          fi
+        fi
       fi
-      ;; 
+      ;;
 
     restart)
       FILE=$HOME/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
       if test -f "$FILE"; then
-        unload ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
+        launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
         rm ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
         brew services start mysql@5.7
-      else  
+      else
         brew services stop mysql@5.7
         brew services start mysql@5.7
-      fi 
+      fi
       brew services list
       ;;
 
     set)
-      case $2 in 
+      case $2 in
         olimpia|rioclaro|suzano|santoandre|demo)
           set -o allexport
           . ./.env/development/$2
@@ -192,19 +205,19 @@ function db(){
       ;;
 
     *)
-      __pr succ "db_dev:" $MYSQL_DATABASE_DEV 
-      __pr succ "db_tst:" $MYSQL_DATABASE_TST 
+      __pr succ "db_dev:" $MYSQL_DATABASE_DEV
+      __pr succ "db_tst:" $MYSQL_DATABASE_TST
       IFS=$'\n'
-      files_sql=(`ls *$SITE.sql 2>/dev/null`) 
+      files_sql=(`ls *$SITE.sql 2>/dev/null`)
       echo -e "db_sqls:"
       if [ ! -z "$files_sql" ]; then
         IFS=$'\n'
         files_sql=( $(printf "%s\n" ${files_sql[@]} | sort -r ) )
         for file in ${files_sql[*]}
-        do 
+        do
           __pr info ' '$file
         done
-      else 
+      else
         __pr dang " no sql files"
       fi
       __pr
@@ -215,7 +228,7 @@ function db(){
 function site(){
   case $1 in
     set)
-      case $2 in 
+      case $2 in
         olimpia|santoandre|demo)
           export SITE=$2
           cd "$HOME/Projects/obras"

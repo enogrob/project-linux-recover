@@ -1,9 +1,9 @@
 #!/bin/bash
 ## Crafted (c) 2013~2020 by ZoatWorks Software LTDA.
 ## Prepared : Roberto Nogueira
-## File     : .obras_osx.sh
-## Version  : PA03
-## Date     : 2020-04-08
+## File     : .obras.sh
+## Version  : PA04
+## Date     : 2020-04-14
 ## Project  : project-things-today
 ## Reference: bash
 ##
@@ -11,14 +11,21 @@
 ##            projects.
 
 # variables
-export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
-export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
-export SITE=demo
+export OS=`uname`
+if [ $OS == 'Darwin' ]; then
+  export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
+  export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
+  export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+fi
+
+export MAILCATCHER_ENV=LOCALHOST
 export MYSQL_DATABASE_DEV=demo_dev
 export MYSQL_DATABASE_TST=demo_tst
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+export OBRAS="$HOME/Projects/obras"
+export OBRAS_OLD="$HOME/Logbook/obras"
 export RAILS_ENV=development
 export RUBYOPT=-W0
+export SITE=demo
 
 # aliases development
 alias enogrob='cd $HOME;title enogrob'
@@ -172,16 +179,21 @@ function db(){
       ;;
 
     restart)
-      FILE=$HOME/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
-      if test -f "$FILE"; then
-        launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
-        rm ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
-        brew services start mysql@5.7
+      if [ $OS == 'Darwin' ]; then
+        FILE=$HOME/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
+        if test -f "$FILE"; then
+          launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
+          rm ~/Library/LaunchAgents/homebrew.mxcl.mysql@5.7.plist
+          brew services start mysql@5.7
+        else
+          brew services stop mysql@5.7
+          brew services start mysql@5.7
+        fi
+        brew services list
       else
-        brew services stop mysql@5.7
-        brew services start mysql@5.7
+        service mysql restart
+        service mysql status
       fi
-      brew services list
       ;;
 
     set)
@@ -201,7 +213,11 @@ function db(){
       ;;
 
     status)
-      brew services list
+      if [ $OS == 'Darwin' ]; then
+        brew services list
+      else  
+        service mysql status
+      fi
       ;;
 
     *)
@@ -231,7 +247,7 @@ function site(){
       case $2 in
         olimpia|santoandre|demo)
           export SITE=$2
-          cd "$HOME/Projects/obras"
+          cd "$OBRAS"
           db set $2
           title $2
           site
@@ -239,7 +255,7 @@ function site(){
 
         rioclaro|suzano)
           export SITE=$2
-          cd "$HOME/Logbook/obras"
+          cd "$OBRAS_OLD"
           db set $2
           title $2
           site

@@ -54,7 +54,7 @@ alias tree='tree -C -L 2'
 # alias vim='vim --servername VIM'
 
 # obras
-test -s "$HOME/.obras_osx.sh" && source "$HOME/.obras_osx.sh"
+test -s "$HOME/.obras.sh" && source "$HOME/.obras.sh"
 
 # macbook
 function spotlight(){

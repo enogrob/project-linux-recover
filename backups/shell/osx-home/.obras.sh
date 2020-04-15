@@ -220,9 +220,29 @@ function db(){
       fi
       ;;
 
+    show)
+      if [ $RAILS_ENV == "development" ]; then
+        mysqlshow -uroot  $MYSQL_DATABASE_DEV | head
+      else
+        mysqlshow -uroot  $MYSQL_DATABASE_TST | head
+      fi
+      ;;
+
     *)
-      __pr succ "db_dev:" $MYSQL_DATABASE_DEV
-      __pr succ "db_tst:" $MYSQL_DATABASE_TST
+      DB_DEV=`mysqlshow -uroot  $MYSQL_DATABASE_DEV | grep -v Wildcard | grep -o $MYSQL_DATABASE_DEV`
+      if [ "$DB_DEV" == $MYSQL_DATABASE_DEV ]; then
+        DB_DEV="\033[36m (exists) \033[0m"
+      else  
+        DB_DEV="\033[31m (no exist) \033[0m"
+      fi
+      DB_TST=`mysqlshow -uroot  $MYSQL_DATABASE_TST | grep -v Wildcard | grep -o $MYSQL_DATABASE_TST`
+      if [ "$DB_TST" == $MYSQL_DATABASE_TST ]; then
+        DB_TST="\033[36m (exists) \033[0m"
+      else  
+        DB_TST="\033[31m (no exist) \033[0m"
+      fi
+      echo -e "db_dev: \033[32m$MYSQL_DATABASE_DEV \033[0m $DB_DEV"
+      echo -e "db_tst: \033[32m$MYSQL_DATABASE_TST \033[0m $DB_TST"
       IFS=$'\n'
       files_sql=(`ls *$SITE.sql 2>/dev/null`)
       echo -e "db_sqls:"

@@ -167,13 +167,13 @@ function iterm2_print_user_vars() {
 test -s  "$HOME/.todayrc.sh" && source "$HOME/.todayrc.sh"
 
 # erlang
-#. /Users/enogrob/kerl/20.2/activate
+. /Users/enogrob/kerl/22.3/activate
 #source $HOME/.evm/scripts/evm
 
 # java
 export SDKMAN_DIR="$HOME/.sdkman"
 test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # elixir
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+test -s $HOME/.kiex/elixirs/elixir-1.10.2.env && source $HOME/.kiex/elixirs/elixir-1.10.2.env
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"

@@ -24,7 +24,9 @@ export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
 export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode – cyan
 export LOCAL_USER_ID=$(id -u)
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home
+export CFLAGS="-O2 -g -fno-stack-check"
+export KERL_CONFIGURE_OPTIONS="--disable-hipe --with-ssl=$(brew --prefix openssl)"
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home
 
 # aliases general
 alias airport='airport -s'
@@ -52,6 +54,7 @@ alias shutdown='shutdown -r now'
 alias top='top -o cpu'
 alias tree='tree -C -L 2'
 alias lastrails='gem search rails | grep "^rails "'
+alias lastruby='curl -s https://rubies.io/api/normal | jq'
 # alias vim='vim --servername VIM'
 
 # obras
@@ -168,13 +171,15 @@ function iterm2_print_user_vars() {
 test -s  "$HOME/.todayrc.sh" && source "$HOME/.todayrc.sh"
 
 # erlang
-. /Users/enogrob/kerl/22.3/activate
+test -s $HOME/.kerl/23.0/activate && source $HOME/.kerl/23.0/activate
+
 #source $HOME/.evm/scripts/evm
 
-# java
-export SDKMAN_DIR="$HOME/.sdkman"
-test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # elixir
-test -s $HOME/.kiex/elixirs/elixir-1.10.2.env && source $HOME/.kiex/elixirs/elixir-1.10.2.env
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+test -s "$HOME/.kiex/elixirs/elixir-1.10.4.env" && source "$HOME/.kiex/elixirs/elixir-1.10.4.env"
+# java
+#export SDKMAN_DIR="$HOME/.sdkman"
+#test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"

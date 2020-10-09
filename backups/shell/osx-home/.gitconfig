@@ -1,0 +1,9 @@
+[user]
+	name = Roberto Nogueira
+	email = enogrob@gmail.com
+[pull]
+	ff = only
+[pager]
+    diff = diff-so-fancy | less --tabs=1,5 -RFX
+    show = diff-so-fancy | less --tabs=1,5 -RFX
+    log = diff-so-fancy | less --tabs=1,5 -RFX

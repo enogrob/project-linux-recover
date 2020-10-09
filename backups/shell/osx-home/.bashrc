@@ -55,6 +55,10 @@ alias top='top -o cpu'
 alias tree='tree -C -L 2'
 alias lastrails='gem search rails | grep "^rails "'
 alias lastruby='curl -s https://rubies.io/api/normal | jq'
+
+test -f /usr/local/bin/exa && alias exals="exa -lhgbH --git"
+test -f /usr/local/bin/exa && alias exala="exa -lahgbH --git"
+
 # alias vim='vim --servername VIM'
 
 # obras
@@ -183,3 +187,6 @@ test -s "$HOME/.kiex/elixirs/elixir-1.10.4.env" && source "$HOME/.kiex/elixirs/e
 #test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Created by `userpath` on 2020-09-20 12:32:59
+export PATH="$PATH:/Users/enogrob/.local/bin"

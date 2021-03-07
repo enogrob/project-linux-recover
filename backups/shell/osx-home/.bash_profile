@@ -12,3 +12,6 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+
+# Created by `userpath` on 2020-09-20 12:32:59
+export PATH="$PATH:/Users/enogrob/.local/bin"

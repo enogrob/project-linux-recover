@@ -190,3 +190,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 # Created by `userpath` on 2020-09-20 12:32:59
 export PATH="$PATH:/Users/enogrob/.local/bin"
+
+# goto Today
+tdy
+title

@@ -14,5 +14,13 @@
 	// See https://github.com/Microsoft/vscode/issues/51791 for details
 	"disable-color-correct-rendering": true,
 	"disable-hardware-acceleration": true
+,
 
+	// Allows to disable crash reporting.
+	// Should restart the app if the value is changed.
+	"enable-crash-reporter": true,
+
+	// Unique id used for correlating crash reports sent from this instance.
+	// Do not edit this value.
+	"crash-reporter-id": "0ab48216-a67e-4d5e-bf50-3dd8b8d60888"
 }

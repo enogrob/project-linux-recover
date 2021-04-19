@@ -10,9 +10,9 @@
 
 
 # variables
-export OBRAS_UTILS_VERSION=1.5.10
-export OBRAS_UTILS_VERSION_DATE=2021.02.21
-export OBRAS_UTILS_UPDATE_MESSAGE="Remove 'rvm use' in 'site.init' command."
+export OBRAS_UTILS_VERSION=1.5.29
+export OBRAS_UTILS_VERSION_DATE=2021.04.18
+export OBRAS_UTILS_UPDATE_MESSAGE="New parameter for commands 'site flags/services [refs]' and 'obras_utils refs [tools/ssh]'."
 
 export OS=`uname`
 if [ $OS == 'Darwin' ]; then
@@ -27,11 +27,11 @@ export OBRASOLDTMP="$HOME/Projects/obras"
 export RAILSVERSIONTMP="Rails 6.0.2.1"
 
 export INSTALL_DIR=$INSTALLDIRTMP
-export OBRAS=/Users/enogrob/Projects/obras
-export OBRAS_OLD=/Users/enogrob/Projects/obras
+export OBRAS=$OBRASTMP
+export OBRAS_OLD=$OBRASOLDTMP
 export RAILS_VERSION=$RAILSVERSIONTMP
 
-pushd . > /dev/null 2>&1
+pushd . > /dev/null
 cd $OBRAS
 
 ! test -d tmp/devtools && mkdir -p tmp/devtools
@@ -51,14 +51,13 @@ if [ "$OBRAS" != "$OBRAS_OLD" ]; then
 else  
   export SITES_OLD="none"
 fi  
-popd > /dev/null 2>&1
 
 export SITES_CASE="+($(echo $SITES | sed 's/ /|/g'))"
 export SITES_OLD_CASE="+($(echo $SITES_OLD | sed 's/ /|/g'))"
 
 export RAILS_ENV=development
 export RUBYOPT=-W0
-export MAILCATCHER_ENV=LOCALHOST
+unset MAILCATCHER_ENV
 unset MYSQL_DATABASE_DEV
 unset MYSQL_DATABASE_TST
 unset DB_TABLES_DEV
@@ -78,11 +77,14 @@ alias olimpia='cd $OBRAS;site olimpia'
 alias rioclaro='cd $OBRAS;site rioclaro'
 alias suzano='cd $OBRAS;site suzano'
 alias santoandre='cd $OBRAS;site santoandre'
+alias cordeiropolis='cd $OBRAS;site cordeiropolis'
 alias demo='cd $OBRAS;site demo'
 alias downloads='cd $HOME/Downloads;title downloads'
 alias default='cd $OBRAS;site default'
 alias rc='rvm current'
 alias window='tput cols;tput lines'
+alias init_bash='source $HOME/.bashrc'
+alias init_obras='cd $OBRAS;source $HOME/.obras_utils.sh'
 
 
 # aliases docker
@@ -91,6 +93,9 @@ alias dk='docker'
 alias dkc='docker container'
 alias dki='docker image'
 alias dkis='docker images'
+
+popd > /dev/null
+
 
 # functions
 __gitignore(){
@@ -110,9 +115,12 @@ obras_utils() {
 
   case $1 in
     --version|-v|v|version)
-      ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
+      ansi --white-intense "Crafted (c) 2018~2020 by InMov - Intelligence in Movement"
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
+      ansi --no-newline --white "homepage "
+      ansi --green --underline "https://github.com/enogrob/research-obras-devtools"
+      ansi --white ""
       ;;
 
     check|-c)
@@ -134,8 +142,8 @@ obras_utils() {
       test -f obras_temp && rm -rf obras_temp*
       test -f .obras_utils.sh && rm -rf .obras_utils.sh
       wget https://raw.githubusercontent.com/enogrob/research-obras-devtools/master/obras/.obras_utils.sh
-      sed 's@\/Users/enogrob/Projects/obras@'"$OBRAS"'@' .obras_utils.sh > obras_temp
-      sed 's@\/Users/enogrob/Projects/obras@'"$OBRAS_OLD"'@' obras_temp > obras_temp1 
+      sed 's@\$OBRASTMP@'"$OBRAS"'@' .obras_utils.sh > obras_temp
+      sed 's@\$OBRASOLDTMP@'"$OBRAS_OLD"'@' obras_temp > obras_temp1 
       echo -e "\033[1;92m==> \033[0m\033[1;39mUpdating \".obras_utils.sh\" \033[0m"
       cp obras_temp1 $HOME/.obras_utils.sh 
       test -f obras_temp && rm -rf obras_temp*
@@ -170,27 +178,30 @@ obras_utils() {
         fi
       fi
 
-      if ! test -f /usr/local/bin/pipx && ! test -f $HOME/.local/bin/pipx ; then
+      if ! test -f /usr/local/bin/pipx && ! test -f /usr/bin/pip3; then
         echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"pip\" \033[0m"
         echo ""
         if [ "$OS" == 'Darwin' ]; then
           brew install pipx
           pipx ensurepath
         else 
-          python3 -m pip install --user pipx
-          python3 -m pipx ensurepath 
-          source $HOME/.bashrc
+          sudo apt-get install python3-pip
         fi
       fi
 
-      if ! test -f $HOME/.local/bin/iredis; then
+      if ! test -f $HOME/.local/bin/iredis && ! test -f /usr/local/bin/iredis; then
         echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"iredis\" \033[0m"
         echo ""
         if [ "$OS" == 'Darwin' ]; then
           brew install iredis
         else 
-          apt-get install python3-venv
-          pipx install iredis
+          test -f ./iredis.tar.gz && rm -f ./iredis.tar.gz
+          test -f /tmp/iredis && rm -f /tmp/iredis
+          test -d /tmp/lib && rm -rf /tmp/lib
+          wget "https://github.com/laixintao/iredis/releases/latest/download/iredis.tar.gz" && test -f ./iredis.tar.gz && tar -xzf ./iredis.tar.gz -C /tmp && sudo mv /tmp/iredis /usr/local/bin && sudo mv /tmp/lib /usr/local/bin
+          test -f ./iredis.tar.gz && rm -f ./iredis.tar.gz
+          test -f /tmp/iredis && rm -f /tmp/iredis
+          test -d /tmp/lib && rm -rf /tmp/lib
         fi
       fi
 
@@ -200,16 +211,32 @@ obras_utils() {
         if [ "$OS" == 'Darwin' ]; then
           brew cask install ngrok
         else  
-          sudo snap install ngrok
+          test -f ./ngrok-stable-linux-amd64.zip && rm -f ngrok-stable-linux-amd64.zip
+          test -f ./ngrok && rm -f ngrok
+          wget "https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip" && test -f ./ngrok-stable-linux-amd64.zip && unzip ngrok-stable-linux-amd64.zip && sudo mv ./ngrok /usr/local/bin
+          test -f ./ngrok-stable-linux-amd64.zip && rm -f ngrok-stable-linux-amd64.zip
+          test -f ./ngrok && rm -f ngrok
         fi
       fi
 
       if [ "$OS" != 'Darwin' ]; then
-        if ! test -f /bin/netstat; then
+        if ! test -f /bin/netstat && ! test -f /usr/bin/netstat; then
           echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"net-tools\" \033[0m"
           echo ""
           sudo apt-get install net-tools
         fi 
+      fi
+
+      if ! test -f /usr/local/bin/lazygit && ! test -f /usr/bin/lazygit; then
+        echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"Lazygit\" \033[0m"
+        echo ""
+        if [ "$OS" == 'Darwin' ]; then
+          brew cask install lazygit
+        else  
+          sudo add-apt-repository ppa:lazygit-team/release
+          sudo apt-get update
+          sudo apt-get install lazygit
+        fi
       fi
 
       source $HOME/.bashrc
@@ -218,14 +245,44 @@ obras_utils() {
       cowsay $OBRAS_UTILS_UPDATE_MESSAGE
       ;;
 
+    refs)
+      obras_utils.refs $2
+      ;;
     *)
       ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
-      __pr info "obras_utils " "[version/update/check]"
+      __pr info "obras_utils " "[version/update/check] || refs [tools/ssh]"
       __pr
+      ansi --no-newline --white "homepage "
+      ansi --green --underline "https://github.com/enogrob/research-obras-devtools"
+      ansi --white ""
       ;;  
     esac  
+}
+obras_utils.refs(){  
+  case $1 in
+     tools)
+       ansi --white "tools:"
+       ansi --no-newline "  foreman     ";ansi --underline --green "https://github.com/ddollar/foreman" 
+       ansi --no-newline "  iredis      ";ansi --underline --green "https://iredis.io" 
+       ansi --no-newline "  lazygit     ";ansi --underline --green "https://github.com/jesseduffield/lazygit" 
+       ansi --no-newline "  mycli       ";ansi --underline --green "https://github.com/dbcli/mycli" 
+       ansi --no-newline "  3llo        ";ansi --underline --green "https://github.com/qcam/3llo" 
+       ;;
+     ssh)
+       ansi --white "ssh:"
+       ansi --no-newline "  github      ";ansi --underline --green "https://github.com/settings/keys" 
+       ansi --no-newline "  gitlab      ";ansi --underline --green "https://gitlab.tecnogroup.com.br/profile/keys" 
+       ansi --no-newline "  engineyard  ";ansi --underline --green "https://cloud.engineyard.com/keypairs" 
+       ;; 
+     *)
+       ansi --white "obras utils:"
+       ansi --no-newline "  homepage    ";ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
+       ansi --no-newline "  chrome-apps ";ansi --underline --green "https://github.com/enogrob/chromeapps-eicon" 
+       ansi --no-newline "  obras       ";ansi --underline --green "https://gitlab.tecnogroup.com.br" 
+       ;;   
+   esac
 }
 __sites(){
   case $# in
@@ -586,6 +643,9 @@ __port(){
     santoandre)
       port=3005
       ;;  
+    cordeiropolis)
+      port=3006
+      ;;  
     demo)
       port=3013
       ;;  
@@ -639,6 +699,47 @@ __docker(){
 }
 
 
+audit.run(){
+  if [ "$(flags.is_set audit)" == "y" ]; then 
+    if [ $# -eq 0 ]; then
+      ansi --no-newline --green-intense "==> "; ansi --white-intense "Running Audit "
+      revolver --style 'simpleDotsScrolling' start
+      bundle install > /dev/null 2>&1
+      bundle-audit check --update
+      revolver stop
+    else
+      ansi --no-newline --green-intense "==> "; ansi --white-intense "Running Audit "
+      revolver --style 'simpleDotsScrolling' start
+      bundle install > /dev/null 2>&1
+      bundle-audit $*
+      revolver stop
+    fi
+  else  
+    ansi --no-newline --green-intense "==> "; ansi --red "audit shall be set"
+    ansi ""
+  fi
+
+}
+brakeman.run(){
+  if [ "$(flags.is_set brakeman)" == "y" ]; then 
+    if [ $# -eq 0 ]; then
+      ansi --no-newline --green-intense "==> "; ansi --white-intense "Running Brakeman "
+      revolver --style 'simpleDotsScrolling' start
+      bundle install > /dev/null 2>&1
+      bundle exec brakeman --ensure-latest --format html --output tmp/brakeman.html
+      revolver stop
+    else
+      ansi --no-newline --green-intense "==> "; ansi --white-intense "Running Brakeman "
+      revolver --style 'simpleDotsScrolling' start
+      bundle install > /dev/null 2>&1
+      bundle exec brakeman $*
+      revolver stop
+    fi
+  else  
+    ansi --no-newline --green-intense "==> "; ansi --red "brakeman shall be set"
+    ansi ""
+  fi
+}
 rubocop.run(){
   local params=$(git diff --name-only --diff-filter AMT | grep -i 'rb' | tr '\n' ' ')
   if [ "$(flags.is_set rubocop)" == "y" ]; then 
@@ -710,6 +811,12 @@ flags.any_set(){
 flags.get(){
   local flag=$1
   case $flag in
+    audit)
+      echo $AUDIT
+      ;;
+    brakeman)
+      echo $BRAKEMAN
+      ;;
     coverage)
       echo $COVERAGE
       ;;
@@ -760,6 +867,46 @@ flags.print(){
           ansi --red "coverage";
         else
           ansi --no-newline --red "coverage";
+        fi
+      fi
+      ;;
+
+    audit)
+      if [ "$(flags.is_set audit)" == "y" ]; then
+        if [ "$last" == "true" ]; then
+          ansi --green "audit"
+        else
+          ansi --no-newline --green "audit"
+        fi
+      else
+        if [ "$last" == "true" ]; then
+          ansi --red "audit";
+        else
+          ansi --no-newline --red "audit";
+        fi
+      fi
+      ;;
+
+    brakeman)
+      if [ "$(flags.is_set brakeman)" == "y" ]; then
+        if [ "$last" == "true" ]; then
+          if test -f tmp/brakeman.html; then
+            ansi --underline --green "tmp/brakeman.html"
+          else
+            ansi --green "brakeman"
+          fi
+        else
+          if test -f tmp/brakeman.html; then
+            ansi --no-newline --underline --green "tmp/brakeman.html"
+          else
+            ansi --no-newline --green "brakeman"
+          fi
+        fi
+      else
+        if [ "$last" == "true" ]; then
+          ansi --red "brakeman";
+        else
+          ansi --no-newline --red "brakeman";
         fi
       fi
       ;;
@@ -847,15 +994,18 @@ flags.print(){
   esac
 }
 flags.print_all(){
-  local flags=(docker headless)
+  local flags=(audit docker headless)
+  if [ "$(flags.is_set brakeman)" == "n" ]; then
+    flags+=(brakeman)
+  fi
   if [ "$(flags.is_set coverage)" == "n" ]; then
     flags+=(coverage)
   fi
-  if [ "$(flags.is_set rubycritic)" == "n" ]; then
-    flags+=(rubycritic)
-  fi
   if [ "$(flags.is_set rubocop)" == "n" ]; then
     flags+=(rubocop)
+  fi
+  if [ "$(flags.is_set rubycritic)" == "n" ]; then
+    flags+=(rubycritic)
   fi
   local flags_set
   ansi --no-newline "  "
@@ -873,6 +1023,26 @@ flags.print_down(){
   local flag=$1
   local last=$2
   case $flag in
+    audit)
+      if [ "$(flags.is_set audit)" == "n" ]; then
+        if [ "$last" == "true" ]; then
+          ansi --red "audit";
+        else
+          ansi --no-newline --red "audit";
+        fi
+      fi
+      ;;
+  
+    brakeman)
+      if [ "$(flags.is_set brakeman)" == "n" ]; then
+        if [ "$last" == "true" ]; then
+          ansi --red "brakeman";
+        else
+          ansi --no-newline --red "brakeman";
+        fi
+      fi
+      ;;
+
     coverage)
       if [ "$(flags.is_set coverage)" == "n" ]; then
         if [ "$last" == "true" ]; then
@@ -925,7 +1095,7 @@ flags.print_down(){
   esac
 }
 flags.print_downs(){
-  local flags=(coverage rubycritic rubocop docker headless)
+  local flags=(audit brakeman coverage docker headless rubocop rubycritic)
   local flags_not_set
   for f in ${flags[@]}
   do
@@ -951,6 +1121,19 @@ flags.print_up(){
   local major=$2
   local flag_name
   case $flag in
+    brakeman)
+      if [ "$(flags.is_set brakeman)" == "y" ]; then
+        if test -f tmp/brakeman.html; then
+          flag_name=$(printf "%-${major}s" "brakeman")
+          ansi --no-newline "  ${flag_name} ";
+          ansi --underline --green "tmp/brakeman.html"
+        else
+          flag_name=$(printf "%-${major}s" "brakeman")
+          ansi --no-newline "  ${flag_name} ";
+          ansi --green "brakeman"
+        fi
+      fi
+      ;;
     coverage)
       if [ "$(flags.is_set coverage)" == "y" ]; then
         if test -f coverage/index.html; then
@@ -996,7 +1179,7 @@ flags.print_up(){
 flags.print_ups(){
   local flag_name_lens=()
   local major
-  local flags=(rubycritic rubocop coverage)
+  local flags=(brakeman coverage rubocop rubycritic)
   local flags_set
   for f in ${flags[@]}
   do
@@ -1017,6 +1200,16 @@ flags.print_ups(){
 flags.set(){
   local flag=$1
   case $flag in
+    audit)
+      unset AUDIT
+      export AUDIT=true
+      ;;
+
+    brakeman)
+      unset BRAKEMAN
+      export BRAKEMAN=true
+      ;;
+
     coverage)
       unset COVERAGE
       export COVERAGE=true
@@ -1065,6 +1258,14 @@ flags.status(){
 flags.unset(){
   local flag=$1
   case $flag in
+    audit)
+      unset AUDIT
+      ;;
+
+    brakeman)
+      unset BRAKEMAN
+      ;;
+
     coverage)
       unset COVERAGE
       ;;
@@ -1096,6 +1297,16 @@ flags.unset(){
       ;;
   esac   
 }
+flags.refs(){
+  ansi --white "flags:"
+  ansi --no-newline "  audit       ";ansi --underline --green "https://github.com/rubysec/bundler-audit" 
+  ansi --no-newline "  docker      ";ansi --underline --green "https://www.docker.com" 
+  ansi --no-newline "  headless    ";ansi --underline --green "https://developers.google.com/web/updates/2017/04/headless-chrome" 
+  ansi --no-newline "  brakeman    ";ansi --underline --green "https://github.com/presidentbeef/brakeman" 
+  ansi --no-newline "  coverage    ";ansi --underline --green "https://github.com/simplecov-ruby/simplecov" 
+  ansi --no-newline "  rubocop     ";ansi --underline --green "https://rubocop.org" 
+  ansi --no-newline "  rubycritic  ";ansi --underline --green "https://github.com/whitesmith/rubycritic" 
+}
 
 
 __mailcatcher(){
@@ -1123,8 +1334,8 @@ __mailcatcher(){
         test -f tmp/pids/server.pid && rm -f tmp/pids/server.pid
         ! test -d tmp/devtools && mkdir -p tmp/devtools
         if ! test -f tmp/devtools/${SITE}.procfile; then
-          cat Procfile.services > tmp/devtools/${SITE}.procfile.temp
-          cat Procfile | grep $SITE | sed "s/$SITE/rails/" >> tmp/devtools/${SITE}.procfile.temp
+          cat Procfile | grep $SITE | sed "s/$SITE/rails/" > tmp/devtools/${SITE}.procfile.temp
+          cat Procfile.services | tail -3 >> tmp/devtools/${SITE}.procfile.temp 
           sed 's@\$PORT@'"$PORT"'@' tmp/devtools/${SITE}.procfile.temp > tmp/devtools/${SITE}.procfile
           rm -rf tmp/devtools/${SITE}.procfile.temp
         fi  
@@ -1166,6 +1377,9 @@ __mailcatcher(){
         service_name=$(printf "%-${major}s" "mailcatcher")
         ansi --no-newline "  ${service_name} ";
         ansi --no-newline --underline  --green "http://localhost:$port";ansi " $pid"
+        if [ -z "$MAILCATCHER_ENV" ]; then
+          export MAILCATCHER_ENV=LOCALHOST
+        fi
       fi  
       ;;
 
@@ -1178,15 +1392,27 @@ __mailcatcher(){
       if [ -z $pid ]; then
         if [ "$last" == "true" ]; then
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --strike --red "$service";
+            ansi --black-intense "$service";
+            if [[ ! -z "${MAILCATCHER_ENV}" ]]; then
+              unset MAILCATCHER_ENV
+            fi
           else  
             ansi --red "$service";
+            if [[ -z "${MAILCATCHER_ENV}" ]]; then
+              export MAILCATCHER_ENV=LOCALHOST
+            fi
           fi
         else  
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --no-newline --strike --red "$service";
+            ansi --no-newline --black-intense "$service";
+            if [[ ! -z "${MAILCATCHER_ENV}" ]]; then
+              unset MAILCATCHER_ENV
+            fi
           else  
             ansi --no-newline --red "$service";
+            if [[ -z "${MAILCATCHER_ENV}" ]]; then
+              export MAILCATCHER_ENV=LOCALHOST
+            fi
           fi 
         fi  
       fi
@@ -1221,7 +1447,7 @@ __mysql(){
           if [ $OS == 'Darwin' ]; then
             brew services start mysql@5.7
           else
-            sudo service start mysql
+            sudo service mysql start
           fi
         else
           ansi --no-newline --green-intense "==> "; ansi --red "Mysql is started already"
@@ -1238,7 +1464,7 @@ __mysql(){
           if [ $OS == 'Darwin' ]; then
             brew services stop mysql@5.7
           else
-            sudo service stop db
+            sudo service mysql stop 
           fi
         else
           ansi --no-newline --green-intense "==> "; ansi --red "Mysql is stopped already"
@@ -1275,7 +1501,7 @@ __mysql(){
        if [ $OS == 'Darwin' ]; then
          brew services 
        else
-         service mysql status
+         sudo service mysql status
        fi
       else  
         docker-compose ps db
@@ -1301,13 +1527,13 @@ __mysql(){
       if [ -z $pid ]; then
         if [ "$last" == "true" ]; then
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --strike --red "$service";
+            ansi --black-intense "$service";
           else  
             ansi --red "$service";
           fi
         else  
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --no-newline --strike --red "$service";
+            ansi --no-newline --black-intense "$service";
           else  
             ansi --no-newline --red "$service";
           fi 
@@ -1319,9 +1545,10 @@ __mysql(){
 __sidekiq(){
   local pid=""
   local port=""
-  test -f "tmp/pids/sidekiq.pid" && pid=$(cat tmp/pids/sidekiq.pid)
+  pid=$(test -f tmp/pids/sidekiq.pid && cat "tmp/pids/sidekiq.pid")
   case $1 in
     pid)
+      pid=$(test -f tmp/pids/sidekiq.pid && cat "tmp/pids/sidekiq.pid")
       echo $pid
       ;;
 
@@ -1337,8 +1564,8 @@ __sidekiq(){
       if [ -z $pid ]; then
         ! test -d tmp/devtools && mkdir -p tmp/devtools
         if ! test -f tmp/devtools/${SITE}.procfile; then
-          cat Procfile.services > tmp/devtools/${SITE}.procfile.temp
-          cat Procfile | grep $SITE | sed "s/$SITE/rails/" >> tmp/devtools/${SITE}.procfile.temp
+          cat Procfile | grep $SITE | sed "s/$SITE/rails/" > tmp/devtools/${SITE}.procfile.temp
+          cat Procfile.services | tail -3 >> tmp/devtools/${SITE}.procfile.temp 
           sed 's@\$PORT@'"$PORT"'@' tmp/devtools/${SITE}.procfile.temp > tmp/devtools/${SITE}.procfile
           rm -rf tmp/devtools/${SITE}.procfile.temp
         fi  
@@ -1352,8 +1579,20 @@ __sidekiq(){
     stop)  
       if [ ! -z $pid ]; then
         sidekiqctl stop "tmp/pids/sidekiq.pid" > /dev/null 2>&1
-        if [ $? -eq 1 ];then
-          test -f tmp/pids/sidekiq.pid && rm -rf tmp/pids/sidekiq.pid
+        if [ $OS == 'Darwin' ]; then
+          if test -f tmp/pids/sidekiq.pid && pgrep -F tmp/pids/sidekiq.pid > /dev/null;then
+            kill -9 $pid
+            test -f tmp/pids/sidekiq.pid && rm -rf tmp/pids/sidekiq.pid
+          else
+            rm -rf tmp/pids/sidekiq.pid
+          fi
+        else
+          if test -f tmp/pids/sidekiq.pid && pgrep --pidfile tmp/pids/sidekiq.pid > /dev/null;then
+            kill -9 $pid
+            test -f tmp/pids/sidekiq.pid && rm -rf tmp/pids/sidekiq.pid
+          else
+            rm -rf tmp/pids/sidekiq.pid
+          fi
         fi
       else  
         test -f tmp/pids/sidekiq.pid && rm -rf tmp/pids/sidekiq.pid
@@ -1397,13 +1636,13 @@ __sidekiq(){
       if [ -z $pid ]; then
         if [ "$last" == "true" ]; then
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --strike --red "$service";
+            ansi --black-intense "$service";
           else  
             ansi --red "$service";
           fi
         else  
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --no-newline --strike --red "$service";
+            ansi --no-newline --black-intense "$service";
           else  
             ansi --no-newline --red "$service";
           fi 
@@ -1441,8 +1680,8 @@ __ngrok(){
             test -f tmp/pids/server.pid && rm -f tmp/pids/server.pid
             ! test -d tmp/devtools && mkdir -p tmp/devtools
             if ! test -f tmp/devtools/${SITE}.procfile; then
-              cat Procfile.services > tmp/devtools/${SITE}.procfile.temp
-              cat Procfile | grep $SITE | sed "s/$SITE/rails/" >> tmp/devtools/${SITE}.procfile.temp
+              cat Procfile | grep $SITE | sed "s/$SITE/rails/" > tmp/devtools/${SITE}.procfile.temp
+              cat Procfile.services | tail -3 >> tmp/devtools/${SITE}.procfile.temp 
               sed 's@\$PORT@'"$PORT"'@' tmp/devtools/${SITE}.procfile.temp > tmp/devtools/${SITE}.procfile
               rm -rf tmp/devtools/${SITE}.procfile.temp
             fi  
@@ -1501,13 +1740,13 @@ __ngrok(){
       if [ -z $pid ]; then
         if [ "$last" == "true" ]; then
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --strike --red "$service";
+            ansi --black-intense "$service";
           else  
             ansi --red "$service";
           fi
         else  
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --no-newline --strike --red "$service";
+            ansi --no-newline --black-intense "$service";
           else  
             ansi --no-newline --red "$service";
           fi 
@@ -1544,7 +1783,7 @@ __redis(){
           if [ $OS == 'Darwin' ]; then
             brew services start redis
           else
-            sudo service start redis
+            sudo service redis-server start
           fi
         else
           ansi --no-newline --green-intense "==> "; ansi --red "Redis is started already"
@@ -1561,7 +1800,7 @@ __redis(){
           if [ $OS == 'Darwin' ]; then
             brew services stop redis
           else
-            sudo service stop redis
+            sudo service redis-server stop
           fi
         else
           ansi --no-newline --green-intense "==> "; ansi --red "Redis is stopped already"
@@ -1582,7 +1821,7 @@ __redis(){
        if [ $OS == 'Darwin' ]; then
          brew services 
        else
-         service redis status
+         sudo service redis-server status
        fi
       else  
         docker-compose ps redis
@@ -1608,13 +1847,13 @@ __redis(){
       if [ -z $pid ]; then
         if [ "$last" == "true" ]; then
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --strike --red "$service";
+            ansi --black-intense "$service";
           else  
             ansi --red "$service";
           fi
         else  
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --no-newline --strike --red "$service";
+            ansi --no-newline --black-intense "$service";
           else  
             ansi --no-newline --red "$service";
           fi 
@@ -1652,8 +1891,8 @@ __rails(){
             test -f tmp/pids/server.pid && rm -f tmp/pids/server.pid
             ! test -d tmp/devtools && mkdir -p tmp/devtools
             if ! test -f tmp/devtools/${SITE}.procfile; then
-              cat Procfile.services > tmp/devtools/${SITE}.procfile.temp
-              cat Procfile | grep $SITE | sed "s/$SITE/rails/" >> tmp/devtools/${SITE}.procfile.temp
+              cat Procfile | grep $SITE | sed "s/$SITE/rails/" > tmp/devtools/${SITE}.procfile.temp
+              cat Procfile.services | tail -3 >> tmp/devtools/${SITE}.procfile.temp 
               sed 's@\$PORT@'"$PORT"'@' tmp/devtools/${SITE}.procfile.temp > tmp/devtools/${SITE}.procfile
               rm -rf tmp/devtools/${SITE}.procfile.temp
             fi  
@@ -1688,7 +1927,7 @@ __rails(){
             docker-compose up -d db redis $SITE
           else   
             case $2 in
-              olimpia|rioclaro|suzano|santoandre|demo)
+              olimpia|rioclaro|suzano|santoandre|cordeiropolis|demo)
                 docker-compose up -d $2
                 ;;
 
@@ -1717,12 +1956,12 @@ __rails(){
             kill -9 $(__pid $(__port $SITE))
           else   
             case $2 in
-              olimpia|rioclaro|suzano|santoandre|default)
+              olimpia|rioclaro|suzano|santoandre|cordeiropolis|default)
                 kill -9 $(__pid $(__port $2))
                 ;;
 
               all)
-              sites=(olimpia rioclaro suzano santoandre default)
+              sites=(olimpia rioclaro suzano santoandre cordeiropolis default)
               for site in "${sites[@]}"
               do
                 pid=$(__pid $(__port $site))
@@ -1744,7 +1983,7 @@ __rails(){
             docker-compose rm -f -s -v $SITE
           else   
             case $2 in
-              olimpia|rioclaro|suzano|santoandre|demo)
+              olimpia|rioclaro|suzano|santoandre|cordeiropolis|demo)
                 docker-compose stop $2
                 ;;
 
@@ -1804,13 +2043,13 @@ __rails(){
       if [ -z $pid ]; then
         if [ "$last" == "true" ]; then
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --strike --red "$service";
+            ansi --black-intense "$service";
           else  
             ansi --red "$service";
           fi
         else  
           if [ $(__contains "$services_disabled" "$service") == "y" ]; then
-            ansi --no-newline --strike --red "$service";
+            ansi --no-newline --black-intense "$service";
           else  
             ansi --no-newline --red "$service";
           fi 
@@ -1824,7 +2063,7 @@ __services(){
   local services=(mysql redis mailcatcher sidekiq ngrok rails)
   case $action in
     help|h|--help|-h)
-      ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
+      ansi --white-intense "Crafted (c) 2018~2020 by InMov - Intelligence in Movement"
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
       __pr info "services " "[ls/check]"
@@ -1834,14 +2073,17 @@ __services(){
       __pr 
       __pr info "obs: " "redis and mysql are not involved when all is specified"
       __pr 
+      ansi --no-newline --white "homepage " 
+      ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
+      ansi --white ""
       ;;
     ls|check)
       ! test -d tmp/devtools && mkdir -p tmp/devtools
       if test -f tmp/devtools/${SITE}.procfile; then
         foreman check -f tmp/devtools/${SITE}.procfile
       else
-        cat Procfile.services > tmp/devtools/${SITE}.procfile.temp
-        cat Procfile | grep $SITE | sed "s/$SITE/rails/" >> tmp/devtools/${SITE}.procfile.temp
+        cat Procfile | grep $SITE | sed "s/$SITE/rails/" > tmp/devtools/${SITE}.procfile.temp
+        cat Procfile.services | tail -3 >> tmp/devtools/${SITE}.procfile.temp
         sed 's@\$PORT@'"$PORT"'@' tmp/devtools/${SITE}.procfile.temp > tmp/devtools/${SITE}.procfile
         rm -rf tmp/devtools/${SITE}.procfile.temp
         foreman check -f tmp/devtools/${SITE}.procfile
@@ -1855,8 +2097,8 @@ __services(){
         all)
           ! test -d tmp/devtools && mkdir -p tmp/devtools
           if ! test -f tmp/devtools/${SITE}.procfile; then
-            cat Procfile.services > tmp/devtools/${SITE}.procfile.temp
-            cat Procfile | grep $SITE | sed "s/$SITE/rails/" >> tmp/devtools/${SITE}.procfile.temp
+            cat Procfile | grep $SITE | sed "s/$SITE/rails/" > tmp/devtools/${SITE}.procfile.temp
+            cat Procfile.services | tail -3 >> tmp/devtools/${SITE}.procfile.temp
             sed 's@\$PORT@'"$PORT"'@' tmp/devtools/${SITE}.procfile.temp > tmp/devtools/${SITE}.procfile
             rm -rf tmp/devtools/${SITE}.procfile.temp
           fi  
@@ -1867,12 +2109,13 @@ __services(){
       if [ -z "$2" ]; then
         ! test -d tmp/devtools && mkdir -p tmp/devtools
         if ! test -f tmp/devtools/${SITE}.procfile; then
-          cat Procfile.services > tmp/devtools/${SITE}.procfile.temp
-          cat Procfile | grep $SITE | sed "s/$SITE/rails/" >> tmp/devtools/${SITE}.procfile.temp
+          cat Procfile | grep $SITE | sed "s/$SITE/rails/" > tmp/devtools/${SITE}.procfile.temp
+          cat Procfile.services | tail -3 >> tmp/devtools/${SITE}.procfile.temp
           sed 's@\$PORT@'"$PORT"'@' tmp/devtools/${SITE}.procfile.temp > tmp/devtools/${SITE}.procfile
           rm -rf tmp/devtools/${SITE}.procfile.temp
         fi  
         db migrate:status
+        (! test -d tmp/pids) && mkdir -p tmp/pids
         foreman start all -f tmp/devtools/${SITE}.procfile
       fi 
       ;;   
@@ -1932,6 +2175,7 @@ __services(){
                 __$s stop
               fi
             done
+            (! test -d tmp/pids) && mkdir -p tmp/pids
             foreman start all -f tmp/devtools/${SITE}.procfile
           else  
             ansi --no-newline --green-intense "==> "; ansi --red "Procfile.{$SITE} does not exist"
@@ -1957,6 +2201,9 @@ __services(){
       do
         if [ $(__contains "$site_services" "$p") == "y" ]; then
           sed -e "/#$p/ s/^#$p*/$p/" tmp/devtools/${SITE}.procfile > temp && rm -f "tmp/devtools/${SITE}.procfile" && mv temp "tmp/devtools/${SITE}.procfile"
+          if [ "$p" == "mailcatcher" ]; then
+            export MAILCATCHER_ENV=LOCALHOST
+          fi
         else 
           ansi --no-newline --green-intense "==> "; ansi --red "Procfile.${SITE} does not contain this '${p}' service"
           ansi ""
@@ -1974,6 +2221,9 @@ __services(){
       do
         if [ $(__contains "$site_services" "$p") == "y" ]; then
           sed -e "/$p/ s/^#*/#/" tmp/devtools/${SITE}.procfile > temp && rm -f "tmp/devtools/${SITE}.procfile" && mv temp "tmp/devtools/${SITE}.procfile"
+          if [ "$p" == "mailcatcher" ]; then
+            unset MAILCATCHER_ENV
+          fi
         else 
           ansi --no-newline --green-intense "==> "; ansi --red "Procfile.${SITE} does not contain this '${p}' service"
           ansi ""
@@ -2032,8 +2282,8 @@ __services(){
       local sites_disabled
       ! test -d tmp/devtools && mkdir -p tmp/devtools
       if ! test -f tmp/devtools/${SITE}.procfile; then
-        cat Procfile.services > tmp/devtools/${SITE}.procfile.temp
-        cat Procfile | grep $SITE | sed "s/$SITE/rails/" >> tmp/devtools/${SITE}.procfile.temp
+        cat Procfile | grep $SITE | sed "s/$SITE/rails/" > tmp/devtools/${SITE}.procfile.temp
+        cat Procfile.services | tail -3 >> tmp/devtools/${SITE}.procfile.temp
         sed 's@\$PORT@'"$PORT"'@' tmp/devtools/${SITE}.procfile.temp > tmp/devtools/${SITE}.procfile
         rm -rf tmp/devtools/${SITE}.procfile.temp
       fi  
@@ -2074,6 +2324,15 @@ __services(){
 services.status(){
   __services print
 }
+services.refs(){  
+  ansi --white "services:"
+  ansi --no-newline "  mailcatcher  ";ansi --underline --green "https://github.com/sj26/mailcatcher" 
+  ansi --no-newline "  mysql        ";ansi --underline --green "https://dev.mysql.com/doc/refman/5.7/en/" 
+  ansi --no-newline "  ngrok        ";ansi --underline --green "https://ngrok.com" 
+  ansi --no-newline "  redis        ";ansi --underline --green "https://redis.io/commands" 
+  ansi --no-newline "  rails        ";ansi --underline --green "https://apidock.com/rails" 
+  ansi --no-newline "  sidekiq      ";ansi --underline --green "https://github.com/mperham/sidekiq" 
+}
 
 
 db(){
@@ -2081,21 +2340,27 @@ db(){
   if [ $? -eq 0 ]; then
   case $1 in
     help|h|--help|-h)
-      ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
+      ansi --white-intense "Crafted (c) 2018~2020 by InMov - Intelligence in Movement"
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
       __pr info "db " "[set dbname || init || preptest || drop [all] || create || migrate migrate:status || seed]"
-      __pr info "db " "[databases || tables || socket || connect]"
+      __pr info "db " "[databases || tables || socket || conn/connect]"
       __pr info "db " "[api [dump/export || import]]"
       __pr info "db " "[backups || download [backupfile] || update [all]]"
       __pr info "db " "[dumps/ls || import [dumpfile] || update [all]]"
       __pr 
+      ansi --no-newline --white "homepage " 
+      ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
+      ansi --white ""
       ;; 
 
     --version|-v|v)  
       ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
+      ansi --no-newline --white "homepage " 
+      ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
+      ansi --white ""
       ;;
 
     api)
@@ -2554,6 +2819,11 @@ db(){
                   __import $(basename $file)
                   __update_db_stats
                 fi
+                if [ $(__contains "$file" "cordeiropolis") == "y" ]; then
+                  site set cordeiropolis
+                  __import $(basename $file)
+                  __update_db_stats
+                fi
                 if [ $(__contains "$file" "demo") == "y" ]; then
                   site set demo
                   __import $(basename $file)
@@ -2590,6 +2860,11 @@ db(){
                 fi
                 if [ $(__contains "$file" "santoandre") == "y" ]; then
                   site set santoandre
+                  __import_docker $(basename $file)
+                  __update_db_stats
+                fi
+                if [ $(__contains "$file" "cordeiropolis") == "y" ]; then
+                  site set cordeiropolis
                   __import_docker $(basename $file)
                   __update_db_stats
                 fi
@@ -2798,6 +3073,44 @@ db(){
           unset IFS
           ;;
 
+        cordeiropolis)  
+          filename_orig="${file[1]}"
+          if [ -z "$2" ]; then
+            files=$(echo 'sudo -i eybackup -e mysql -l obras' | ssh -t deploy@ec2-54-232-90-58.sa-east-1.compute.amazonaws.com | tail -2 | grep gz)
+          else  
+            files=$(echo 'sudo -i eybackup -e mysql -l obras' | ssh -t deploy@ec2-54-232-90-58.sa-east-1.compute.amazonaws.com | grep gz | grep "$2:obras")
+          fi
+          IFS=' '
+          read -ra file <<< "$files"
+          filenumber=${file[0]}
+          filename_orig="${file[1]}"
+
+
+          ansi --no-newline --green-intense "==> "; ansi --no-newline --white-intense "Listing ";ansi --white-intense "$filenumber"
+          echo "sudo -i eybackup -e mysql -d $filenumber" | ssh -t deploy@ec2-54-232-90-58.sa-east-1.compute.amazonaws.com 
+          ansi --no-newline --green-intense "==> "; ansi --white-intense "Downloading "$filename_orig
+          scp deploy@ec2-54-232-90-58.sa-east-1.compute.amazonaws.com:/mnt/tmp/$filename_orig .
+          IFS='T'
+          read -ra file1 <<< "${file[1]}"
+
+          prefix="${file1[0]}"
+          IFS='.'
+          read -ra file2 <<< "${file1[1]}"
+          filename=$prefix'_'${file2[0]}'_'$SITE
+
+          ansi --no-newline --green-intense "==> "; ansi --no-newline --white-intense "Renaming to ";ansi --white-intense "$filename.sql.gz"
+          mv "$filename_orig" "$filename.sql.gz"
+          ansi --no-newline --green-intense "==> "; ansi --no-newline --white-intense "Ungzipping ";ansi --white-intense "$filename.sql.gz"
+          pv "$filename.sql.gz" | gunzip > "$filename.sql"
+          rm -rf "$filename.sql~"
+          ansi --no-newline --green-intense "==> "; ansi --no-newline --white-intense "Cleaning ";ansi --white-intense "$filename.sql"
+          pv "$filename.sql" | sed '/^\/\*\!50112/d' > temp && rm -f "$filename.sql" && mv temp "$filename.sql"
+          ansi --no-newline --green-intense "==> "; ansi --no-newline --white-intense "Removing ";ansi --white-intense "$filename.sql.gz"
+          rm -f "$filename.sql.gz"
+          unset IFS
+          ;;
+
+
         demo)
           filename_orig="${file[1]}"
           if [ -z "$2" ]; then
@@ -2862,6 +3175,10 @@ db(){
     
         santoandre)  
           echo 'sudo -i eybackup -e mysql -l obras' | ssh -t deploy@ec2-52-67-134-57.sa-east-1.compute.amazonaws.com | grep -e 'Listing database backups for obras' -e 'backup(s) found' -e 'gz'
+          ;;
+
+        cordeiropolis)  
+          echo 'sudo -i eybackup -e mysql -l obras' | ssh -t deploy@ec2-54-232-90-58.sa-east-1.compute.amazonaws.com | grep -e 'Listing database backups for obras' -e 'backup(s) found' -e 'gz'
           ;;
     
         demo)
@@ -3015,8 +3332,10 @@ dbs.print_db(){
 dbs.set(){
   local site=$1
   case $1 in
-    olimpia|rioclaro|suzano|santoandre|demo)
-      spring stop
+    olimpia|rioclaro|suzano|santoandre|cordeiropolis|demo)
+      if hash spring 2>/dev/null; then
+        spring stop
+      fi
       set -o allexport
       . ./.env/development/$1
       set +o allexport
@@ -3129,25 +3448,36 @@ site(){
   if [ $? -eq 0 ]; then
   case $1 in
     help|h|--help|-h)
-      ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
+      ansi --white-intense "Crafted (c) 2018~2020 by InMov - Intelligence in Movement"
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
       __pr info "site " "[sitename || flags || set/unset flag|| env development/test]"
       __pr info "site " "[check/ls || start/stop [sitename/all] || console || test/test:system || rspec]"
       __pr info "site " "[mysql/ngrok/redis/mailcatcher/sidekiq start/stop/restart/status]"
       __pr info "site " "[dumps [activate dumpfile]]"
-      __pr info "site " "[db/mysql/redis conn/connect]"
+      __pr info "site " "[db/mysql/redis/trello/git conn/connect]"
       __pr info "site " "[conn/connect]"
       __pr info "site " "[stats]"
-      __pr info "site " "[rubycritic/rubocop [files]]"
+      __pr info "site " "[audit/brakeman/rubycritic/rubocop [files]]"
       __pr info "site " "[db:drop || db:create || db:migrate db:migrate:status || db:seed]"
+      __pr info "site " "[refs [flags/services/homologs/backups || obrasutils [tools/ssh]]"
       __pr 
+      ansi --no-newline --white "homepage " 
+      ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
+      ansi --white ""
       ;;
+
+    ref)
+      site.ref
+      ;;  
 
     --version|-v|v)  
       ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
+      ansi --no-newline --white "homepage " 
+      ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
+      ansi --white ""
       ;;
 
     $SITES_CASE)
@@ -3232,7 +3562,7 @@ site(){
     conn|connect)
       site.connect
       ;;
-    ngrok|mysql|redis|sidekiq|mailcatcher)
+    ngrok|mysql|redis|sidekiq|mailcatcher|trello|git)
       case $2 in
         start)
           __$1 start
@@ -3273,6 +3603,12 @@ site(){
                 ansi ""
               fi
               ;;
+            trello)
+              3llo;
+              ;;  
+            git)
+              lazygit;
+              ;;  
           esac 
           ;;      
 
@@ -3285,6 +3621,16 @@ site(){
     flags) 
       flags.status
       ;;
+
+    audit)
+      shift 
+      audit.run $*
+      ;;
+
+    brakeman)
+      shift 
+      brakeman.run $*
+      ;;  
 
     rubycritic)
       shift 
@@ -3356,6 +3702,10 @@ site(){
     site|status)
       site.status
       ;;  
+    refs)
+      shift
+      site.refs $*
+      ;;  
     *)
       __docker
       __update_db_stats_site
@@ -3370,7 +3720,24 @@ site(){
   esac
   fi
 }
+site.about(){
+  if [ -z $ABOUT ]; then
+    ansi --white-intense "Crafted (c) 2018~2020 by InMov - Intelligence in Movement"
+    ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
+    ansi --white "::"
+    ansi --white "Obras Utils is loaded, type 'init_obras' just once to start the session and then the site name."
+    ansi --white ""
+    ansi --white "Available sites:"
+    ansi --white " default, olimpia, rioclaro, suzano, santoandre, cordeiropolis, demo"
+    ansi --white ""
+    ansi --no-newline --white "Homepage: " 
+    ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
+    ansi --white ""
+    export ABOUT=true
+  fi
+}
 site.init(){
+  pushd . > /dev/null
   cd "$OBRAS"
   export SITE=$1
   export SITEPREV=$2
@@ -3390,6 +3757,7 @@ site.init(){
   unset RUBOCOP
   export HEADLESS=true
   __update_db_stats_site
+  popd > /dev/null
 }
 site.connect(){
   case $SITE in
@@ -3405,6 +3773,9 @@ site.connect(){
     santoandre)
       ssh -t deploy@ec2-52-67-134-57.sa-east-1.compute.amazonaws.com "cd /data/obras/current/ey_bundler_binstubs; exec \$SHELL -l"
       ;;
+    cordeiropolis)
+      ssh -t deploy@ec2-54-232-90-58.sa-east-1.compute.amazonaws.com "cd /data/obras/current/ey_bundler_binstubs; exec \$SHELL -l"
+      ;;
     demo)
       ssh -t deploy@ec2-54-232-113-149.sa-east-1.compute.amazonaws.com "cd /data/obras/current/ey_bundler_binstubs; exec \$SHELL -l"
       ;;
@@ -3413,6 +3784,89 @@ site.connect(){
       ansi ""
      ;;          
   esac 
+}
+site.refs(){ 
+  case $1 in 
+    obrasutils)
+      obras_utils.refs $2
+      ;;
+    flags)
+      flags.refs
+      ;;
+    services)
+      services.refs
+      ;; 
+    backups)
+      site.backups.refs
+      ;;
+    homologs)
+      site.homologs.refs
+      ;;     
+    *)
+      ansi --white "obras-devtools:" 
+      ansi --no-newline "  homepage ";ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
+      case $SITE in
+        demo)
+          ansi --white "demo:"
+          ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
+          ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/110323/backups" 
+          ansi --no-newline "  homolog  ";ansi --underline --green "https://demo.inmov.net.br" 
+          ;;
+        cordeiropolis)  
+          ansi --white "cordeiropolis:"
+          ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
+          ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/114763/backups" 
+          ansi --no-newline "  homolog  ";ansi --underline --green "https://homologcordeiropolis.inmov.net.br" 
+          ;;
+        olimpia)  
+          ansi --white "olimpia:"
+          ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
+          ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112642/backups" 
+          ansi --no-newline "  homolog  ";ansi --underline --green "https://homologolimpia.inmov.net.br" 
+          ;;
+        rioclaro)  
+          ansi --white "rioclaro:"
+          ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
+          ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112643/backups" 
+          ansi --no-newline "  homolog  ";ansi --underline --green "https://homologrioclaro.inmov.net.br" 
+          ;;
+        santoandre)  
+          ansi --white "santoandre:"
+          ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
+          ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112641/backups" 
+          ansi --no-newline "  homolog  ";ansi --underline --green "https://homologsantoandre.inmov.net.br" 
+          ;;
+        suzano)  
+          ansi --white "suzano:"
+          ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
+          ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112644/backups" 
+          ansi --no-newline "  homolog  ";ansi --underline --green "https://homologsuzano.inmov.net.br" 
+          ;;
+      esac
+      ;;
+  esac  
+}
+site.homologs.refs(){  
+  ansi --white "deploys:"
+  ansi --no-newline "  apps          ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
+  ansi --white "homologs:"
+  ansi --no-newline "  demo          ";ansi --underline --green "https://demo.inmov.net.br" 
+  ansi --no-newline "  cordeiropolis ";ansi --underline --green "https://homologcordeiropolis.inmov.net.br" 
+  ansi --no-newline "  olimpia       ";ansi --underline --green "https://homologolimpia.inmov.net.br" 
+  ansi --no-newline "  rioclaro      ";ansi --underline --green "https://homologrioclaro.inmov.net.br" 
+  ansi --no-newline "  santoandre    ";ansi --underline --green "https://homologsantoandre.inmov.net.br" 
+  ansi --no-newline "  suzano        ";ansi --underline --green "https://homologsuzano.inmov.net.br" 
+}
+site.backups.refs(){  
+  ansi --white "deploys:"
+  ansi --no-newline "  apps          ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
+  ansi --white "backups:"
+  ansi --no-newline "  demo          ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/110323/backups" 
+  ansi --no-newline "  cordeiropolis ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/114763/backups" 
+  ansi --no-newline "  olimpia       ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112642/backups" 
+  ansi --no-newline "  rioclaro      ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112643/backups" 
+  ansi --no-newline "  santoandre    ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112641/backups" 
+  ansi --no-newline "  suzano        ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112644/backups" 
 }
 site.status(){
   ansi --white --no-newline "site:   "
@@ -3432,4 +3886,6 @@ site.status(){
   fi
 }
 
-site.init demo
+
+site.about 
+site.init default

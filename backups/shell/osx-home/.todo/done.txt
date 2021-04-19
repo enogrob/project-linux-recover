@@ -100,3 +100,69 @@ x 2020-12-28 2020-12-28 ebook-learning-devise-for-rails
 x 2020-12-29 2020-12-28 project-inmov-obras +project +rails @rails
 x 2021-02-08 2021-02-08 research-obras-devtools +research @bash
 x 2021-02-11 2021-02-09 research-obras-devtools +research @bash
+x 2021-03-12 2021-03-12 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-12 2021-03-12 ruby-weekly +tutorial @ruby
+x 2021-03-12 2021-03-12 project-inmov-obras +project +rails @rails
+x 2021-03-15 2021-03-15 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-15 2021-03-13 krishnamurti-teachings +krishnamurti
+x 2021-03-15 2021-03-15 ebook-eloquent-ruby
+x 2021-03-15 2021-03-15 project-inmov-obras +project +rails @rails
+x 2021-03-15 2021-03-13 tutorial-onefile-rails-app +rails +tutorial @rails
+x 2021-03-15 2021-03-13 pragmaticstudio-ruby-object-model-and-metaprogramming +pragmaticstudio @ruby
+x 2021-03-16 2021-03-16 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-16 2021-03-16 ebook-affective-ruby +ebook @ruby
+x 2021-03-16 2021-03-16 tutorial-infranodus +tutorial
+x 2021-03-17 2021-03-17 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-17 2021-03-17 ebook-refactoring
+x 2021-03-17 2021-03-16 selectiontest-fox +job
+x 2021-03-18 2021-03-18 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-18 2021-03-18 ebook-design-patterns-in-ruby
+x 2021-03-19 2021-03-19 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-19 2021-03-19 ruby-weekly +tutorial @ruby
+x 2021-03-19 2021-03-19 ebook-the-rails-5-way
+x 2021-03-20 2021-03-15 project-inmov-obras +project +rails @rails
+x 2021-03-20 2021-03-20 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-20 2021-03-20 pragmaticstudio-ruby-object-model-and-metaprogramming +pragmaticstudio @ruby
+x 2021-03-21 2021-03-21 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-21 2021-03-20 krishnamurti-teachings +krishnamurti
+x 2021-03-21 2021-03-21 tutorial-rails-app-health +rails +tutorial @rails
+x 2021-03-22 2021-03-22 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-22 2021-03-22 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-22 2021-03-22 research-obras-devtools +research @bash
+x 2021-03-22 2021-03-22 ebook-eloquent-ruby
+x 2021-03-22 2021-03-22 udemy-mastering-devops +udemy @devops
+x 2021-03-22 2021-03-22 selectiontest-daitangroup +job @devops @java
+x 2021-03-22 2021-03-22 ebook-docker-for-rails-developers
+x 2021-03-23 2021-03-23 ebook-affective-ruby +ebook @ruby
+x 2021-03-23 2021-03-23 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-24 2021-03-24 krihnamurti-talks +krishnamurti
+x 2021-03-24 2021-03-24 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-24 2021-03-23 project-inmov-obras +project +rails @rails
+x 2021-03-24 2021-03-24 ebook-refactoring
+x 2021-03-25 2021-03-25 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-25 2021-03-25 ebook-design-patterns-in-ruby
+x 2021-03-26 2021-03-26 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-26 2021-03-26 ebook-the-rails-5-way
+x 2021-03-26 2021-03-26 ruby-weekly +tutorial @ruby
+x 2021-03-26 2021-03-25 project-inmov-obras +project +rails @rails
+x 2021-03-27 2021-03-27 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-28 2021-03-28 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-28 2021-03-28 tutorial-rails-app-health +rails +tutorial @rails
+x 2021-03-29 2021-03-29 research-obras-devtools +research @bash
+x 2021-03-29 2021-03-29 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-29 2021-03-29 ebook-eloquent-ruby
+x 2021-03-29 2021-03-29 project-inmov-obras +project +rails @rails
+x 2021-03-30 2021-03-30 krihnamurti-the-book-of-life +krishnamurti
+x 2021-03-30 2021-03-30 ebook-affective-ruby +ebook @ruby
+x 2021-03-31 2021-03-31 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-01 2021-04-01 research-obras-devtools +research @bash
+x 2021-04-01 2021-04-01 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-05 2021-04-05 research-obras-devtools +research @bash
+x 2021-04-05 2021-04-05 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-06 2021-04-06 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-07 2021-04-07 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-08 2021-04-08 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-09 2021-04-09 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-10 2021-04-10 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-13 2021-04-13 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-17 2021-04-17 krihnamurti-the-book-of-life +krishnamurti

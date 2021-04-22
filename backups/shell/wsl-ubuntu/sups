@@ -1,0 +1,5 @@
+#!/bin/bash
+sudo service --status-all |& grep redis-server
+sudo service --status-all |& grep mysql
+sudo service --status-all |& grep xrdp
+sudo service --status-all |& grep dbus

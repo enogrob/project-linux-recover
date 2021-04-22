@@ -1,0 +1,8 @@
+#!/bin/bash
+! pgrep dbus > /dev/null && sudo service dbus start > /dev/null
+! pgrep mysql > /dev/null && sudo service mysql start > /dev/null
+! pgrep redis-server > /dev/null && sudo service redis-server start > /dev/null
+if ! sudo service --status-all |& grep xrdp |& grep +  > /dev/null && test -f /var/run/xrdp/xrdp.pid; then
+  sudo rm -f /var/run/xrdp/xrdp.pid
+fi	
+! sudo service --status-all |& grep xrdp |& grep +  > /dev/null && sudo service xrdp start > /dev/null

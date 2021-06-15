@@ -412,6 +412,16 @@ $ cd /opt/RubyMine-*/bin
 $ ./rubymine.sh&
 ```
 
+* [x] Install [Code](https://code.visualstudio.com/) and reconfigure.
+Download it and install it accordingly:
+```shell
+$ sudo apt install software-properties-common apt-transport-https wget
+$ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+$ sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+$ sudo apt update
+$ sudo apt install code
+```
+
 * [x] Install [Eclipse](http://www.eclipse.org/downloads) and reconfigure.
 Download it and install it accordingly:
 ```shell
@@ -436,6 +446,12 @@ Install from Ubuntu Software `CompizConfig Settings Manager`.
 Set keymaps for <ctrl>-<shift> in `Windows Manager -> Grid -> Bindings`.
 Check `Cycle Through Multiple Sizes` in `Resize Actions` tab.
 Click in `Windows Manager` and in `Place Windows` unticked `Workarounds` and in `Placement Mode` select `Placeacross all outputs`. The Placement Mode `Smart` is the key for remembering your desired position.
+```shell
+$ sudo apt-get install compiz    
+$ sudo apt install ubuntu-unity-desktop
+$ sudo dpkg-reconfigure lightdm
+$ sudo reboot
+```
 
 * [x] Install [Skype](https://www.skype.com/en/get-skype/) and reconfigure.
 Download it and install it accordingly:

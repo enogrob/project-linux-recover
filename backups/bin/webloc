@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Test to be sure user supplied a parameter; error if not
+if [ $# -eq 0 ]; then
+    echo "Please supply the name of a .webloc file to open"
+    exit
+fi
+
+# Extract URL from webloc file
+URL=$(xmllint --xpath "string(//string)" "$1")
+
+# Open $URL in Firefox
+/usr/bin/google-chrome $URL &

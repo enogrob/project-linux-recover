@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Add the language server into the load path
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'lib'))
+# Add the vendored gems into the load path
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'vendor', 'hiera-eyaml', 'lib'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'vendor', 'yard', 'lib'))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), 'vendor', 'puppet-strings', 'lib'))
+
+require 'puppet_languageserver_sidecar'
+
+PuppetLanguageServerSidecar.init_puppet_sidecar(PuppetLanguageServerSidecar::CommandLineParser.parse(ARGV))
+PuppetLanguageServerSidecar.execute_and_output(PuppetLanguageServerSidecar::CommandLineParser.parse(ARGV))

@@ -1,0 +1,681 @@
+{
+	"name": "puppet-vscode",
+	"displayName": "Puppet",
+	"description": "Official Puppet VSCode extension. Provides full Puppet DSL intellisense, syntax highlighting, Puppet command support, Puppet node graphs, and much more",
+	"version": "1.4.0",
+	"editorComponents": {
+		"editorServices": {
+			"release": "1.3.0"
+		},
+		"editorSyntax": {
+			"release": "1.3.7"
+		}
+	},
+	"publisher": "puppet",
+	"license": "SEE LICENSE IN LICENSE.txt",
+	"icon": "images/puppet-vscode-sm.png",
+	"aiKey": "147f322c-ecdc-4db2-a818-da8be01f07f5",
+	"galleryBanner": {
+		"color": "#000000",
+		"theme": "dark"
+	},
+	"homepage": "https://github.com/puppetlabs/puppet-vscode",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/puppetlabs/puppet-vscode"
+	},
+	"bugs": {
+		"type": "git",
+		"url": "https://github.com/puppetlabs/puppet-vscode/issues"
+	},
+	"qna": "https://stackoverflow.com/questions/tagged/visual-studio-code+puppet",
+	"badges": [
+		{
+			"url": "https://travis-ci.com/puppetlabs/puppet-vscode.svg?branch=master",
+			"href": "https://travis-ci.com/puppetlabs/puppet-vscode",
+			"description": "Continuous integration (Travis)"
+		}
+	],
+	"engines": {
+		"vscode": "^1.38.0"
+	},
+	"categories": [
+		"Linters",
+		"Programming Languages",
+		"Snippets",
+		"Formatters",
+		"Debuggers"
+	],
+	"keywords": [
+		"puppet",
+		"puppet-lint",
+		"linters",
+		"snippet",
+		"language"
+	],
+	"activationEvents": [
+		"onLanguage:puppet",
+		"onLanguage:puppetfile",
+		"workspaceContains:**/*.pp",
+		"workspaceContains:**/*.epp",
+		"workspaceContains:**/Puppetfile",
+		"workspaceContains:**/lib/puppet",
+		"onCommand:extension.pdkNewModule"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "puppet",
+				"aliases": [
+					"Puppet",
+					"puppet"
+				],
+				"extensions": [
+					".pp",
+					".epp"
+				],
+				"configuration": "./languages/puppet-language-configuration.json"
+			},
+			{
+				"id": "puppetfile",
+				"aliases": [
+					"Puppetfile",
+					"PuppetFile"
+				],
+				"filenames": [
+					"Puppetfile"
+				],
+				"configuration": "./languages/puppetfile-language-configuration.json"
+			}
+		],
+		"jsonValidation": [
+			{
+				"fileMatch": "/metadata.json",
+				"url": "https://forgeapi.puppet.com/schemas/module.json"
+			},
+			{
+				"fileMatch": "tasks/*.json",
+				"url": "https://forgeapi.puppet.com/schemas/task.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "puppet",
+				"scopeName": "source.puppet",
+				"path": "./syntaxes/puppet.tmLanguage"
+			},
+			{
+				"language": "puppetfile",
+				"scopeName": "source.ruby",
+				"path": "./syntaxes/puppetfile.cson.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "puppet",
+				"path": "./snippets/keywords.snippets.json"
+			},
+			{
+				"language": "json",
+				"path": "./snippets/metadata.snippets.json"
+			},
+			{
+				"language": "puppetfile",
+				"path": "./snippets/puppetfile.snippets.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "extension.puppetShowConnectionLogs",
+				"category": "Puppet",
+				"title": "Show Connection Logs"
+			},
+			{
+				"command": "extension.pdkNewModule",
+				"category": "Puppet",
+				"title": "PDK New Module",
+				"icon": {
+					"dark": "images/puppet-dag-dark.svg",
+					"light": "images/puppet-dag-light.svg"
+				}
+			},
+			{
+				"command": "extension.pdkTestUnit",
+				"category": "Puppet",
+				"title": "PDK Test Unit"
+			},
+			{
+				"command": "extension.pdkValidate",
+				"category": "Puppet",
+				"title": "PDK Validate"
+			},
+			{
+				"command": "extension.pdkNewClass",
+				"category": "Puppet",
+				"title": "PDK New Class"
+			},
+			{
+				"command": "extension.pdkNewTask",
+				"category": "Puppet",
+				"title": "PDK New Task"
+			},
+			{
+				"command": "extension.pdkNewDefinedType",
+				"category": "Puppet",
+				"title": "PDK New Defined type"
+			},
+			{
+				"command": "extension.pdkNewFact",
+				"category": "Puppet",
+				"title": "PDK New Fact"
+			},
+			{
+				"command": "extension.pdkNewFunction",
+				"category": "Puppet",
+				"title": "PDK New Function"
+			},
+			{
+				"command": "extension.puppetResource",
+				"category": "Puppet",
+				"title": "Puppet Resource"
+			},
+			{
+				"command": "puppet.puppetShowNodeGraphToSide",
+				"title": "Open Node Graph to the Side",
+				"category": "Puppet",
+				"icon": {
+					"light": "./media/PreviewOnRightPane_16x.svg",
+					"dark": "./media/PreviewOnRightPane_16x_dark.svg"
+				}
+			},
+			{
+				"command": "puppet.refreshFacts",
+				"title": "Refresh",
+				"icon": {
+					"light": "assets/icons/light/sync.svg",
+					"dark": "assets/icons/dark/sync.svg"
+				}
+			},
+			{
+				"command": "puppet.goToPuppetfileDefinition",
+				"title": "Go to definition",
+				"enablement": "puppet:puppetfileEnabled",
+				"icon": {
+					"light": "assets/icons/light/sync.svg",
+					"dark": "assets/icons/dark/sync.svg"
+				}
+			},
+			{
+				"command": "puppet.refreshPuppetfileDependencies",
+				"title": "Refresh Puppetfile View",
+				"enablement": "puppet:puppetfileEnabled",
+				"icon": {
+					"light": "assets/icons/light/sync.svg",
+					"dark": "assets/icons/dark/sync.svg"
+				}
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "puppet-toolbar",
+					"title": "Puppet Toolbar",
+					"icon": "images/puppet-dag-dark.svg"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "puppetFacts",
+				"contents": "No facts found\n[Refresh](command:puppet.refreshFacts)"
+			},
+			{
+				"view": "puppetfile",
+				"contents": "No Puppetfile found\n[Refresh](command:puppet.refreshPuppetfileDependencies)",
+				"when": "puppet:puppetfileEnabled"
+			}
+		],
+		"views": {
+			"puppet-toolbar": [
+				{
+					"id": "puppetFacts",
+					"name": "Facts"
+				},
+				{
+					"id": "puppetfile",
+					"name": "Puppetfile",
+					"when": "puppet:puppetfileEnabled"
+				}
+			]
+		},
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "extension.puppetShowConnectionLogs"
+				},
+				{
+					"command": "extension.pdkNewModule"
+				},
+				{
+					"command": "extension.pdkTestUnit"
+				},
+				{
+					"command": "extension.pdkValidate"
+				},
+				{
+					"command": "extension.pdkNewClass"
+				},
+				{
+					"command": "extension.pdkNewTask"
+				},
+				{
+					"command": "extension.pdkNewDefinedType"
+				},
+				{
+					"command": "extension.pdkNewFact"
+				},
+				{
+					"command": "extension.pdkNewFunction"
+				},
+				{
+					"command": "extension.puppetResource",
+					"when": "editorLangId == 'puppet'"
+				},
+				{
+					"command": "puppet.puppetShowNodeGraphToSide",
+					"when": "editorLangId == 'puppet'"
+				}
+			],
+			"editor/title": [
+				{
+					"command": "extension.pdkNewModule",
+					"when": "config.puppet.titleBar.pdkNewModule.enable",
+					"group": "navigation@100"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewClass",
+					"group": "pdk@2"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewTask",
+					"group": "pdk@3"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewDefinedType",
+					"group": "pdk@4"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewFact",
+					"group": "pdk@5"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewFunction",
+					"group": "pdk@6"
+				},
+				{
+					"when": "editorLangId == 'puppet' ",
+					"command": "extension.pdkValidate",
+					"group": "pdk@7"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkTestUnit",
+					"group": "pdk@8"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "puppet.puppetShowNodeGraphToSide",
+					"group": "puppet"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.puppetResource",
+					"group": "puppet"
+				}
+			],
+			"editor/context": [
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewClass",
+					"group": "pdk@1"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewTask",
+					"group": "pdk@2"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewDefinedType",
+					"group": "pdk@3"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewFact",
+					"group": "pdk@4"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkNewFunction",
+					"group": "pdk@5"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkValidate",
+					"group": "pdk@6"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.pdkTestUnit",
+					"group": "pdk@7"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "puppet.puppetShowNodeGraphToSide",
+					"group": "puppet"
+				},
+				{
+					"when": "editorLangId == 'puppet'",
+					"command": "extension.puppetResource",
+					"group": "puppet"
+				}
+			],
+			"view/title": [
+				{
+					"command": "puppet.refreshFacts",
+					"when": "view == puppetFacts",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "puppet.goToPuppetfileDefinition",
+					"when": "view == puppetfile"
+				}
+			]
+		},
+		"configurationDefaults": {
+			"[puppet]": {
+				"editor.tabSize": 2,
+				"editor.insertSpaces": true,
+				"files.insertFinalNewline": true
+			}
+		},
+		"configuration": {
+			"type": "object",
+			"title": "Puppet",
+			"properties": {
+				"puppet.editorService.enable": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable/disable advanced Puppet Language Features"
+				},
+				"puppet.editorService.debugFilePath": {
+					"type": "string",
+					"default": "",
+					"description": "The absolute filepath where the Puppet Editor Service will output the debugging log. By default no logfile is generated"
+				},
+				"puppet.editorService.featureFlags": {
+					"type": "array",
+					"default": [],
+					"description": "An array of strings of experimental features to enable in the Puppet Editor Service"
+				},
+				"puppet.editorService.foldingRange.enable": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable/disable syntax aware code folding provider"
+				},
+				"puppet.editorService.foldingRange.showLastLine": {
+					"type": "boolean",
+					"default": false,
+					"description": "Show or hide the last line in code folding regions"
+				},
+				"puppet.editorService.formatOnType.enable": {
+					"type": "boolean",
+					"default": false,
+					"description": "Enable/disable the Puppet document on-type formatter, for example hashrocket alignment"
+				},
+				"puppet.editorService.formatOnType.maxFileSize": {
+					"type": "integer",
+					"default": 4096,
+					"minimum": 0,
+					"description": "Sets the maximum file size (in Bytes) that document on-type formatting will occur. Setting this to zero (0) will disable the file size check. Note that large file sizes can cause performance issues."
+				},
+				"puppet.editorService.hover.showMetadataInfo": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable or disable showing Puppet Module version information in the metadata.json file"
+				},
+				"puppet.editorService.loglevel": {
+					"type": "string",
+					"default": "normal",
+					"description": "Set the logging verbosity level for the Puppet Editor Service, with Debug producing the most output and Error producing the least",
+					"enum": [
+						"debug",
+						"error",
+						"normal",
+						"warning",
+						"verbose"
+					]
+				},
+				"puppet.editorService.protocol": {
+					"type": "string",
+					"default": "stdio",
+					"description": "The protocol used to communicate with the Puppet Editor Service. By default the local STDIO protocol is used.",
+					"enum": [
+						"stdio",
+						"tcp"
+					]
+				},
+				"puppet.editorService.puppet.confdir": {
+					"type": "string",
+					"default": "",
+					"description": "The Puppet configuration directory. See https://puppet.com/docs/puppet/latest/dirs_confdir.html for more information"
+				},
+				"puppet.editorService.puppet.environment": {
+					"type": "string",
+					"default": "",
+					"description": "The Puppet environment to use. See https://puppet.com/docs/puppet/latest/config_print.html#environments for more information"
+				},
+				"puppet.editorService.puppet.modulePath": {
+					"type": "string",
+					"default": "",
+					"description": "Additional module paths to use when starting the Editor Services. On Windows this is delimited with a semicolon, and on all other platforms, with a colon. For example C:\\Path1;C:\\Path2"
+				},
+				"puppet.editorService.puppet.vardir": {
+					"type": "string",
+					"default": "",
+					"description": "The Puppet cache directory. See https://puppet.com/docs/puppet/latest/dirs_vardir.html for more information"
+				},
+				"puppet.editorService.puppet.version": {
+					"type": "string",
+					"default": "",
+					"description": "The version of Puppet to use. For example '5.4.0'. This is generally only applicable when using the PDK installation type. If Puppet Editor Services is unable to use this version, it will default to the latest available version of Puppet."
+				},
+				"puppet.editorService.tcp.address": {
+					"type": "string",
+					"description": "The IP address or hostname of the remote Puppet Editor Service to connect to, for example 'computer.domain' or '192.168.0.1'. Only applicable when the editorService.protocol is set to tcp"
+				},
+				"puppet.validate.resolvePuppetfiles": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable/disable using dependency resolution for Puppetfiles"
+				},
+				"puppet.editorService.tcp.port": {
+					"type": "integer",
+					"description": "The TCP Port of the remote Puppet Editor Service to connect to. Only applicable when the editorService.protocol is set to tcp"
+				},
+				"puppet.editorService.timeout": {
+					"type": "integer",
+					"default": 10,
+					"description": "The timeout to connect to the Puppet Editor Service"
+				},
+				"puppet.format.enable": {
+					"type": "boolean",
+					"scope": "window",
+					"default": true,
+					"description": "Enable/disable the Puppet document formatter"
+				},
+				"puppet.installDirectory": {
+					"type": "string",
+					"markdownDescription": "The fully qualified path to the Puppet install directory. This can be a PDK or Puppet Agent installation. For example: 'C:\\Program Files\\Puppet Labs\\Puppet' or '/opt/puppetlabs/puppet'. If this is not set the extension will attempt to detect the installation directory. Do **not** use when `#puppet.installType#` is set to `auto`"
+				},
+				"puppet.installType": {
+					"type": "string",
+					"default": "auto",
+					"markdownDescription": "The type of Puppet installation. Either the Puppet Development Kit (pdk) or the Puppet Agent (agent). Choose `auto` to have the extension detect which to use automatically based on default install locations",
+					"enum": [
+						"auto",
+						"pdk",
+						"agent"
+					],
+					"enumDescriptions": [
+						"The exention will use the PDK or the Puppet Agent based on default install locations. When both are present, it will use the PDK",
+						"Use the PDK as an installation source",
+						"Use the Puppet Agent as an installation source"
+					]
+				},
+				"puppet.notification.nodeGraph": {
+					"type": "string",
+					"default": "messagebox",
+					"description": "The type of notification used when a node graph is being generated. Default value of messagebox",
+					"enum": [
+						"messagebox",
+						"statusbar",
+						"none"
+					]
+				},
+				"puppet.notification.puppetResource": {
+					"type": "string",
+					"default": "messagebox",
+					"description": "The type of notification used when a running Puppet Resouce. Default value of messagebox",
+					"enum": [
+						"messagebox",
+						"statusbar",
+						"none"
+					]
+				},
+				"puppet.pdk.checkVersion": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable/disable checking if installed PDK version is latest"
+				},
+				"puppet.titleBar.pdkNewModule.enable": {
+					"type": "boolean",
+					"default": true,
+					"description": "Enable/disable the PDK New Module icon in the Editor Title Bar"
+				}
+			}
+		},
+		"breakpoints": [
+			{
+				"language": "puppet"
+			}
+		],
+		"debuggers": [
+			{
+				"type": "Puppet",
+				"label": "Puppet Debugger",
+				"languages": [
+					"puppet"
+				],
+				"configurationSnippets": [
+					{
+						"label": "Puppet: Apply Current File",
+						"description": "Apply current file (in active editor window) under debugger",
+						"body": {
+							"type": "Puppet",
+							"request": "launch",
+							"name": "Puppet Apply current file",
+							"manifest": "^\"\\${file}\"",
+							"args": [],
+							"noop": true,
+							"cwd": "^\"\\${file}\""
+						}
+					}
+				],
+				"configurationAttributes": {
+					"launch": {
+						"properties": {
+							"program": {
+								"type": "string",
+								"description": "Deprecated. Please use the 'manifest' property instead to specify the absolute path to the Puppet manifest to launch under the debugger."
+							},
+							"manifest": {
+								"type": "string",
+								"description": "Optional: Absolute path to the Puppet manifest to launch under the debugger."
+							},
+							"noop": {
+								"type": "boolean",
+								"description": "Optional: Whether the the Puppet run is in NoOp mode. Default is true.",
+								"default": true
+							},
+							"args": {
+								"type": "array",
+								"description": "Command line arguments to pass to Puppet.",
+								"items": {
+									"type": "string"
+								},
+								"default": []
+							},
+							"cwd": {
+								"type": "string",
+								"description": "Absolute path to the working directory. Default is the current workspace.",
+								"default": "${workspaceRoot}"
+							}
+						}
+					}
+				}
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "pwsh -file ./build.ps1 build",
+		"compile": "tsc -p ./",
+		"build": "pwsh -file ./build.ps1",
+		"watch": "npm run build && tsc -watch -p ./",
+		"pretest": "npm run compile",
+		"test": "node ./out/test/runtest.js",
+		"format": "prettier --write ./**/*.{ts,js,json}",
+		"lint": "eslint --ext .ts src",
+		"fix": "eslint --fix --ext .ts src"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^12.0.8",
+		"@types/vscode": "^1.38.0",
+		"@typescript-eslint/eslint-plugin": "^5.0.0",
+		"@typescript-eslint/parser": "^5.0.0",
+		"cytoscape": "^3.14.0",
+		"eslint": "^7.0.0",
+		"eslint-config-prettier": "^6.11.0",
+		"eslint-plugin-prettier": "^3.1.3",
+		"glob": "^7.1.4",
+		"mocha": "^9.1.2",
+		"prettier": "^2.0.5",
+		"typescript": "^3.5.2",
+		"vsce": "^1.93.0",
+		"vscode-test": "^1.0.2"
+	},
+	"dependencies": {
+		"axios": "0.21.2",
+		"jsonc-parser": "~2.1.0",
+		"vscode-debugadapter": "^1.19.0",
+		"vscode-debugprotocol": "^1.19.0",
+		"vscode-extension-telemetry": "0.1.2",
+		"vscode-languageclient": "^5.2.1"
+	},
+	"__metadata": {
+		"id": "6888a303-8912-4fe1-8e83-56b76ffdaf42",
+		"publisherId": "06764220-6d77-431b-9760-dc62ae7376e4",
+		"publisherDisplayName": "puppet",
+		"installedTimestamp": 1639305449030
+	}
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+  <Metadata>
+    <Identity Language="en-US" Id="puppet-vscode" Version="1.4.0" Publisher="puppet"  />
+    <DisplayName>Puppet</DisplayName>
+    <Description xml:space="preserve">Official Puppet VSCode extension. Provides full Puppet DSL intellisense, syntax highlighting, Puppet command support, Puppet node graphs, and much more</Description>
+    <Tags>puppet,puppet-lint,linters,snippet,language,debuggers,json,Puppet,__ext_pp,__ext_epp,puppetfile,Puppetfile,PuppetFile,javascript,node</Tags>
+    <Categories>Linters,Programming Languages,Snippets,Formatters,Debuggers</Categories>
+    <GalleryFlags>Public</GalleryFlags>
+    <Badges><Badge Link="https://travis-ci.com/puppetlabs/puppet-vscode" ImgUri="https://travis-ci.com/puppetlabs/puppet-vscode.svg?branch=master" Description="Continuous integration (Travis)" /></Badges>
+    <Properties>
+      <Property Id="Microsoft.VisualStudio.Code.Engine" Value="^1.38.0" />
+      <Property Id="Microsoft.VisualStudio.Code.ExtensionDependencies" Value="" />
+      <Property Id="Microsoft.VisualStudio.Code.ExtensionPack" Value="" />
+      <Property Id="Microsoft.VisualStudio.Code.ExtensionKind" Value="workspace" />
+      <Property Id="Microsoft.VisualStudio.Code.LocalizedLanguages" Value="" />
+      
+        <Property Id="Microsoft.VisualStudio.Services.Links.Source" Value="https://github.com/puppetlabs/puppet-vscode.git" />
+        <Property Id="Microsoft.VisualStudio.Services.Links.Getstarted" Value="https://github.com/puppetlabs/puppet-vscode.git" />
+        
+          <Property Id="Microsoft.VisualStudio.Services.Links.GitHub" Value="https://github.com/puppetlabs/puppet-vscode.git" />
+        
+      
+      <Property Id="Microsoft.VisualStudio.Services.Links.Support" Value="https://github.com/puppetlabs/puppet-vscode/issues" />
+      <Property Id="Microsoft.VisualStudio.Services.Links.Learn" Value="https://github.com/puppetlabs/puppet-vscode" />
+      <Property Id="Microsoft.VisualStudio.Services.Branding.Color" Value="#000000" />
+      <Property Id="Microsoft.VisualStudio.Services.Branding.Theme" Value="dark" />
+      <Property Id="Microsoft.VisualStudio.Services.GitHubFlavoredMarkdown" Value="true" />
+      
+      <Property Id="Microsoft.VisualStudio.Services.CustomerQnALink" Value="https://stackoverflow.com/questions/tagged/visual-studio-code+puppet" />
+      
+    </Properties>
+    
+    <Icon>extension/images/puppet-vscode-sm.png</Icon>
+  </Metadata>
+  <Installation>
+    <InstallationTarget Id="Microsoft.VisualStudio.Code"/>
+  </Installation>
+  <Dependencies/>
+  <Assets>
+    <Asset Type="Microsoft.VisualStudio.Code.Manifest" Path="extension/package.json" Addressable="true" />
+    <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="extension/README.md" Addressable="true" /><Asset Type="Microsoft.VisualStudio.Services.Content.Changelog" Path="extension/CHANGELOG.md" Addressable="true" /><Asset Type="Microsoft.VisualStudio.Services.Icons.Default" Path="extension/images/puppet-vscode-sm.png" Addressable="true" />
+  </Assets>
+</PackageManifest>

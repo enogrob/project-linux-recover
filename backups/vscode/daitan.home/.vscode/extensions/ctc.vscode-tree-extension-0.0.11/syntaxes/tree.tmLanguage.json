@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "tree",
+  "scopeName": "source.tree",
+  "fileTypes": [
+    "tree"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#variables"
+    },
+    {
+      "include": "#keywords"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "match": "(?<=├──|└──)[^\/]+",          
+          "name": "keyword.filename"
+        }       
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "match": "(├──|│|└──)",          
+          "name": "variable.trunk.tree"
+        }       
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.documentation.tree",
+          "match": "\/\/.*"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<% if group.length > 0 -%>
+**<%= group_name %>**
+
+<% if priv -%>
+_Public <%= group_name %>_
+
+<% group.each do |item| -%>
+<% unless item[:private] -%>
+* [`<%= item[:name] %>`](#<%= item[:link] %>): <%= item[:desc] %>
+<% end -%>
+<% end -%>
+
+_Private <%= group_name %>_
+
+<% group.each do |item| -%>
+<% if item[:private] -%>
+* `<%= item[:name] %>`: <%= item[:desc] %>
+<% end -%>
+<% end -%>
+<% else -%>
+<% group.each do |item| -%>
+* [`<%= item[:name] %>`](#<%= item[:link] %>): <%= item[:desc] %>
+<% end -%>
+<% end -%>
+
+<% end -%>

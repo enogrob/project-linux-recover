@@ -2,8 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# set -x
+
 # git tab completion
-test -s /usr/local/etc/bash_completion.d/git-completion.bash && source /usr/local/etc/bash_completion.d/git-completion.bash
+# test -s /usr/local/etc/bash_completion.d/git-completion.bash && source /usr/local/etc/bash_completion.d/git-completion.bash
 test -s /usr/local/etc/bash_completion.d/git-prompt.sh && source /usr/local/etc/bash_completion.d/git-prompt.sh
 
 # If not running interactively, don't do anything
@@ -61,7 +63,6 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-
 if [ "$color_prompt" = yes ]; then
     # override default virtualenv indicator in prompt
     VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -102,7 +103,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
     alias diff='diff --color=auto'
-    alias ip='ip --color=auto'
+    # alias ip='ip --color=auto'
 
     export LESS_TERMCAP_mb=$'\E[1;31m'     # begin blink
     export LESS_TERMCAP_md=$'\E[1;36m'     # begin bold
@@ -113,18 +114,28 @@ if [ -x /usr/bin/dircolors ]; then
     export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 fi
 
-# colored GCC warnings and errors
+# colored GCC warnings and errors and EDITOR
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+export EDITOR=vim
 
 # some more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 alias google-chrome='google-chrome --password-store=basic'
-alias tree='tree -C -L 2'
 alias lastrails='gem search rails | grep "^rails "'
 alias lastruby='curl -s https://rubies.io/api/normal | jq'
-# alias git='hub'
+alias centos7='docker run --name=centos7 -t -i --rm centos:7 bash'
+alias centos8='docker run --name=centos8 -t -i --rm centos:latest bash'
+alias debian11='docker run --name=debian11 -t -i --rm debian:11 bash'
+alias git='hub'
+
+# aliases docker
+alias dc='docker-compose'
+alias dk='docker'
+alias dkc='docker container'
+alias dki='docker image'
+alias dkis='docker images'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -162,7 +173,7 @@ test -s "$HOME/.kiex/elixirs/elixir-1.12.1.env" && source "$HOME/.kiex/elixirs/e
 # env variables
 
 # trash-cli ~/.local/share/Trash/
-export PATH="$PATH":~/.local/bin
+export PATH="$PATH":.:~/.local/bin
 
 # asdf
 source $HOME/.asdf/asdf.sh
@@ -171,56 +182,58 @@ source $HOME/.asdf/completions/asdf.bash
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-# daitan
-alias kubectl='microk8s.kubectl'
-alias fixroute='sudo ip route change 10.127.20.0/24 via 10.227.130.1 && sudo ip route change 10.127.130.0/24 via 10.227.130.1'
-#alias fixroute='sudo ip route del 10.127.130.0/24 via 192.168.7.1; sudo ip route del 10.127.20.0/24 via 192.168.7.1
-vpn(){
-    if ! test -f /usr/local/bin/ansi; then
-      echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"ansi\" \033[0m"
-      echo ""
-      curl -OL git.io/ansi
-      chmod 755 ansi
-      sudo mv ansi /usr/local/bin/
-    fi 
-    export VPN_VERSION='1.0'
-    case $1 in
-      --version|-v|v|version)
-        ansi --white-intense "Crafted (c) 2021 by Daitan"
-        ansi --white --no-newline "Vpn ";ansi --white-intense $VPN_VERSION
-        ansi --white "::"
-        ansi --no-newline --white "homepage "
-        ansi --green --underline "https://github.com/enogrob/vpn"
-        ansi --white ""
-        ;;
-      help|h|--help|-h)
-        ansi --white-intense "Crafted (c) 2021 by Daitan"
-        ansi --white --no-newline "Vpn ";ansi --white-intense $VPN_VERSION
-        ansi --white "::"
-        ansi --cyan-intense "vpn " "[on/off/status]"
-        ansi --cyan-intense "vpn " "[start/stoken]"
-        ansi --no-newline --white "homepage " 
-        ansi --underline --green "https://github.com/enogrob/vpn" 
-        ansi --white ""
-        ;;
-      start)
-        /opt/paloaltonetworks/globalprotect/PanGPA start&
-        ;;
-      stoken)
-        stoken-gui&
-        ;;
-      on)
-        globalprotect connect -p wr.alameda.windriver.com && fixroute && fixroute
-        ;;
-      off)
-        globalprotect disconnect
-        ;;
-      *)
-        globalprotect show --status
-        ;;  
-    esac
+
+title() {
+    # Set terminal tab title. Usage: title "new tab name"
+    prefix=${PS1%%\\a*}                  # Everything before: \a
+    search=${prefix##*;}                 # Eeverything after: ;
+    esearch="${search//\\/\\\\}"         # Change \ to \\ in old title
+    PS1="${PS1/$esearch/$@}"             # Search and replace old with new
 }
 
+if ! test -f /usr/local/bin/ansi; then
+  echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"ansi\" \033[0m"
+  echo ""
+  curl -OL git.io/ansi
+  chmod 755 ansi
+  sudo mv ansi /usr/local/bin/
+fi 
+
+# tilix
+[[ $TERMINIX_ID || $VTE_VERSION ]] && source /etc/profile.d/vte.sh
+
+alias kubectl='microk8s.kubectl'
+alias k='microk8s.kubectl'
+source <(kubectl completion bash) # setup autocomplete in bash into the current shell, bash-completion package should be installed first.
+complete -F __start_kubectl k
+alias kc='kubectl apply -f https://k8smastery.com/shpod.yaml`' 
+alias ka='kubectl attach --namespace=shpod -ti shpod' 
+alias kd='kubectl delete -f https://k8smastery.com/shpod.yaml`' 
+alias pbcopy='xclip -selection clipboard < ~/.ssh/id_rsa.pub'
+alias token='echo $(echo betoz23 | stoken | sed 's/[^0-9]*//g')'
+unalias projects
+
+source ~/venv/bin/activate
+source ~/.local/bin/bashmarks.sh
+
 # goto Today
-tdy
-title
+# tdy
+
+# Source goto
+test -f ~/Projects/goto/goto.sh && source ~/Projects/goto/goto.sh
+# Source daitam
+export STOKENPASS=betoz23
+
+# vboxmanage completion
+test -f $HOME/THINGS_HOME/Projects/vboxmanage-bash-completion/VBoxManage && source $HOME/THINGS_HOME/Projects/vboxmanage-bash-completion/VBoxManage 
+
+# site manager
+test -f /home/rnogueira/.site && source /home/rnogueira/.site
+
+# Debian Build Environment
+export TOOL_HOME=~/DebianBuild
+export WORKSPACE_HOME=~/DebianBuildWorkspace
+test -f $TOOL_HOME/tools/import-stx && pushd $TOOL_HOME/tools && source $TOOL_HOME/tools/import-stx && popd
+
+# Puppet Agent
+export PATH=$PATH:/opt/puppetlabs/puppet/bin

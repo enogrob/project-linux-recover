@@ -158,7 +158,9 @@ if ! shopt -oq posix; then
 fi
 
 # today
-test -s  "$HOME/.todayrc.sh" && source "$HOME/.todayrc.sh"
+#test -s  "$HOME/.todayrc.sh" && source "$HOME/.todayrc.sh"
+test -f ~/Projects/project-today-manager/today && source ~/Projects/project-today-manager/today
+test -f ~/Projects/project-tag-manager/tag && source ~/Projects/project-tag-manager/tag
 
 # erlang
 test -s $HOME/.kerl/24.0/activate && source $HOME/.kerl/24.0/activate
@@ -211,13 +213,9 @@ alias ka='kubectl attach --namespace=shpod -ti shpod'
 alias kd='kubectl delete -f https://k8smastery.com/shpod.yaml`' 
 alias pbcopy='xclip -selection clipboard < ~/.ssh/id_rsa.pub'
 alias token='echo $(echo betoz23 | stoken | sed 's/[^0-9]*//g')'
-unalias projects
 
 source ~/venv/bin/activate
 source ~/.local/bin/bashmarks.sh
-
-# goto Today
-# tdy
 
 # Source goto
 test -f ~/Projects/goto/goto.sh && source ~/Projects/goto/goto.sh
@@ -228,12 +226,15 @@ export STOKENPASS=betoz23
 test -f $HOME/THINGS_HOME/Projects/vboxmanage-bash-completion/VBoxManage && source $HOME/THINGS_HOME/Projects/vboxmanage-bash-completion/VBoxManage 
 
 # site manager
-test -f /home/rnogueira/.site && source /home/rnogueira/.site
+test -f ~/Projects/project-site-manager/site && source ~/Projects/project-site-manager/site
 
 # Debian Build Environment
 export TOOL_HOME=~/DebianBuild
 export WORKSPACE_HOME=~/DebianBuildWorkspace
+export PROJECT=stx-deb-bld-1
+export MY_REPO_ROOT_DIR=/localdisk/$USER/localdisk/designer/$USER/$PROJECT
+export MY_BUILD_DIR=/localdisk/$USER/localdisk/loadbuild/$USER/$PROJECT
 test -f $TOOL_HOME/tools/import-stx && pushd $TOOL_HOME/tools && source $TOOL_HOME/tools/import-stx && popd
 
 # Puppet Agent
-export PATH=$PATH:/opt/puppetlabs/puppet/bin
+export PATH=/opt/puppetlabs/puppet/bin:$PATH

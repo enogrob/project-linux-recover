@@ -122,8 +122,8 @@ export EDITOR=vim
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 # For compilers to find icu4c you may need to set:
-export LDFLAGS="-L/usr/local/opt/icu4c/lib"
-export CPPFLAGS="-I/usr/local/opt/icu4c/include"
+#export LDFLAGS="-L/usr/local/opt/icu4c/lib"
+#export CPPFLAGS="-I/usr/local/opt/icu4c/include"
 
 export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode – red
 export LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode – bold, magenta
@@ -134,7 +134,7 @@ export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
 export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode – cyan
 export LOCAL_USER_ID=$(id -u)
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
-export CFLAGS="-O2 -g -fno-stack-check"
+#export CFLAGS="-O2 -g -fno-stack-check"
 export KERL_CONFIGURE_OPTIONS="--disable-hipe --with-ssl=$(brew --prefix openssl)"
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home
 
@@ -281,6 +281,55 @@ function iterm2_print_user_vars() {
   iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
 }
 
+#alias fixroute='sudo ip route change 10.127.20.0/24 via 10.227.130.1 && sudo ip route change 10.127.130.0/24 via 10.227.130.1'
+alias fixroute='sudo ip route del 10.127.130.0/24 via 192.168.15.1; sudo ip route del 10.127.20.0/24 via 192.168.15.1' 
+vpn(){
+    if ! test -f /usr/local/bin/ansi; then
+      echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"ansi\" \033[0m"
+      echo ""
+      curl -OL git.io/ansi
+      chmod 755 ansi
+      sudo mv ansi /usr/local/bin/
+    fi 
+    export VPN_VERSION='1.0'
+    case $1 in
+      --version|-v|v|version)
+        ansi --white-intense "Crafted (c) 2021 by Daitan"
+        ansi --white --no-newline "Vpn ";ansi --white-intense $VPN_VERSION
+        ansi --white "::"
+        ansi --no-newline --white "homepage "
+        ansi --green --underline "https://github.com/enogrob/vpn"
+        ansi --white ""
+        ;;
+      help|h|--help|-h)
+        ansi --white-intense "Crafted (c) 2021 by Daitan"
+        ansi --white --no-newline "Vpn ";ansi --white-intense $VPN_VERSION
+        ansi --white "::"
+        ansi --cyan-intense "vpn " "[on/off/status]"
+        ansi --cyan-intense "vpn " "[start/stoken]"
+        ansi --no-newline --white "homepage " 
+        ansi --underline --green "https://github.com/enogrob/vpn" 
+        ansi --white ""
+        ;;
+      start)
+        /opt/paloaltonetworks/globalprotect/PanGPA start&
+        ;;
+      stoken)
+        stoken-gui&
+        ;;
+      on)
+        globalprotect connect -p wr.alameda.windriver.com && fixroute 
+        ;;
+      off)
+        globalprotect disconnect
+        ;;
+      *)
+        globalprotect show --status
+        ;;  
+    esac
+}
+source <(kubectl completion bash) # setup autocomplete in bash into the current shell, bash-completion package should be installed first.
+
 # today
 test -s  "$HOME/.todayrc.sh" && source "$HOME/.todayrc.sh"
 
@@ -296,7 +345,7 @@ test -s "$HOME/.kiex/elixirs/elixir-1.10.4.env" && source "$HOME/.kiex/elixirs/e
 #export SDKMAN_DIR="$HOME/.sdkman"
 #test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/.rvm/bin:/Users/enogrob/Library/Python/2.7/bin"
 
 # source $HOME/.os_parrot.sh
 

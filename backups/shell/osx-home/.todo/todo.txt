@@ -1,4 +1,2 @@
-2021-04-19 ebook-eloquent-ruby
-2021-04-19 krihnamurti-the-book-of-life +krishnamurti
-2021-04-19 project-inmov-obras +project +rails @rails
-2021-04-19 research-obras-devtools +research @bash
+2022-04-17 udemy-puppet-5-from-beginner-to-paid-professional-2-in-1 +udemy @python
+2022-04-17 udemy-the-complete-hiera-course-a-puppet-masterclass +udemy @python

@@ -1,500 +1,500 @@
-tdpn tutorial-ultimate-rails-stack tutorial
-tdgi
-tdgi
-tdgi
-tdy
-tl
-tdss
-init_obras
-demo
-site conn
-tdy
-tl
-home
-ls -la
-cd THINGS_HOME
-ls -la
-cd ..
-ls -la
-cd THINGS_HOME
-ls
-ls -la
-home
-ls -la
-home
-ls -la
-tdp
-cd project-linux-recover/
-git pull
-code
-. ~/.bashrc
-. ~/.bashrc
-source ~/.bashrc
-santoandre
-site
-tdp
-tdss
-tdy
-exit
-source ~/.bashrc
-cd /Volumes/Data\ HD/enogrob/Things/Projects/ruby-weekly
-clear
-tdge add-articles
-exit
-source ~/.bashrc
-brew install asciinema
-home
-clear
-asciinema rec
-clear
-source ~/.bashrc
-cd /Volumes/Data\ HD/enogrob/Things/Projects/chromeapps-elixir
-clear
-tdg
-tdge update-topics
-source ~/.bashrc
-home
-santoandre
-site
-site --help
-site console
-source ~/.bashrc
-tdy
-pwd
-code
-home
-code
-title home
-. ~/.bashrc
-pwd
-santoandre
-site
-init_obras
-santoandre
-site
-init_obras
-santoandre
-exit
-site
-init_obras
-. ˜/.bashrc
-init_bash
-. ~/.bashrc
-santoandre
-site
-asciinema of
-asciinema off
-exit
-site
-bash --login
-exit
-site
-init_bash
-. ~/bashrc
-. ~/.bashrc
-site
-santoandre
-site
-exit
-site
-bash --login
-exit
-site
-. ~/.bashrc
-santoandre
-site
-home
-exit
-source ~/.bashrc
-asciinema rec
-init_obras
-santoandre
-site
-asciinema
-asciinema rec
-site
-asciinema rec
-site
-asciinema rec
-/bin/bash -l
-home
-cd .config/
-ls
-cd asciinema/
-ls
-ls -la
-vim config
-exit
-ls
-xit
-exit
-source ~/.bashrc
-bash --login
-exit
-source ~/.bashrc
-asciinema rec
-home
-cd .config/
-ls
-cd asciinema/
-ls
-ls -la
-vim config 
-asciinema
-exit
-source ~/.bashrc
-which bash
-exit
-source ~/.bashrc
-asciinema rec
-cd .config/asciinema/
-ls
-vim config 
-asciinema rec
-ls -la
-cat config 
-vim config 
-exit
-source ~/.bashrc
-santoandre
-site
-exit
-source ~/.bashrc
-santoandre
-init_obras
-santoandre
-source ~/.bashrc
-bash --login
-exit
-source ~/.bashrc
-asciinema rec
-pwd
-cd .config/
-cd asciinema/
-ls -la
-cd ..
-ls
-rm -rf asciinema/
-asciinema rec
-bash --login
-. ~/.bashrc
-santoandre
-site
-site backups
-site --help
-site db --help
-site db backups
-site db backups 99
-site db --help
-site db backups download 99
-site db backups download 99:obras obras.2021-04-16T08-58-02.sql.gz
-site db  download 99
-source ~/.bashrc
-cd /Volumes/Data\ HD/enogrob/Things/Projects/ruby-weekly
 clear
 tdge update-articles
-exit
 source ~/.bashrc
-cd /Volumes/Data\ HD/enogrob/Things/Projects/elixir-weekly
+tdpn ebook-modern-front-end-development-for-rails ebook
+tdy
+code 
+tdpn tutorial-turbo-rails tutorial
+tdyi
 clear
-tdge update-articles
-exit
-source ~/.bashrc
-santoandre
-site
-. ~/.bashrc
-init_obras
-site --help
-. ~/.bashrc
-santoandre
-source ~/.bashrc
-site
-santoandre
-source ~/.bashrc
-source ~/.bashrc
-tdyea
-tdyia
-tdyj 2
+tdgi
+ls -la
+code
 tdge update-topics
+tdpn tutorial-rails-code-along tutorial
+tdyi
+code
+tdgi
+git remote -v
+git status
+clear
+tdy
+clear
+tl
+tdyj 1
+ls -la
+src
+cd code
+ls -la
+cd chapter_01/
+ls -la
+cd 01/
+ls -la
+rmv list
+rvm list
+rvm list known
+rvm install "ruby-3.0.0"
+source ~/.bashrc
+tdpn ebook-modern-front-end-development-for-rails ebook
+tdy
+code 
+tdpn tutorial-turbo-rails tutorial
+tdyi
+clear
+tdgi
+ls -la
+code
+tdge update-topics
+tdpn tutorial-rails-code-along tutorial
+tdyi
+code
+tdgi
+git remote -v
+git status
+clear
+tdy
+clear
+tl
+tdyj 1
+ls -la
+src
+cd code
+ls -la
+cd chapter_01/
+ls -la
+cd 01/
+ls -la
+rmv list
+rvm list
+rvm list known
+rvm install "ruby-3.0.0"
+source ~/.bashrc
+tdpn ebook-modern-front-end-development-for-rails ebook
+tdy
+code 
+tdpn tutorial-turbo-rails tutorial
+tdyi
+clear
+tdgi
+ls -la
+code
+tdge update-topics
+tdpn tutorial-rails-code-along tutorial
+tdyi
+code
+tdgi
+git remote -v
+git status
+clear
+tdy
+clear
+tl
+tdyj 1
+ls -la
+src
+cd code
+ls -la
+cd chapter_01/
+ls -la
+cd 01/
+ls -la
+rmv list
+rvm list
+rvm list known
+rvm install "ruby-3.0.0"
+source ~/.bashrc
+tdpn ebook-modern-front-end-development-for-rails ebook
+tdy
+code 
+tdpn tutorial-turbo-rails tutorial
+tdyi
+clear
+tdgi
+ls -la
+code
+tdge update-topics
+tdpn tutorial-rails-code-along tutorial
+tdyi
+code
+tdgi
+git remote -v
+git status
+clear
+tdy
+clear
+tl
+tdyj 1
+ls -la
+src
+cd code
+ls -la
+cd chapter_01/
+ls -la
+cd 01/
+ls -la
+rmv list
+rvm list
+rvm list known
+rvm install "ruby-3.0.0"
+source ~/.bashrc
+tdpn ebook-modern-front-end-development-for-rails ebook
+tdy
+code 
+tdpn tutorial-turbo-rails tutorial
+tdyi
+clear
+tdgi
+ls -la
+code
+tdge update-topics
+tdpn tutorial-rails-code-along tutorial
+tdyi
+code
+tdgi
+git remote -v
+git status
+clear
+tdy
+clear
+tl
+tdyj 1
+ls -la
+src
+cd code
+ls -la
+cd chapter_01/
+ls -la
+cd 01/
+ls -la
+rmv list
+rvm list
+rvm list known
+rvm install "ruby-3.0.0"
+rvm install ruby-3.0.0
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/tutorial-rails-code-along
+clear
 tdye
 tdya
-tdss
-tdp
-tdpj research-obras-devtools
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/tutorial-turbo-rails
+clear
+tdg
+tdge update-resources
+tdye
+tdya
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/ebook-modern-front-end-development-for-rails
+clear
+tdyi
+tl
+tdyj 3
+tdgi
+tdy
+clear
 code
-cp obras/.obras_utils.sh ~/
-tdge update-helps
-site
+tl
+tdyj 1
+tdg
+tdge update-topics
+rvm list
+brew services
+source ~/.bashrc
+tdpn ebook-modern-front-end-development-for-rails ebook
+tdy
+code 
+tdpn tutorial-turbo-rails tutorial
+tdyi
+clear
+tdgi
+ls -la
+code
+tdge update-topics
+tdpn tutorial-rails-code-along tutorial
+tdyi
+code
+tdgi
+git remote -v
+git status
+clear
+tdy
+clear
+tl
+tdyj 1
+ls -la
+src
+cd code
+ls -la
+cd chapter_01/
+ls -la
+cd 01/
+ls -la
+rmv list
+rvm list
+rvm list known
+rvm install "ruby-3.0.0"
+rvm install ruby-3.0.0
+unset CFLAGS
+rvm install ruby-3.0.0
+unset CFLAGS
+unset LDFLAGS
+rvm install ruby-3.0.0
+code ~/.bashrc
+cd ~/
+code
+source ~/.bashrc
+tl
+tdyj 1
+rvm install ruby-3.0.0
+tdg
+tdye
+tdya
+clear
+rvm list
+clear
+source ~/.bashrc
+source ~/.bashrc
+tdpn etc-rails-saulo-nascimento job
+tdgi
+ls -la
+\rm -rf .git
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:enogrob/etc-rails-saulo-nascimento.git
+git push -u origin main
+git status
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/ruby-weekly
+clear
+tdge update-articles
+source ~/.bashrc
+rvm update
+rvm get head
+rvm list
+rvm list known
+rvm install 3.0.1
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/ruby-weekly
+clear
+tdge update-articles
+source ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/chromeapps-puppet
+clear
+tdg
+tdge update-apps
+tdg
+tdge update-apps
+tdg
 exit
 source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/chromeapps-webtools
+clear
+tdg
+tdge add-apps
+exit
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/etc-rails-saulo-nascimento
+clear
+tdg
+tdge update-emails
+ls -la
+tdg
+git status
+git push origin main
+source ~/.bashrc
+init_obras
 santoandre
-site --help
-services --help
-site services --help
-site db --help
-obras_utils
+rails console
 source ~/.bashrc
-obras_utils
+cd /Volumes/Data\ HD/enogrob/Things/Projects/etc-rails-saulo-nascimento
+clear
+tdyi
+tdye
+tdya
 source ~/.bashrc
-obras_utils
-obras_utils --version
 source ~/.bashrc
-obras_utils --version
-site --help
-site db --help
-site services --help
-obras_utils update
-site --help
-home
+cd /Volumes/Data\ HD/enogrob/Things/Projects/chromeapps-kubernetes
+clear
+git pull
+tdg
+tdge update-apps
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/chromeapps-webtools
+clear
+tdg
+tdge update-apps
+tdg
+tdge update-apps
+source ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
+tdp
+git clone git@github.com:enogrob/project-mtce-bootstrap.git
+ls -la
+ls -lat
+clear
+tdy
+exit
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/project-puppet-etcd-rabbitmq-bootstrap
+clear
+code
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:enogrob/project-puppet-etcd-rabbitmq-bootstrap.git
+git push -u origin main
+tdy
 clear
 exit
 source ~/.bashrc
-cd /Volumes/Data\ HD/enogrob/Things/Projects/chromeapps-devops
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/etc-rails-bruno-gama
+clear
+tdg
+git init
+tdgi
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:enogrob/etc-rails-bruno-gama.git
+git push -u origin main
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/etc-rails-bruno-gama
+clear
+tdyi
+tdp
+git clone git@github.com:mqgama/sm1.git
+cd sm1
+git log --oneline
+cd ..
+git clone git@github.com:mqgama/challenge-lemoney.git
+cd challenge-lemoney
+lsm -la
+ls -la
+git log --oneline
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/tutorial-turbo-rails
+clear
+tdg
+tdge update-resources
+git pull
+tdg
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/etc-rails-bruno-gama
+clear
+git pull
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/ruby-weekly
+clear
+tdg
+tdge update-articles
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/ruby-weekly
+clear
+tdge update-articles
+git status
+source ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/udemy-puppet-5-from-beginner-to-paid-professional-2-in-1
+clear
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin git@github.com:enogrob/udemy-puppet-5-from-beginner-to-paid-professional-2-in-1.git
+git push -u origin main
+code 
+tdg
+tdge update-src
+git status
+git push
+source ~/.bashrc
+title
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/udemy-puppet-5-from-beginner-to-paid-professional-2-in-1
 clear
 title
-tdge update-apps
-exit
+tdyi
 source ~/.bashrc
-cd /Volumes/Data\ HD/enogrob/Things/Projects/chromeapps-devops
+source ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/tutorial-notion
 clear
-tdge update-apps
 tdg
+git add .
+git commit -m "add-notion-url-video"
+git push
 source ~/.bashrc
-santoandre
-site
-. ~/.bashrc
-santoandre
-site
-. ~/.bashrc
-site
-. ~/.bashrc
-site
-site --help
-site
-santoandre
-site
-. ~/.bashrc
-site
-. ~/.bashrc
-site
 source ~/.bashrc
-santoandre
-site
-tdss
+source ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
 tdp
-tdpj research-obras-devtools
-code
-git status
-cp obras/.obras_utils.sh ~/
-tdge update-readme
+git clone git@github.com:enogrob/etc-rails-luiz-romario-lopes-de-santana-filho.git
+clear
 source ~/.bashrc
-exit
-source ~/.bashrc
-santoandre
-site
-. ~/.bashrc
-santiandre
-santoandre
-site
-exit
-source ~/.bashrc
-site dumps
-santoandre
-site
-site dumps 
-site dumps
-site dumps status
-. ~/.bashrc
-source ~/.bashrc
-site 
-site services refs
-site refs
-site homepage
-source ~/.bashrc
-site
-site ref
-source ~/.bashrc
-site
-site ref
-santoandre
-site ref
-site
-site.ref
-source ~/.bashrc
-santoandre
-site
-site ref
-site.ref
-site servives refs
-site services refs
-site refs
-obras_utils refs
-site ref
-site home
-source ~/.bashrc
-site ref
-santoandre
-site ref
-source ~/.bashrc
-santoandre
-site
-site ref
-source ~/.bashrc
-santoandre
-site
-site ref
-source ~/.bashrc
-santoandre
-site ref
-source ~/.bashrc
-site ref
-santoandre
-site ref
-site services ref
-site services refs
-site flags refs
-site flags ref
-source ~/.bashrc
-santoandre
-site refs
-site flags refs
-source ~/.bashrc
-santoandre
-site
-site refs
-site flags refs
-site
-site services refs
-site dumps refs
-site
-site refs
-site services refs
-site flags ref
-site flags refs
-site
-site refs
-obras_utils refs
-source ~/.bashrc
-santoandre
-site --help
-site db --help
-Crafted (c) 2018~2020 by InMov - Intelligence in Movement
-Obras Utils 1.5.29
-::
-db[set dbname || init || preptest || drop [all] || create || migrate migrate:status || seed]
-db[databases || tables || socket || conn/connect]
-db[api [dump/export || import]]
-db[backups || download [backupfile] || update [all]]
-site services --help
-obras_utils --help
-obras_utils refs
-obras_utils refs tools
-obras_utils refs ssh
-obras_utils --help
-source ~/.bashrc
-santoandre
-site refs
-site flags refs
-site services refs
-obras_utils refs
-obras_utils refs tools
-obras_utils refs ssh
-site services
-site
-source ~/.bashrc
-site
-site refs
-santoandre
-site refs
-site flags refs
-site services refs
-obras_utils refs
-obras_utils refs ssh
-obras_utils update
-site
-site sidekiq stop
-site
-site refs
-site homologs
-site.homologs.refs
-site homologs refs
-site backups refs
-site.backups.refs
-site
-site refs
-site
-source ~/.bashrc
-site --help
-site refs
-santoandre
-site refs
-site refs obrasutils
-source ~/.bashrc
-santoandre
-site --help
-site refs
-site refs obrasutils
-source ~/.bashrc
-santoandre
-site --help
-site refs
-site refs obrasutils
-site refs obrasutils ssh
-site refs obrasutils tools
-site refs services
-site refs flags
-site refs homologs
-site refs backups
-site services --help
-site db --help
-obras_utils refs
-obras_utils refs ssh
-obras_utils refs tools
-obras_utils refs 
-site --help
-site
-site ref
-site refs
-santoandre
-site
-. ~.,bashrc
-. ~/.bashrc
-santoandre
-site
-exit
-source ~/.bashrc
-tdss
-tdp
-tdpj research-obras-devtools
-code
-site dumps
-cp obras/.obras_utils.sh ~/
-code
-cp obras/.obras_utils.sh ~/
+cd /Volumes/Data\ HD/enogrob/Things/Projects/etc-rails-luiz-romario-lopes-de-santana-filho
+clear
 tdg
-tdge update-refs
-code
+tdyi
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/etc-rails-renan-soares
+clear
+tdye
+tdya
+source ~/.bashrc
+santoandre
+init_obras
+santoandre
 site
-cp obras/.obras_utils.sh ~/
-tdg
-tdge update-refs
-code
-tdg
-tdge update-refs
+mine .&
+clear
+source ~/.bashrc
+init_obras
+santoandre
+site
+clear
 tdy
-santoandre
-site
-. ~/.bashrc
-site
-santoandre
-site
-. ~/.bashrc
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/tutorial-turbo-rails
+clear
+tdg
+tdge update-infographs
+git pull
+git status
+git pull
+git remote -v
+tdp
+git clone git@github.com:enogrob/tutorial-turbo-rails.git
+source ~/.bashrc
 exit
 source ~/.bashrc
-tdyea
-tdyia
-home
-code
-ansi --color-table
-. ~/.bashrc
-exit
+cd /Volumes/Data\ HD/enogrob/Things/Projects/tutorial-turbo-rails
+clear
+tdg
+tdge update-infographs
+git status
+source ~/.bashrc
+source ~/.bashrc
+cd /Volumes/Data\ HD/enogrob/Things/Projects/ruby-weekly
+clear
+tdge update-articles
+git status
+clear

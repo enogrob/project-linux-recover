@@ -166,3 +166,128 @@ x 2021-04-09 2021-04-09 krihnamurti-the-book-of-life +krishnamurti
 x 2021-04-10 2021-04-10 krihnamurti-the-book-of-life +krishnamurti
 x 2021-04-13 2021-04-13 krihnamurti-the-book-of-life +krishnamurti
 x 2021-04-17 2021-04-17 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-19 2021-04-19 research-obras-devtools +research @bash
+x 2021-04-19 2021-04-19 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-22 2021-04-22 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-23 2021-04-23 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-23 2021-04-23 ruby-weekly +tutorial @ruby
+x 2021-04-24 2021-04-24 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-25 2021-04-25 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-25 2021-04-25 pragmaticstudio-ruby-object-model-and-metaprogramming +pragmaticstudio @ruby
+x 2021-04-25 2021-04-25 tutorial-elixir-livebook +tutorial @elixir
+x 2021-04-26 2021-04-26 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-27 2021-04-27 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-27 2021-04-27 ebook-affective-ruby +ebook @ruby
+x 2021-04-28 2021-04-28 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-28 2021-04-28 reactive-rails-with-no-javascript +rails +tutorial @javascript @rails
+x 2021-04-28 2021-04-28 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-29 2021-04-29 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-30 2021-04-30 krihnamurti-the-book-of-life +krishnamurti
+x 2021-04-30 2021-04-30 ruby-weekly +tutorial @ruby
+x 2021-05-03 2021-05-03 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-05 2021-05-04 project-multicloud-challenge
+x 2021-05-05 2021-05-04 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-05 2021-05-05 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-05 2021-05-05 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-05 2021-05-05 ebook-design-patterns-in-ruby
+x 2021-05-06 2021-05-06 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-06 2021-05-06 ebook-the-rails-5-way
+x 2021-05-07 2021-05-07 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-07 2021-05-07 ruby-weekly +tutorial @ruby
+x 2021-05-08 2021-05-07 project-inmov-obras +project +rails @rails
+x 2021-05-08 2021-05-08 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-09 2021-05-08 tutorial-ultimate-rails-stack +rails +tutorial @rails
+x 2021-05-10 2021-05-10 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-10 2021-05-10 selectiontest-daitangroup +job @devops @java
+x 2021-05-11 2021-05-11 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-11 2021-05-11 tutorialspoint-kubernetes +tutorialspoint
+x 2021-05-11 2021-05-11 tutorialspoint-pytest +tutorialspoint @python
+x 2021-05-11 2021-05-11 tutorialspoint-pytest
+x 2021-05-13 2021-05-12 project-onebitfood +project
+x 2021-05-13 2021-05-13 tutorialspoint-openstack +tutorialspoint
+x 2021-05-13 2021-05-13 tutorialspoint-pytest
+x 2021-05-13 2021-05-13 tutorialspoint-kubernetes +tutorialspoint
+x 2021-05-13 2021-05-13 tutorialspoint-openstack +tutorialspoint
+x 2021-05-13 2021-05-13 ebook-head-first-python +ebook @python
+x 2021-05-15 2021-05-14 selectiontest-daitangroup +job @devops @java
+x 2021-05-15 2021-05-14 project-inmov-obras +project +rails @rails
+x 2021-05-15 2021-05-14 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-16 2021-05-14 tutorialspoint-openstack +tutorialspoint
+x 2021-05-16 2021-05-14 tutorialspoint-kubernetes +tutorialspoint
+x 2021-05-17 2021-05-17 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-18 2021-05-18 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-19 2021-05-19 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-21 2021-05-17 project-inmov-obras +project +rails @rails
+x 2021-05-23 2021-05-16 tutorial-openstack +tutorial
+x 2021-05-23 2021-05-20 selectiontest-daitangroup +job @devops @java
+x 2021-05-23 2021-05-23 udemy-kubernetes-mastery +udemy
+x 2021-05-23 2021-05-23 udemy-mastering-stimulusjs +udemy
+x 2021-05-24 2021-05-24 udemy-kubernetes-mastery +udemy
+x 2021-05-24 2021-05-24 udemy-mastering-stimulusjs +udemy
+x 2021-05-24 2021-05-24 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-25 2021-05-25 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-26 2021-05-26 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-27 2021-05-27 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-29 2021-05-29 krihnamurti-the-book-of-life +krishnamurti
+x 2021-05-31 2021-05-31 krihnamurti-the-book-of-life +krishnamurti
+x 2021-06-01 2021-06-01 krihnamurti-the-book-of-life +krishnamurti
+x 2021-06-01 2021-05-29 krihnamurti-talks +krishnamurti
+x 2021-06-01 2021-06-01 edx-introduction-to-cloud-computing +edx @devops
+x 2021-06-04 2021-06-04 research-obras-devtools +research @bash
+x 2021-06-10 2021-06-10 krihnamurti-the-book-of-life +krishnamurti
+x 2021-06-12 2021-06-12 selectiontest-daitangroup +job @devops @java
+x 2021-06-12 2021-06-12 chromeapps-daitan
+x 2021-06-13 2021-06-13 krihnamurti-the-book-of-life +krishnamurti
+x 2021-06-15 2021-06-14 krihnamurti-the-book-of-life +krishnamurti
+x 2021-06-16 2021-06-16 krihnamurti-the-book-of-life +krishnamurti
+x 2021-06-19 2021-06-17 selectiontest-daitangroup +job @devops @java
+x 2021-06-21 2021-06-14 tutorial-health +tutorial
+x 2021-06-21 2021-06-14 udemy-kubernetes-mastery +udemy @devops
+x 2021-06-22 2021-06-19 tutorial-python +tutorial @python
+x 2021-06-22 2021-06-21 oreilly-networking-fundamentals +oreilly
+x 2021-06-22 2021-06-22 tutorial-daitan-devops +tutorial @devops
+x 2021-06-22 2021-06-22 tutorial-daitan-programming-languages +tutorial
+x 2021-06-22 2021-06-22 tutorial-daitan-analysis +tutorial
+x 2021-06-22 2021-06-22 tutorial-daitan-libraries-and-frameworks +tutorial
+x 2021-06-23 2021-06-22 tutorial-daitan-networking +tutorial
+x 2021-06-23 2021-06-22 tutorial-daitan-security +tutorial
+x 2021-06-23 2021-06-22 tutorial-daitan-storage +tutorial
+x 2021-06-24 2021-06-23 oreilly-introduction-to-python +oreilly @python
+x 2021-06-24 2021-06-24 tutorial-python +tutorial @python
+x 2021-06-29 2021-06-25 oreilly-elegant-automation-frameworks-with-python-and-pytest +oreilly @python
+x 2021-07-01 2021-06-30 udemy-gerrit-code-review +udemy
+x 2021-07-04 2021-07-03 edx-introduction-to-kubernetes +edx
+x 2021-08-01 2021-07-27 tutorial-elxpro +tutorial
+x 2021-09-13 2021-09-04 tutorial-create-rpm-package +tutorial
+x 2021-09-24 2021-08-18 krihnamurti-the-book-of-life +krishnamurti
+x 2021-09-24 2021-09-24 chromeapps-puppet
+x 2021-09-26 2021-09-26 chromeapps-python
+x 2021-12-02 2021-09-17 project-windriver-puppet-upversion +project
+x 2021-12-02 2021-12-02 project-puppet-failure-for-postgres +project
+x 2021-12-12 2021-11-13 tutorial-puppet-debugger +tutorial
+x 2022-01-04 2021-12-30 presentation-share-and-organise-information
+x 2022-01-08 2022-01-04 presentation-organize-and-share-information
+x 2022-01-08 2022-01-04 project-today-manager +project
+x 2022-01-08 2021-12-30 tutorial-building-debian +tutorial
+x 2022-01-08 2021-12-30 presentation-puppet-debugger
+x 2022-01-09 2022-01-08 etc-rails-2022-01-11 +job +rails @rails
+x 2022-01-09 2022-01-08 etc-rails-2022-01-12 +job +rails @rails
+x 2022-01-15 2022-01-09 etc-rails-caio-rodrigo
+x 2022-01-16 2021-12-30 tutorial-vagrant-docker +tutorial @docker
+x 2022-01-16 2021-12-30 tutorial-windows-11-in-virtualbox +tutorial
+x 2022-01-19 2022-01-16 project-competence-plan +project
+x 2022-01-19 2022-01-09 etc-rails-mauricio-almeida
+x 2022-02-05 2022-02-03 selectiontest-daitanlabs-rails +job +rails @rails
+x 2022-02-05 2022-01-23 futurelearn-advanced-cyber-security +futurelearn
+x 2022-02-09 2022-02-09 ebook-effective-development-with-rails-console +ebook +rails @rails
+x 2022-02-24 2022-02-18 etc-rails-vinicius-machado-araujo-santana +job +rails @rails
+x 2022-02-24 2022-02-09 futurelearn-advanced-cyber-security +futurelearn
+x 2022-02-24 2022-02-06 project-bash-with-ruby +project @bash @ruby
+x 2022-02-25 2022-02-19 selectiontest-daitanlabs-rails +job +rails @rails
+x 2022-02-28 2022-02-24 ebook-modern-front-end-development-for-rails +ebook +rails @rails
+x 2022-02-28 2022-02-25 tutorial-turbo-rails +rails +tutorial @rails
+x 2022-02-28 2022-02-26 tutorial-rails-code-along +rails +tutorial @rails
+x 2022-03-08 2022-03-08 etc-rails-saulo-nascimento +job +rails @rails
+x 2022-03-25 2022-03-22 etc-rails-bruno-gama +job +rails @rails
+x 2022-05-05 2022-05-03 etc-rails-luiz-romario-lopes-de-santana-filho
+x 2022-05-06 2022-05-05 etc-rails-renan-soares

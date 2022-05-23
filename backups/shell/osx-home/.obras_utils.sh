@@ -10,9 +10,9 @@
 
 
 # variables
-export OBRAS_UTILS_VERSION=1.5.29
-export OBRAS_UTILS_VERSION_DATE=2021.04.18
-export OBRAS_UTILS_UPDATE_MESSAGE="New parameter for commands 'site flags/services [refs]' and 'obras_utils refs [tools/ssh]'."
+export OBRAS_UTILS_VERSION=1.5.33
+export OBRAS_UTILS_VERSION_DATE=2021.04.23
+export OBRAS_UTILS_UPDATE_MESSAGE="Improve 'obras_utils', new option 'update_deps'."
 
 export OS=`uname`
 if [ $OS == 'Darwin' ]; then
@@ -27,8 +27,8 @@ export OBRASOLDTMP="$HOME/Projects/obras"
 export RAILSVERSIONTMP="Rails 6.0.2.1"
 
 export INSTALL_DIR=$INSTALLDIRTMP
-export OBRAS=$OBRASTMP
-export OBRAS_OLD=$OBRASOLDTMP
+export OBRAS=/Users/enogrob/Projects/obras
+export OBRAS_OLD=/Users/enogrob/Projects/obras
 export RAILS_VERSION=$RAILSVERSIONTMP
 
 pushd . > /dev/null
@@ -142,12 +142,19 @@ obras_utils() {
       test -f obras_temp && rm -rf obras_temp*
       test -f .obras_utils.sh && rm -rf .obras_utils.sh
       wget https://raw.githubusercontent.com/enogrob/research-obras-devtools/master/obras/.obras_utils.sh
-      sed 's@\$OBRASTMP@'"$OBRAS"'@' .obras_utils.sh > obras_temp
-      sed 's@\$OBRASOLDTMP@'"$OBRAS_OLD"'@' obras_temp > obras_temp1 
+      sed 's@\/Users/enogrob/Projects/obras@'"$OBRAS"'@' .obras_utils.sh > obras_temp
+      sed 's@\/Users/enogrob/Projects/obras@'"$OBRAS_OLD"'@' obras_temp > obras_temp1 
       echo -e "\033[1;92m==> \033[0m\033[1;39mUpdating \".obras_utils.sh\" \033[0m"
       cp obras_temp1 $HOME/.obras_utils.sh 
       test -f obras_temp && rm -rf obras_temp*
       test -f .obras_utils.sh && rm -rf .obras_utils.sh
+      source $HOME/.obras_utils.sh
+      site $SITE
+      ansi --white --no-newline "Obras Utils is now updated to ";ansi --white-intense $OBRAS_UTILS_VERSION
+      cowsay $OBRAS_UTILS_UPDATE_MESSAGE
+      ;;
+
+    update_deps)  
       if ! test -f /usr/local/bin/mycli && ! test -f /usr/bin/mycli; then
         echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"mycli\" \033[0m"
         echo ""
@@ -227,22 +234,20 @@ obras_utils() {
         fi 
       fi
 
-      if ! test -f /usr/local/bin/lazygit && ! test -f /usr/bin/lazygit; then
-        echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"Lazygit\" \033[0m"
+      if ! test -f /usr/local/bin/tig; then
+        echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"tig\" \033[0m"
         echo ""
         if [ "$OS" == 'Darwin' ]; then
-          brew cask install lazygit
+          brew install tig
         else  
-          sudo add-apt-repository ppa:lazygit-team/release
-          sudo apt-get update
-          sudo apt-get install lazygit
+          git clone git@github.com:jonas/tig.git
+          cd tig
+          make prefix=/usr/local
+          sudo make install prefix=/usr/local
+          cd ..
+          rm -rf tig
         fi
       fi
-
-      source $HOME/.bashrc
-      site $SITE
-      ansi --white --no-newline "Obras Utils is now updated to ";ansi --white-intense $OBRAS_UTILS_VERSION
-      cowsay $OBRAS_UTILS_UPDATE_MESSAGE
       ;;
 
     refs)
@@ -252,7 +257,7 @@ obras_utils() {
       ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
-      __pr info "obras_utils " "[version/update/check] || refs [tools/ssh]"
+      __pr info "obras_utils " "[version/update/update_deps/check] || refs [tools/ssh]"
       __pr
       ansi --no-newline --white "homepage "
       ansi --green --underline "https://github.com/enogrob/research-obras-devtools"
@@ -266,7 +271,7 @@ obras_utils.refs(){
        ansi --white "tools:"
        ansi --no-newline "  foreman     ";ansi --underline --green "https://github.com/ddollar/foreman" 
        ansi --no-newline "  iredis      ";ansi --underline --green "https://iredis.io" 
-       ansi --no-newline "  lazygit     ";ansi --underline --green "https://github.com/jesseduffield/lazygit" 
+       ansi --no-newline "  tig         ";ansi --underline --green "https://github.com/jonas/tig" 
        ansi --no-newline "  mycli       ";ansi --underline --green "https://github.com/dbcli/mycli" 
        ansi --no-newline "  3llo        ";ansi --underline --green "https://github.com/qcam/3llo" 
        ;;
@@ -277,7 +282,7 @@ obras_utils.refs(){
        ansi --no-newline "  engineyard  ";ansi --underline --green "https://cloud.engineyard.com/keypairs" 
        ;; 
      *)
-       ansi --white "obras utils:"
+       ansi --white "obras-utils:"
        ansi --no-newline "  homepage    ";ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
        ansi --no-newline "  chrome-apps ";ansi --underline --green "https://github.com/enogrob/chromeapps-eicon" 
        ansi --no-newline "  obras       ";ansi --underline --green "https://gitlab.tecnogroup.com.br" 
@@ -2069,7 +2074,7 @@ __services(){
       __pr info "services " "[ls/check]"
       __pr info "services " "[start/stop/restart/status mysql/ngrok/redis/sidekiq/mailcatcher || all]"
       __pr info "services " "[enable/disable ngrok/sidekiq/mailcatcher]"
-      __pr info "services " "[conn/connect mysql/db/redis]"
+      __pr info "services " "[c/conn/connect mysql/db/redis]"
       __pr 
       __pr info "obs: " "redis and mysql are not involved when all is specified"
       __pr 
@@ -2344,7 +2349,7 @@ db(){
       ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
       ansi --white "::"
       __pr info "db " "[set dbname || init || preptest || drop [all] || create || migrate migrate:status || seed]"
-      __pr info "db " "[databases || tables || socket || conn/connect]"
+      __pr info "db " "[databases || tables || socket || c/conn/connect]"
       __pr info "db " "[api [dump/export || import]]"
       __pr info "db " "[backups || download [backupfile] || update [all]]"
       __pr info "db " "[dumps/ls || import [dumpfile] || update [all]]"
@@ -3240,7 +3245,7 @@ db(){
       fi
       ;; 
 
-    connect|conn)
+    c|connect|conn)
       db=$(dbs.current)
       if [ "$(__has_database $db)" == 'yes' ]; then
         if [ -z "$DOCKER" ]; then
@@ -3455,8 +3460,8 @@ site(){
       __pr info "site " "[check/ls || start/stop [sitename/all] || console || test/test:system || rspec]"
       __pr info "site " "[mysql/ngrok/redis/mailcatcher/sidekiq start/stop/restart/status]"
       __pr info "site " "[dumps [activate dumpfile]]"
-      __pr info "site " "[db/mysql/redis/trello/git conn/connect]"
-      __pr info "site " "[conn/connect]"
+      __pr info "site " "[db/mysql/redis/trello/git c/conn/connect]"
+      __pr info "site " "[c/conn/connect]"
       __pr info "site " "[stats]"
       __pr info "site " "[audit/brakeman/rubycritic/rubocop [files]]"
       __pr info "site " "[db:drop || db:create || db:migrate db:migrate:status || db:seed]"
@@ -3466,10 +3471,6 @@ site(){
       ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
       ansi --white ""
       ;;
-
-    ref)
-      site.ref
-      ;;  
 
     --version|-v|v)  
       ansi --white-intense "Crafted (c) 2013~2020 by InMov - Intelligence in Movement"
@@ -3559,7 +3560,7 @@ site(){
       rails stats
       revolver stop
       ;;  
-    conn|connect)
+    c|conn|connect)
       site.connect
       ;;
     ngrok|mysql|redis|sidekiq|mailcatcher|trello|git)
@@ -3576,7 +3577,7 @@ site(){
           __$1 status
           ;; 
 
-        connect|conn)
+        c|connect|conn)
           case $1 in
             mysql)
               db=$(dbs.current)
@@ -3607,7 +3608,7 @@ site(){
               3llo;
               ;;  
             git)
-              lazygit;
+              tig;
               ;;  
           esac 
           ;;      
@@ -3722,17 +3723,17 @@ site(){
 }
 site.about(){
   if [ -z $ABOUT ]; then
-    ansi --white-intense "Crafted (c) 2018~2020 by InMov - Intelligence in Movement"
-    ansi --white --no-newline "Obras Utils ";ansi --white-intense $OBRAS_UTILS_VERSION
-    ansi --white "::"
-    ansi --white "Obras Utils is loaded, type 'init_obras' just once to start the session and then the site name."
-    ansi --white ""
-    ansi --white "Available sites:"
-    ansi --white " default, olimpia, rioclaro, suzano, santoandre, cordeiropolis, demo"
-    ansi --white ""
-    ansi --no-newline --white "Homepage: " 
-    ansi --underline --green "https://github.com/enogrob/research-obras-devtools" 
-    ansi --white ""
+    echo -e "\033[1;39mCrafted (c) 2018~2020 by InMov - Intelligence in Movement \033[0m"
+    echo -n "Obras Utils ";echo -e "\033[1;39m${OBRAS_UTILS_VERSION}\033[0m"
+    echo "::"
+    echo  "Obras Utils is loaded, type 'init_obras' just once to start the session and then the site name."
+    echo ""
+    echo "Available sites:"
+    echo " default, olimpia, rioclaro, suzano, santoandre, cordeiropolis, demo"
+    echo ""
+    echo -n  "Homepage: " 
+    echo -e  "\033[0;32m\033[4mhttps://github.com/enogrob/research-obras-devtools\033[0m\033[0m" 
+    echo ""
     export ABOUT=true
   fi
 }
@@ -3808,36 +3809,42 @@ site.refs(){
       case $SITE in
         demo)
           ansi --white "demo:"
+          ansi --no-newline "  review   ";ansi --underline --green "https://gitlab.tecnogroup.com.br/inmov/obras" 
           ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
           ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/110323/backups" 
           ansi --no-newline "  homolog  ";ansi --underline --green "https://demo.inmov.net.br" 
           ;;
         cordeiropolis)  
           ansi --white "cordeiropolis:"
+          ansi --no-newline "  review   ";ansi --underline --green "https://gitlab.tecnogroup.com.br/inmov/obras" 
           ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
           ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/114763/backups" 
           ansi --no-newline "  homolog  ";ansi --underline --green "https://homologcordeiropolis.inmov.net.br" 
           ;;
         olimpia)  
           ansi --white "olimpia:"
+          ansi --no-newline "  review   ";ansi --underline --green "https://gitlab.tecnogroup.com.br/inmov/obras" 
           ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
           ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112642/backups" 
           ansi --no-newline "  homolog  ";ansi --underline --green "https://homologolimpia.inmov.net.br" 
           ;;
         rioclaro)  
           ansi --white "rioclaro:"
+          ansi --no-newline "  review   ";ansi --underline --green "https://gitlab.tecnogroup.com.br/inmov/obras" 
           ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
           ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112643/backups" 
           ansi --no-newline "  homolog  ";ansi --underline --green "https://homologrioclaro.inmov.net.br" 
           ;;
         santoandre)  
           ansi --white "santoandre:"
+          ansi --no-newline "  review   ";ansi --underline --green "https://gitlab.tecnogroup.com.br/inmov/obras" 
           ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
           ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112641/backups" 
           ansi --no-newline "  homolog  ";ansi --underline --green "https://homologsantoandre.inmov.net.br" 
           ;;
         suzano)  
           ansi --white "suzano:"
+          ansi --no-newline "  review   ";ansi --underline --green "https://gitlab.tecnogroup.com.br/inmov/obras" 
           ansi --no-newline "  deploy   ";ansi --underline --green "https://cloud.engineyard.com/accounts/11492/apps" 
           ansi --no-newline "  backups  ";ansi --underline --green "https://cloud.engineyard.com/app_deployments/112644/backups" 
           ansi --no-newline "  homolog  ";ansi --underline --green "https://homologsuzano.inmov.net.br" 

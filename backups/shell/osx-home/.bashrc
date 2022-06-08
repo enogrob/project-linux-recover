@@ -172,7 +172,7 @@ test -f /usr/local/bin/exa && alias exala="exa -lahgbH --git"
 # alias vim='vim --servername VIM'
 
 # obras
-test -s "$HOME/.obras_utils.sh" && source "$HOME/.obras_utils.sh"
+test -f "$HOME/Projects/research-obras-devtools/obras/.obras_utils.sh" && source "$HOME/Projects/research-obras-devtools/obras/.obras_utils.sh"
 
 # macbook
 function spotlight(){
@@ -281,57 +281,11 @@ function iterm2_print_user_vars() {
   iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
 }
 
-#alias fixroute='sudo ip route change 10.127.20.0/24 via 10.227.130.1 && sudo ip route change 10.127.130.0/24 via 10.227.130.1'
-alias fixroute='sudo ip route del 10.127.130.0/24 via 192.168.15.1; sudo ip route del 10.127.20.0/24 via 192.168.15.1' 
-vpn(){
-    if ! test -f /usr/local/bin/ansi; then
-      echo -e "\033[1;92m==> \033[0m\033[1;39mInstalling \"ansi\" \033[0m"
-      echo ""
-      curl -OL git.io/ansi
-      chmod 755 ansi
-      sudo mv ansi /usr/local/bin/
-    fi 
-    export VPN_VERSION='1.0'
-    case $1 in
-      --version|-v|v|version)
-        ansi --white-intense "Crafted (c) 2021 by Daitan"
-        ansi --white --no-newline "Vpn ";ansi --white-intense $VPN_VERSION
-        ansi --white "::"
-        ansi --no-newline --white "homepage "
-        ansi --green --underline "https://github.com/enogrob/vpn"
-        ansi --white ""
-        ;;
-      help|h|--help|-h)
-        ansi --white-intense "Crafted (c) 2021 by Daitan"
-        ansi --white --no-newline "Vpn ";ansi --white-intense $VPN_VERSION
-        ansi --white "::"
-        ansi --cyan-intense "vpn " "[on/off/status]"
-        ansi --cyan-intense "vpn " "[start/stoken]"
-        ansi --no-newline --white "homepage " 
-        ansi --underline --green "https://github.com/enogrob/vpn" 
-        ansi --white ""
-        ;;
-      start)
-        /opt/paloaltonetworks/globalprotect/PanGPA start&
-        ;;
-      stoken)
-        stoken-gui&
-        ;;
-      on)
-        globalprotect connect -p wr.alameda.windriver.com && fixroute 
-        ;;
-      off)
-        globalprotect disconnect
-        ;;
-      *)
-        globalprotect show --status
-        ;;  
-    esac
-}
 source <(kubectl completion bash) # setup autocomplete in bash into the current shell, bash-completion package should be installed first.
 
 # today
-test -s  "$HOME/.todayrc.sh" && source "$HOME/.todayrc.sh"
+test -s  "$HOME/Projects/project-things-today/.todayrc_vars.sh" && source "$HOME/Projects/project-things-today/.todayrc_vars.sh"
+test -s  "$HOME/Projects/project-things-today/.todayrc.sh" && source "$HOME/Projects/project-things-today/.todayrc.sh"
 
 # erlang
 test -s $HOME/.kerl/23.0/activate && source $HOME/.kerl/23.0/activate

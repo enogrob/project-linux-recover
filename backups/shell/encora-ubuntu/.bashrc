@@ -231,9 +231,10 @@ test -f ~/Projects/project-site-manager/site && source ~/Projects/project-site-m
 # Debian Build Environment
 export TOOL_HOME=~/DebianBuild
 export WORKSPACE_HOME=~/DebianBuildWorkspace
-export PROJECT=stx-deb-bld-1
+export PROJECT=stx-debian
 export MY_REPO_ROOT_DIR=/localdisk/$USER/localdisk/designer/$USER/$PROJECT
 export MY_BUILD_DIR=/localdisk/$USER/localdisk/loadbuild/$USER/$PROJECT
+export STX_BUILD_HOME=/localdisk/designer/$(id -nu)/$PROJECT
 test -f $TOOL_HOME/tools/import-stx && pushd $TOOL_HOME/tools && source $TOOL_HOME/tools/import-stx && popd
 
 # Puppet Agent

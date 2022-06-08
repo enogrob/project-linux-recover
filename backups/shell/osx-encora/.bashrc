@@ -1,4 +1,6 @@
 LANG=en_US.US-ASCII;export LANG;LC_TYPE=UTF-8;export LC_TYPE
+export LC_ALL=en_US.utf-8
+export LANG=en_US.utf-8
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
@@ -61,7 +63,6 @@ if [ -n "$force_color_prompt" ]; then
 	color_prompt=
     fi
 fi
-
 
 if [ "$color_prompt" = yes ]; then
     # override default virtualenv indicator in prompt
@@ -138,13 +139,18 @@ export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
 export KERL_CONFIGURE_OPTIONS="--disable-hipe --with-ssl=$(brew --prefix openssl)"
 #export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_241.jdk/Contents/Home
 
+# enable colors
+export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
 # aliases general
 alias airport='airport -s'
 alias browser-sync='browser-sync --start --directory --files "**/*"'
 alias ct='ctags -R -V --exclude=.git --exclude=.idea'
 alias cypher='/usr/local/Cellar/neo4j/3.1.0/libexec/bin/cypher-shell -u neo4j -p betoz23'
 alias excel='open -a "Microsoft Excel"'
-alias git='hub'
+#alias git='hub'
 alias h='history | tail'
 alias icling='/Users/enogrob/bin/cling/inst/bin/cling'
 alias iclosure='java -jar ~/bin/clojure-1.8.0/clojure-1.8.0.jar'
@@ -172,101 +178,7 @@ test -f /usr/local/bin/exa && alias exala="exa -lahgbH --git"
 # alias vim='vim --servername VIM'
 
 # obras
-test -f "$HOME/Projects/research-obras-devtools/obras/.obras_utils.sh" && source "$HOME/Projects/research-obras-devtools/obras/.obras_utils.sh"
-
-# macbook
-function spotlight(){
-    case $1 in
-        status)
-        mdutil -s /Volumes/Macintosh\ HD
-        ;;
-        on)
-        sudo mdutil -a -i on
-        ;;
-        off)
-        sudo mdutil -a -i off
-        ;;
-    esac
-}
-
-function tasks(){
-    case $1 in
-        list)
-        CA_LOADED=`launchctl list | grep CalendarAgent`;
-        if [[ $CA_LOADED == *"CalendarAgent"* ]]
-        then
-          echo "CalendarAgent is loaded.";
-          echo "";
-          /usr/local/bin/icalBuddy -f tasksDueBefore:today+1;
-        else
-          echo "CalendarAgent is not loaded.";
-        fi
-        ;;
-
-        on)
-        CA_LOADED=`launchctl list | grep CalendarAgent`;
-        if [[ $CA_LOADED == *"CalendarAgent"* ]]
-        then
-          echo "CalendarAgent is already loaded.";
-          echo "";
-        else
-          launchctl load -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist
-          tasks status;
-        fi
-        ;;
-
-        off)
-        CA_LOADED=`launchctl list | grep CalendarAgent`;
-        if [[ $CA_LOADED == *"CalendarAgent"* ]]
-        then
-          launchctl unload -w /System/Library/LaunchAgents/com.apple.CalendarAgent.plist
-          tasks status;
-        else
-          echo "CalendarAgent is already unloaded.";
-          echo "";
-        fi
-        ;;
-
-        status|*)
-        CA_LOADED=`launchctl list | grep CalendarAgent`;
-        if [[ $CA_LOADED == *"CalendarAgent"* ]]
-        then
-          echo "CalendarAgent is loaded.";
-          echo "";
-        else
-          echo "CalendarAgent is not loaded.";
-          echo "";
-        fi
-        ;;
-    esac
-}
-
-function repl(){
-  case $1 in
-    java) javarepl;;
-    javascript) jsc;;
-    c++) icling;;
-    cpp) igcc;;
-    perl) re.pl;;
-    r) r --no-save --quiet;;
-    fortran) python -m fytran;;
-    closure) closure;;
-    julia) julia;;
-    ruby) pry;;
-    *) echo "repls:";
-       echo "java       ";
-       echo "javascirpt ";
-       echo "c++        ";
-       echo "cpp        ";
-       echo "perl       ";
-       echo "r          ";
-       echo "fortran    ";
-       echo "closure    ";
-       echo "julia      ";
-       echo "ruby       ";
-       ;;
-  esac
-}
+#test -f "$HOME/Projects/research-obras-devtools/obras/.obras_utils.sh" && source "$HOME/Projects/research-obras-devtools/obras/.obras_utils.sh"
 
 tab() {
     osascript &>/dev/null <<EOF
@@ -281,11 +193,12 @@ function iterm2_print_user_vars() {
   iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
 }
 
-source <(kubectl completion bash) # setup autocomplete in bash into the current shell, bash-completion package should be installed first.
+#source <(kubectl completion bash) # setup autocomplete in bash into the current shell, bash-completion package should be installed first.
 
 # today
-test -s  "$HOME/Projects/project-things-today/.todayrc_vars.sh" && source "$HOME/Projects/project-things-today/.todayrc_vars.sh"
-test -s  "$HOME/Projects/project-things-today/.todayrc.sh" && source "$HOME/Projects/project-things-today/.todayrc.sh"
+test -f  "$HOME/Projects/project-things-today/.todayrc_vars.sh" && source "$HOME/Projects/project-things-today/.todayrc_vars.sh"
+test -f  "$HOME/Projects/project-things-today/.todayrc.sh" && source "$HOME/Projects/project-things-today/.todayrc.sh"
+test -f  "$HOME/Projects/rails-site-manager/site" && source "$HOME/Projects/rails-site-manager/site"
 
 # erlang
 test -s $HOME/.kerl/23.0/activate && source $HOME/.kerl/23.0/activate
@@ -298,11 +211,18 @@ test -s "$HOME/.kiex/elixirs/elixir-1.10.4.env" && source "$HOME/.kiex/elixirs/e
 # java
 #export SDKMAN_DIR="$HOME/.sdkman"
 #test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin:/Users/enogrob/Library/Python/2.7/bin"
 
 # source $HOME/.os_parrot.sh
 
 # Created by `userpath` on 2020-09-20 12:32:59
-export PATH="$PATH:/Users/enogrob/.local/bin"
+export PATH="$PATH:/Users/robertonogueira/.local/bin"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+source /opt/secrets/current/dev_env_exports.sh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+rvm use ruby-2.7.5

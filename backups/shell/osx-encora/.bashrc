@@ -146,26 +146,25 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # aliases general
 alias airport='airport -s'
-alias browser-sync='browser-sync --start --directory --files "**/*"'
 alias ct='ctags -R -V --exclude=.git --exclude=.idea'
-alias cypher='/usr/local/Cellar/neo4j/3.1.0/libexec/bin/cypher-shell -u neo4j -p betoz23'
+# alias cypher='/usr/local/Cellar/neo4j/3.1.0/libexec/bin/cypher-shell -u neo4j -p betoz23'
 alias excel='open -a "Microsoft Excel"'
-#alias git='hub'
+# alias git='hub'
 alias h='history | tail'
-alias icling='/Users/enogrob/bin/cling/inst/bin/cling'
-alias iclosure='java -jar ~/bin/clojure-1.8.0/clojure-1.8.0.jar'
-alias icpp='igcc'
-alias ifortran='python -m fytran'
-alias ijava='javarepl'
-alias ijavascript='jsc'
-alias iperl='re.pl'
-alias ir='r --no-save --quiet'
-alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc"
-alias mytap='cd /usr/local/Library/Taps/caskroom/;open -g .'
+# alias icling='/Users/enogrob/bin/cling/inst/bin/cling'
+# alias iclosure='java -jar ~/bin/clojure-1.8.0/clojure-1.8.0.jar'
+# alias icpp='igcc'
+# alias ifortran='python -m fytran'
+# alias ijava='javarepl'
+# alias ijavascript='jsc'
+# alias iperl='re.pl'
+# alias ir='r --no-save --quiet'
+# alias jsc="/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Resources/jsc"
+# alias mytap='cd /usr/local/Library/Taps/caskroom/;open -g .'
 alias ps='ps aux'
 alias psty='~/bin/psty.py -a -d /Users/enogrob/psty'
-alias rstudio='open -a RStudio .'
-alias shellinit='$(boot2docker shellinit);printenv DOCKER_HOST'
+# alias rstudio='open -a RStudio .'
+# alias shellinit='$(boot2docker shellinit);printenv DOCKER_HOST'
 alias shutdown='shutdown -r now'
 alias top='top -o cpu'
 alias tree='tree -C -L 2'
@@ -198,19 +197,25 @@ function iterm2_print_user_vars() {
 # today
 test -f  "$HOME/Projects/project-things-today/.todayrc_vars.sh" && source "$HOME/Projects/project-things-today/.todayrc_vars.sh"
 test -f  "$HOME/Projects/project-things-today/.todayrc.sh" && source "$HOME/Projects/project-things-today/.todayrc.sh"
+
+# rails site manager
+export PUPPET_USER=rnogueira
+export PUPPET_PASS=Puppet#22.
 test -f  "$HOME/Projects/rails-site-manager/site" && source "$HOME/Projects/rails-site-manager/site"
+git.domain.justworks.init "Roberto Nogueira" "rnogueira@justworks.com"
+git.domain.gmail.init "Roberto Nogueira" "enogrob@gmail.com" 
 
 # erlang
 test -s $HOME/.kerl/23.0/activate && source $HOME/.kerl/23.0/activate
 
-#source $HOME/.evm/scripts/evm
+# source $HOME/.evm/scripts/evm
 
 # elixir
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 test -s "$HOME/.kiex/elixirs/elixir-1.10.4.env" && source "$HOME/.kiex/elixirs/elixir-1.10.4.env"
 # java
-#export SDKMAN_DIR="$HOME/.sdkman"
-#test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# export SDKMAN_DIR="$HOME/.sdkman"
+# test -s "$HOME/.sdkman/bin/sdkman-init.sh" && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # source $HOME/.os_parrot.sh
 
@@ -223,6 +228,6 @@ export NVM_DIR="$HOME/.nvm"
 
 source /opt/secrets/current/dev_env_exports.sh
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-rvm use ruby-2.7.5
+# rvm
+PATH="$GEM_HOME/bin:$HOME/.rvm/bin:$PATH" 
+[ -s ${HOME}/.rvm/scripts/rvm ] && source ${HOME}/.rvm/scripts/rvm

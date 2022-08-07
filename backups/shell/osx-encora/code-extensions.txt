@@ -1,10 +1,12 @@
 acherkashin.virtualbox-extension
 adrianwilczynski.open-folder-in-explorer
+alefragnani.project-manager
 algon-320.integrated-terminal-filedir
 bbenoist.vagrant
 bung87.rails
 bung87.vscode-gemfile
 castwide.solargraph
+christian-kohler.path-intellisense
 CTC.vscode-tree-extension
 cweijan.vscode-office
 dbaeumer.vscode-eslint
@@ -14,6 +16,10 @@ eamodio.gitlens
 EditorConfig.EditorConfig
 FerrierBenjamin.fold-unfold-all-icone
 Hridoy.rails-snippets
+humao.rest-client
+itarato.byesig
+KoichiSasada.ruby-rstfilter
+mads-hartmann.bash-ide-vscode
 mhutchie.git-graph
 mindaro-dev.file-downloader
 ms-azuretools.vscode-docker
@@ -37,6 +43,7 @@ sandcastle.vscode-open
 shanehofstetter.rails-open-partial
 sianglim.slim
 sirmspencer.vscode-autohide
+sorbet.sorbet-vscode-extension
 timonwong.shellcheck
 tomoki1207.pdf
 tomsaunders.vscode-workspace-explorer

@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+! test "$PWD" == "$HOME/Projects/clockwork_web" && pushd "$HOME/Projects/clockwork_web" > /dev/null && result=1
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Git checkout master"
+git checkout master
+git status | grep "On branch master"
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Git fetching master"
+git fetch
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Git pulling  master"
+git pull
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Bundling"
+bundle > /dev/null
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Opening the Rails Console"
+rails runner "puts Document.count" > /dev/null
+git status | grep "Your branch is up to date with 'origin/master'." > /dev/null && ansi --no-newline --green-intense "==> "; ansi --white-intense "Your branch is up to date with 'origin/master'."
+! test -z "$result" && popd > /dev/null

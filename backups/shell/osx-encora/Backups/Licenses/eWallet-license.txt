@@ -1,0 +1,21 @@
+And then I saw that you had requested eWallet for macOS, instead.
+
+You can use the following to install eWallet on your Mac:
+
+eWallet 8.4 for mac OS
+http://www.iliumsoft.com/ewallet/mac/download/
+
+eWallet 8 for mac OS
+  Name: Roberto Nogueira
+  Key:    630548
+
+If you are changing Macs, be sure to copy your current wallet data file (.WLT file) from the Documents folder (or wherever you store it) on your OLD Mac, to the Documents folder on your NEW Mac. Open the Documents folder on the NEW Mac, and double-click your wallet to open it in eWallet.
+
+Thank you for contacting Ilium Software, and feel free to contact me if you have any other questions,
+
+Lee @ Ilium Software
+--------------------
+https://www.iliumsoft.com/contactus
+---------------------
+web: https://www.iliumsoft.com
+help: https://www.iliumsoft.com/support

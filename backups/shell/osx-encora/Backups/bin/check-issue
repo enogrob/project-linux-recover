@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+pushd $HOME/Projects/clockwork_web > /dev/null
+git status | grep "On branch master"
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Checking issue in master"
+git log --oneline --grep=$1
+popd > /dev/null

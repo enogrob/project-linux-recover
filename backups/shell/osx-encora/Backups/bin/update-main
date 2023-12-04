@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+export NVM_DIR=$HOME/.nvm
+source $NVM_DIR/nvm.sh
+unset result
+
+! test "$PWD" == "$HOME/Projects/clockface" && pushd "$HOME/Projects/clockface" > /dev/null && result=1
+nvm use v18.17.1
+git status | grep "On branch main"
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Git fetching main"
+git fetch
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Git pulling main"
+git pull
+ansi --no-newline --green-intense "==> "; ansi --white-intense "Npm Install"
+npm install
+git status | grep "Your branch is up to date with 'origin/main'." > /dev/null && ansi --no-newline --green-intense "==> "; ansi --white-intense "Your branch is up to date with 'origin/main'"
+! test -z "$result" && popd > /dev/null

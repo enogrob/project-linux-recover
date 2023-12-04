@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+GOTO_FILE="$1"
+GOTO_LINE="$2"
+GOTO_CHAR="$3"
+
+if ! [ -f "$GOTO_FILE" ]; then
+    echo "ERROR: file path missing or invalid!" >&2
+    exit 1
+fi
+
+pgrep -x "rubymine" > /dev/null
+IDEA_RUNNING=$?
+
+if [ $IDEA_RUNNING -eq 0 ]; then
+    EDITOR_PATH="$(which rubymine)"
+    if [ -z "$IDEA_PATH" ]; then
+        EDITOR_PATH="/usr/local/bin/rubymine"
+    fi
+
+    if ! [ -z "$GOTO_LINE" ]; then
+        exec "$EDITOR_PATH" --line "$GOTO_LINE" "$GOTO_FILE"
+    else
+        exec "$EDITOR_PATH" "$GOTO_FILE"
+    fi
+else
+    EDITOR_PATH="$(which code)"
+    if [ -z "$EDITOR_PATH" ]; then
+        EDITOR_PATH="/usr/local/bin/code"
+    fi
+
+    if ! [ -z "$GOTO_CHAR" ]; then
+        exec "$EDITOR_PATH" --goto "$GOTO_FILE:$GOTO_LINE:$GOTO_CHAR"
+    elif ! [ -z "$GOTO_LINE" ]; then
+        exec "$EDITOR_PATH" --goto "$GOTO_FILE:$GOTO_LINE"
+    else
+        exec "$EDITOR_PATH" "$GOTO_FILE"
+    fi
+fi

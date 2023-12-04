@@ -257,11 +257,6 @@ eval "$(fasd --init auto)"
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
-# aws
-# export AWS_ACCESS_KEY_ID="ASIARVIMX2VTC433GA4I"
-# export AWS_SECRET_ACCESS_KEY="7lEi8EsxjOO5MfPH1FjUx51mvwWEq6RL0/1SB72q"
-# export AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjEFMaCXVzLWVhc3QtMSJHMEUCIQDQeTd3tMFJC505kC6KHuw2T/TTkr7j0vyOfyLDQYsx+gIgfFIVzzAhj9NG/1NWkxwlxECOW8ECFQKhmXgif8UKYMcqjQMISxAAGgwxMTQzODAyMzIwMzgiDFnS0q+GM+N4s0tr9SrqAgTdC0e1X2Mp3criECEuk6395qTpDPWbhYdJmlUXJOZgFjnx91Vt41v+pm2B9IqEpDw0kydGxaU/LnUXNHusbejReFFFGXkK70fQdBO1XAMJjEYwSWo2h7qWI2/KnvdboCUqPrXYOFYhUoOWj/jTJthFWOppM2QH09b8q+e6HwjO/2uV3p1/F1D03USgBrmX/EkcxSftoKFpiPWCh258TlyegZm+9p1JpeNdb6hEqP/Dift98NtQCErD6C0Z+/kaaeaGvdAOJq/16Q0rqht2Agxg7Ju95rpJE4GIoc4yXSHPq2hJaXIixmAMRgzaW86B7tzd433pC4QhbGn+okR6mKLRKYJvGd9TJB1PoRnyYvb89O/9g8vh5JIHR7HvnAocLDNvVVmHqY3Y1Q9u2AVNyJ4fQkbgZWTUbgLHKigA2ErwnpEMAmUtbwzj3BQSNUoBtmhV5WyAk8UYJluOliNrs+WHa3ldkOuHZVo3MKOa9qEGOqYBfUr98zucAIc2vpFh5qk0J/MtiRrk2NUW3rZbad6vSxAYOPikxpeQ9HCZH7OefLaH/H9cxpJWSrMtnKiGWGokY0mXAN+zCzwOwA2n0h/lPG10UeLXzGykSbJTmF6+sS9DgOuuJt+o6nzX0damJEsxo3c5Ic7gAvgCQweePE9YQMZ9ccyz/y02GYX69Zh3sTjuZ3aP/JffgBlOMWSvYa1JWjopcU5RJQ=="
-# export AWS_PROFILE=infra-sandbox
 # rvm
 PATH="$GEM_HOME/bin:$HOME/.rvm/bin:$PATH"
 [ -s ${HOME}/.rvm/scripts/rvm ] && source ${HOME}/.rvm/scripts/rvm
